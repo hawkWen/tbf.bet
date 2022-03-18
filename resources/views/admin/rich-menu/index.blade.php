@@ -1,0 +1,125 @@
+@extends('layouts.admin')
+
+@section('css')
+@endsection
+
+@section('content')
+    <!--begin::Subheader-->
+    <div class="subheader py-2 py-lg-6 subheader-transparent" id="kt_subheader">
+        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Page Heading-->
+                <div class="d-flex align-items-baseline flex-wrap mr-5">
+                    <!--begin::Page Title-->
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">{{ env('APP_NAME') }}</h5>
+                    <!--end::Page Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('agent') }}" class="text-muted">ภาพรวม</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="" class="text-dark">
+                                จัดการริชเมนู</a>
+                        </li>
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page Heading-->
+            </div>
+            <!--end::Info-->
+            <!--begin::Toolbar-->
+            <div class="d-flex align-items-center">
+                <!--begin::Actions-->
+                <!--begin::Toolbar-->
+                <div class="d-flex align-items-center">
+                </div>
+                <!--end::Toolbar-->
+            </div>
+            <!--end::Toolbar-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-fluid-->
+        <div class="container-fluid">
+            <!--begin::Card-->
+            <div class="card card-custom card-shadowless">
+                <!--begin::Header-->
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">
+                            <i class="fab fa-elementor mr-2"></i>
+                            ริชเมนู
+                        </h3>
+                    </div>
+                </div>
+
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body">
+                    <h3>เลือกแบรนด์</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>แบรนด์</td>
+                                <td>เกมส์</td>
+                                <td>Token</td>
+                                <td>เลือก</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($brands as $brand)
+                                <tr>
+                                    <td>{{ $brand->name }}</td>
+                                    <td>{{ $brand->game->name }}</td>
+                                    <td>{{ $brand->line_token }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.rich-menu.show', $brand->id) }}" class="btn btn-primary">
+                                            <i class="fa fa-hand-point-up"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->
+            <!-- Button trigger modal-->
+
+            <!-- Modal-->
+            <div class="modal fade" id="createPromotionModal" data-backdrop="static" tabindex="-1" role="dialog"
+                aria-labelledby="staticBackdrop" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <i aria-hidden="true" class="ki ki-close"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-primary font-weight-bold"
+                                data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+@endsection
+
+@section('javascript')
+    {!! JsValidator::formRequest('App\Http\Requests\PromotionRequest', '#formCreateDeposit') !!}
+@endsection

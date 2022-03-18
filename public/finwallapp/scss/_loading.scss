@@ -1,0 +1,90 @@
+.logo-loading {
+    text-align: center;
+
+    img {
+        max-width: 100px;
+        margin-bottom: 15px;
+    }
+
+    h3 {
+        color: $bg-primary;
+        font-size: 30px;
+    }
+}
+
+.loader-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.loader-ellipsis div {
+    position: absolute;
+    top: 30px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: $bg-main-text;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.loader-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: loader-ellipsis1 0.6s infinite;
+}
+
+.loader-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: loader-ellipsis2 0.6s infinite;
+}
+
+.loader-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: loader-ellipsis2 0.6s infinite;
+}
+
+.loader-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: loader-ellipsis3 0.6s infinite;
+}
+
+@keyframes loader-ellipsis1 {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes loader-ellipsis3 {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes loader-ellipsis2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(24px, 0);
+    }
+}
+
+.loader-display {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: $bg-main fixed;
+    background-position: center top;
+    background-size: cover;
+    z-index:9999;
+}

@@ -1,0 +1,127 @@
+.rtl {
+    direction: rtl;
+    text-align: right;
+
+    ul{
+        padding-right: 0;
+    }
+    .float-right {
+        float: left !important;
+    }
+
+    .text-left {
+        text-align: right !important;
+    }
+
+    .text-right {
+        text-align: left !important;
+    }
+
+
+    .pl-0 {
+        padding-right: 0 !important;
+        padding-left: 15px !important;
+    }
+
+    .pr-0 {
+        padding-left: 0 !important;
+        padding-right: 15px !important;
+    }
+
+
+    .ml-0,
+    .mx-0 {
+        margin-right: 0 !important;
+    }
+
+    .pl-2,
+    .px-2 {
+        padding-left: inherit !important;
+        padding-right: .5rem !important;
+    }
+
+    .pl-3,
+    .px-3 {
+        padding-left: inherit !important;
+        padding-right: 1rem !important;
+    }
+
+    .mr-auto {
+        margin-right: 0 !important;
+        margin-left: auto !important;
+    }
+
+    .ml-auto {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+    }
+
+    .mx-auto {
+        margin-right: auto !important;
+        margin-left: auto !important;
+    }
+
+    .mr-2,
+    .mx-2 {
+        margin-left: .5rem !important;
+    }
+
+    .ml-2 {
+        margin-right: .5rem !important;
+        margin-left: 0 !important;
+    }
+
+    .mr-3,
+    .mx-3 {
+        margin-right: 0 !important;
+        margin-left: 1rem !important;
+    }
+
+    .ml-3,
+    .mx-3 {
+        margin-left: 0 !important;
+        margin-right: 1rem !important;
+    }
+
+    .mr-0,
+    .mx-0 {
+        margin-left: 0 !important;
+    }
+
+    .swiper-container {
+        direction: ltr;
+
+        .swiper-slide {
+            direction: rtl
+        }
+    }
+
+    .border-left {
+        border-left: 0 !important;
+        border-right: 1px solid #dee2e6 !important;
+    }
+
+    &.menu-overlay .main-menu {
+        left: auto;
+        right: -290px;
+    }
+
+    &.menu-overlay.menu-open .main-menu {
+        left: auto;
+        right: 0;
+    }
+
+    &.menu-overlay .main-menu .menu-container .nav-pills {
+        padding: 0;
+    }
+
+    &.menu-overlay .main-menu .menu-container .nav-pills .nav-item .nav-link .arrow {
+        right: auto;
+        left: 10px;
+    }
+
+    &.menu-overlay .main-menu .menu-container .nav-pills .nav-item .nav-link .icon {
+        margin-right: 0;
+        margin-left: 10px;
+    }
+}

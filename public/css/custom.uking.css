@@ -1,0 +1,190 @@
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: whitesmoke !important;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: whitesmoke !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: whitesmoke !important;
+}
+
+body {
+    background-color: #000000 !important;
+}
+
+select option { color: black !important; }
+
+
+.header {
+    z-index: 99;
+}
+
+/* .footer a:not(.btn) {
+    padding: 0px;
+    text-align: center;
+    color: white;
+    display: inline;
+    text-decoration: none;
+    border-top: 4px solid transparent;
+} */
+
+.main {
+    background-color: black !important;
+}
+
+.header {
+    background-color: black !important;
+}
+
+h1,h2,h3,h4 {
+    color: darkorange;
+}
+
+a {
+    color: darkorange !important;
+}
+
+small {
+    color: darkorange;
+}
+
+.footer p {
+
+    font-size: 10px;
+}
+
+.float-label .form-control {
+    border-bottom: 1px solid #ffffff30;
+}
+
+.float-label .form-control:focus {
+    border-bottom: 1px solid white;
+}
+
+.fa {
+    margin-right: 2px;
+}
+
+.form-control​ {
+    color: white !important;
+}
+
+.form-control:focus {
+    color: white !important;
+}
+
+.background {
+    /* background-image: url('https://fastbet.casinoauto.io/storage/games/dIwCf09gPXyT1aRIxwwaoDE1NIj3feoHGaPqYoyV.png') */
+}
+
+.text-default-secondary {
+    color: orange !important;
+}
+
+.bg-default-secondary {
+    background-color: orange !important;
+    /* background:linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C); */
+}
+
+.btn-outline-default {
+    color: orange;
+    border-color: orange;
+}
+
+.footer a:not(.btn).active i, .footer a:not(.btn).active span {
+    color: #ffc107;
+}
+
+.footer a:not(.btn).active {
+    color: darkorange;
+    border-color: #ffc107;
+}
+
+.footer a:not(.btn) i, .footer a:not(.btn) span {
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+    font-size: 20px;
+}
+
+a:hover​ {
+    color: orange !important;
+}
+
+.modal-content {
+    background-color: #67686b !important;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.form-control.dark:focus {
+    color: black !important;
+}
+
+.text-danger {
+    color: #d12939  ;
+}
+
+.footer a:not(.btn) {
+    padding: 10px 13px;
+    text-align: center;
+    color: #999999;
+    display: block;
+    text-decoration: none;
+    border-top: 4px solid transparent;
+}
+
+.notifyjs-wrapper {
+    z-index: 9;
+}
+
+input:-internal-autofill-selected {
+    background-color: transparent !important;
+}
+
+.cut-text { 
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    width: 100px; 
+    height: 1.2em; 
+    white-space: nowrap;
+}
+
+.form-control:focus {
+    color: black !important;
+}
+
+
+[input-type="money_decimal"] {
+    text-align: center;
+}
+
+[input-type="money"] {
+    text-align: center;
+}
+
+.img-center {
+    display: block;
+    margin: 0 auto;
+}
+
+.card .swipercards .swiper-slide {
+    width: 270px !important;
+}
+
+.form-login:focus {
+    color: white !important;
+}

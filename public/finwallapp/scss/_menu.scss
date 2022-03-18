@@ -1,0 +1,241 @@
+.menu-overlay {
+    .main-menu {
+        background: $bg-primary;
+        color: $bg-primary-text;
+        background-size: cover;
+        padding: 20px 15px 30px 15px;
+        height: 100%;
+        width: 280px;
+        height: 100%;
+        overflow-y: auto;
+        position: fixed;
+        top: 0;
+        left: -290px;
+        z-index: 999;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        -ms-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        @extend .transition;
+
+        .menu-container {
+            max-width: 100%;
+            border-radius: 0;
+            padding: 0 15px;
+            margin: 0 auto;
+            position: relative;
+
+            & > .icon {
+                margin: 0 auto;
+                margin-top: -90px;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+                -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+                -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+                -ms-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-pills {
+                margin-top: 20px;
+
+                .nav-item {
+                    .nav-link {
+                        border-radius: 20px;
+                        line-height: 24px;
+                        padding: 10px 15px;
+                        font-size: 16px;
+                        text-align: left;
+                        position: relative;
+                        color: $bg-primary-text;
+                        display: flex;
+                        justify-content: space-between;
+                        -webkit-justify-content: space-between;
+                        -moz-justify-content: space-between;
+                        -ms-justify-content: space-between;
+
+                        span {
+                            vertical-align: middle
+                        }
+
+                        .icon {
+                            margin-right: 10px;
+                            font-size: 20px;
+                            width: 24px;
+
+                        }
+
+                        .arrow {
+                            position: absolute;
+                            top: 12px;
+                            bottom: 0;
+                            right: 10px;
+                            color: $bg-secondary;
+                            stroke: rgba($bg-secondary, 0.3);
+                        }
+
+                        &.active {
+                            background: $bg-secondary;
+                            color: $bg-secondary-text;
+
+                            .arrow {
+                                color: $bg-secondary;
+                                stroke: $bg-primary;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+        & > .btn-close {
+            margin: 0 auto;
+            opacity: 1;
+            border-radius: 0
+        }
+        & + .backdrop {
+            display: none
+        }
+    }
+
+    &.menu-open {
+        .main-menu {
+            left: 0;
+
+            & + .backdrop {
+                display: block;
+                height: 100%;
+                width: 100%;
+                color: #ffffff;
+                background: transparent;
+                top: 0;
+                left: 0;
+                position: absolute;
+                opacity: 1;
+                z-index: 99
+            }
+        }
+    }
+}
+
+
+.menu-push-content {
+    .main-menu {
+        background: $bg-primary;
+        color: $bg-primary-text;
+        background-size: cover;
+        padding: 20px 0px 50px 0px;
+        height: 100%;
+        width: 280px;
+        margin-left: -320px;
+        height: 100%;
+        overflow-y: auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        display: block;
+        @extend .transition;
+
+
+        .menu-container {
+            max-width: 280px;
+            border-radius: 15px;
+            padding: 0 15px;
+            margin: 0 auto;
+            position: relative;
+
+            & > .icon {
+                margin: 0 auto;
+                margin-top: -90px;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+                -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+                -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+                -ms-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-pills {
+                margin-top: 20px;
+
+                .nav-item {
+                    .nav-link {
+                        border-radius: 15px;
+                        line-height: 24px;
+                        padding: 10px 15px;
+                        font-size: 16px;
+                        text-align: left;
+                        position: relative;
+                        color: $bg-primary-text;
+                        display: flex;
+                        justify-content: space-between;
+                        -webkit-justify-content: space-between;
+                        -moz-justify-content: space-between;
+                        -ms-justify-content: space-between;
+
+                        span {
+                            vertical-align: middle
+                        }
+
+                        .arrow {
+                            position: absolute;
+                            top: 12px;
+                            bottom: 0;
+                            right: 10px;
+                            color: $bg-secondary;
+                            stroke: rgba($bg-secondary, 0.3);
+                        }
+
+                        &.active {
+                            background: $bg-secondary;
+                            color: $bg-secondary-text;
+
+                            .arrow {
+                                color: $bg-secondary;
+                                stroke: $bg-primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        & > .close {
+            margin: 0 auto;
+            opacity: 1;
+            border-radius: 0
+        }
+    }
+}
+
+.menu-active {
+    background: $bg-primary;
+    background-image: none;
+
+    .main-menu {
+        margin-left: 0;
+    }
+
+    main {
+        border-radius: 15px;
+        transform: scale(1);
+        margin-left: 280px;
+        height: 100%;
+        box-shadow: 0 1px 15px rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.05);
+        -ms-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+
+    .footer,
+    .colorsettings,
+    .sidebar-right {
+        display: none;
+    }
+}
+
+.menu-open {
+    overflow: hidden;
+    width: 100%;
+
+}

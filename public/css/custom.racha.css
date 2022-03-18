@@ -1,0 +1,47 @@
+body {
+    background-color: #FFFFFF !important;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+.input-group-append {
+    margin-left: 0px;
+    max-width: 39px;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.img-center {
+    margin: 0 auto;
+    display: block;
+}
+
+.card-body img {
+    position: relative;
+    top: -30px;
+}
+
+.nav-link {
+
+    display: block;
+    padding: 5PX 7PX;
+    font-size: 14px;
+}
+
+[input-type="money_decimal"] {
+    text-align: right;
+}
+
+[input-type="money"] {
+    text-align: right;
+}

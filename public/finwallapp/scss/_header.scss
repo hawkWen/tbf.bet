@@ -1,0 +1,40 @@
+
+.header {
+    padding: 10px 15px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    background: rgba($bg-primary, 0.95);
+    border-radius: 0;
+
+    @extend .transition;
+
+    .btn-link {
+        color: $bg-primary-text;
+    }
+
+    .navbar-brand {
+        line-height: 30px;
+        color: $bg-primary-text;
+        margin-right: 0;
+    }
+
+    &.active {
+        background: rgba($bg-primary, 0.95);
+    }
+}
+
+.counter {
+    height: 6px;
+    width: 6px;
+    border-radius: 4px;
+    background-color: #dc3545;
+    position: absolute;
+    display: block;
+    top: 0px;
+    right: 0px;
+    margin-top: 10px !important;
+    margin-right: 10px;
+}

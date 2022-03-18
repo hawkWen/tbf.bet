@@ -1,0 +1,29 @@
+
+//end 992px
+@media screen and (max-width: 768px) {
+    .container {
+        width: calc(100% - 40px);
+        max-width: 100%;
+    }
+    .steps ul , .form-row{
+        @include flex-direction(column);
+    }
+    .title {
+        width: 150px;
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .form-row .form-date, .form-row .form-select {
+        width: 100%;
+    }
+}
+
+//end 575px
+@media screen and (max-width: 480px) {
+
+    .signup-form {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}

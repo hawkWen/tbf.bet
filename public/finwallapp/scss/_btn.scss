@@ -1,0 +1,166 @@
+.btn {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+
+    span,
+    i {
+        vertical-align: middle;
+        margin-top: -4px;
+    }
+
+    &.rounded {
+        border-radius: 24px !important;
+    }
+
+    &.btn-sm {
+        padding-left: 0.8rem;
+        padding-right: 0.8rem;
+    }
+
+    &.btn-10 {
+        height: 10px;
+        line-height: 10px;
+        width: 10px;
+        padding: 0px;
+    }
+
+    &.btn-20 {
+        height: 20px;
+        line-height: 20px;
+        width: 20px;
+        padding: 0px;
+    }
+
+    &.btn-30 {
+        height: 30px;
+        line-height: 30px;
+        width: 30px;
+        padding: 0px;
+    }
+
+    &.btn-40 {
+        height: 40px;
+        line-height: 40px;
+        width: 40px;
+        padding: 0px;
+    }
+
+    &.btn-50 {
+        height: 50px;
+        line-height: 50px;
+        width: 50px;
+        padding: 0px;
+    }
+
+    &.btn-60 {
+        height: 60px;
+        line-height: 60px;
+        width: 60px;
+        padding: 0px;
+    }
+
+    &.btn-70 {
+        height: 70px;
+        line-height: 70px;
+        width: 70px;
+        padding: 0px;
+    }
+
+    &.btn-80 {
+        height: 80px;
+        line-height: 80px;
+        width: 80px;
+        padding: 0px;
+    }
+
+    &.btn-90 {
+        height: 90px;
+        line-height: 90px;
+        width: 90px;
+        padding: 0px;
+    }
+
+    &.btn-100 {
+        height: 100px;
+        line-height: 100px;
+        width: 100px;
+        padding: 0px;
+    }
+
+    &.btn-110 {
+        height: 110px;
+        line-height: 110px;
+        width: 110px;
+        padding: 0px;
+    }
+
+    &.btn-120 {
+        height: 120px;
+        line-height: 120px;
+        width: 120px;
+        padding: 0px;
+    }
+
+    &.btn-130 {
+        height: 130px;
+        line-height: 130px;
+        width: 130px;
+        padding: 0px;
+    }
+
+    &.btn-140 {
+        height: 140px;
+        line-height: 140px;
+        width: 140px;
+        padding: 0px;
+    }
+
+    &.btn-150 {
+        height: 150px;
+        line-height: 150px;
+        width: 150px;
+        padding: 0px;
+    }
+
+    &:active,
+    &:focus {
+        box-shadow: none;
+    }
+
+
+}
+
+.btn-default {
+    background-color: $bg-secondary;
+    color: $bg-secondary-text;
+
+    &:hover,
+    &:focus {
+        background-color: darken($bg-secondary, 5%);
+        color: $bg-secondary-text
+    }
+
+    &:active,
+    &.active {
+        background-color: darken($bg-secondary, 10%);
+        color: $bg-secondary-text
+    }
+}
+
+.btn-outline-default {
+    border: 1px solid $bg-secondary;
+    color: $bg-secondary;
+
+    &:hover,
+    &:focus {
+        color: $bg-secondary;
+    }
+
+    &:active {
+        background-color: $bg-secondary;
+        color: $bg-secondary-text;
+    }
+}

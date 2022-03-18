@@ -1,0 +1,279 @@
+.signup-form {
+    padding: 32px 90px 40px 90px;
+}
+input, select {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border: 1px solid $border-color;
+    @include border-radius(5px);
+    font-family: 'Roboto Slab';
+    font-size: 13px;
+    padding: 15px 20px;
+}
+input {
+    &:focus {
+        border: 1px solid #666;
+    }
+}
+input.valid {
+    border: 1px solid #666;
+}
+
+.form-group, .form-select, .form-date  {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.form-row {
+    @extend display-flex;
+    @include justify-content(space-between);
+    .form-select {
+        width: 160px;
+    }
+    .form-date {
+        width: 266px;
+    }
+}
+label {
+    display: block;
+    width: 100%;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+label.required {
+    position: relative;
+    &:after {
+        content: '*';
+        margin-left: 2px;
+        color: #b90000;
+    }
+}
+ul {
+    @extend display-flex;
+    @extend list-type-ulli;
+}
+.steps {
+    margin-bottom: 23px;
+    ul {
+        @include justify-content(space-between);
+    }
+}
+a {
+    text-decoration: none;
+}
+.icon {
+    font-size: 29px;
+}
+.title {
+    background: $grey-color;
+    @include border-radius(5px);
+    @extend display-flex;
+    @include justify-content(center);
+    @include align-items(center);
+    @include flex-direction(column);
+    width: 90px;
+    height: 90px;
+    color: #fff;
+    
+}
+.title_text {
+    margin-top: -5px;
+}
+.current {
+    .title {
+        background: $pink-color;
+    }
+}
+
+.content {
+    h3 {
+        display: none;
+    }
+}
+fieldset  {
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.actions {
+    margin-top: 25px;
+    .disabled {
+        display: none;
+    }
+    ul {
+        @include justify-content(flex-end);
+        li {
+            margin-left: 10px;
+            &:first-child {
+                a {
+                    background: $grey-color;
+                }
+            }
+            a {
+                background: $pink-color;
+                width: 130px;
+                height: 50px;
+                color: #fff;
+                @include border-radius(5px);
+                @extend display-flex;
+                @include justify-content(center);
+                @include align-items(center);
+                &:hover {
+                    background-color: darken($pink-color, 10%)
+                }
+            }
+        }
+    }
+}
+label.error {
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    &:after {
+        font-family: 'themify';
+        position: absolute;
+        content: '\e717';
+        right: 20px;
+        top: 40px;
+        font-size: 13px;
+        color: #ff1212;
+    }
+}
+input.error {
+    border: 1px solid #ff1212;
+}
+ul.list-item {
+    z-index: 9;
+    border: 1px solid $border-color;
+    @include border-radius(5px);
+    display: block;
+}
+ul.list-item li { 
+    padding: 13px 20px;
+    z-index: 2;
+    color: $black-color;
+    font-size: 13px;
+}
+ul.list-item li:not(.init) { 
+    display: none; 
+    background: #fff;
+    color: $black-color;
+    padding: 5px 20px; 
+}
+ul.list-item li:not(.init):hover, ul.list-item li.selected:not(.init) { 
+    background: $pink-color;
+    color: #fff;
+}
+li.init { 
+    cursor: pointer;
+    position: relative;
+    &:after {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        @include transform(translateY(-50%));
+        font-size: 10px;
+        color: $black-color;
+        font-family: 'themify';
+        content: '\e64b';
+    }
+}
+legend {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-size: 17px;
+    margin-bottom: 20px;
+    span {
+        display: inline-block;
+    }
+}
+.step-heading {
+    color: $pink-color;
+    float: left;
+}
+.step-number {
+    float: right;
+}
+.form-date-item {
+    position: relative;
+    overflow: hidden;
+    &:after {
+        position: absolute;
+        content: '';
+        width: 1px;
+        height: 30px;
+        background: $border-color;
+        right: 0;
+        top: 50%;
+        @include transform(translateY(-50%));
+    }
+    &:last-child {
+        &:after {
+            width: 0px;
+        }
+    }
+    .select-icon {
+        z-index: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        @extend display-flex;
+        @include justify-content(center);
+        @include align-items(center);
+        i {
+            @extend display-flex;
+            @include justify-content(center);
+            @include align-items(center);
+            width: 30px;
+            height: 20px;
+            font-size: 10px;
+            color: $black-color;
+        }
+    }
+}
+.ui-datepicker-trigger {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    color: $black-color;
+    font-size: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.form-date-group {
+
+    @extend display-flex;
+    @include justify-content(space-between);
+    border: 1px solid $border-color;
+    @include border-radius(5px);
+    select {
+        border: none;
+        width: 90px;
+        box-sizing: border-box;
+        @include appearance(none);
+        position: relative;
+        background: 0 0;
+        z-index: 10;
+        cursor: pointer;
+    }
+}
+.select-list {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 47px;
+}
+.list-item {
+    position: absolute;
+    width: 100%;
+    z-index: 99;
+}

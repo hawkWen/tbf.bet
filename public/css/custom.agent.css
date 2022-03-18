@@ -1,0 +1,182 @@
+.wrapper {
+    /* background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+    radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%); */
+    /* background-color: #323232; */
+    background-color: #f3f6f9;
+    border-radius: unset !important;
+}
+
+.header-menu .menu-nav>.menu-item>.menu-link .menu-text {
+    color: grey;
+    font-weight: 500;
+}
+
+.tab {
+    padding: 10px 30px;
+
+}
+
+i {
+    font-size: 1.25rem;
+    color: unset;
+}
+
+.card.card-custom>.card-header .card-title {
+
+    margin-bottom: -20px;
+}
+
+.tab.active {
+    background-color: #007bff;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.tab.active a {
+    color: white !important;
+}
+
+.checkbox.checkbox-outline.checkbox-white>input:checked~span:after {
+    border-color: #007bff;
+}
+
+body {
+    background: #0E80EB;
+}
+
+.text-primary {
+    color: #1280ea !important;
+}
+
+.btn-icon i {
+    color: white;
+}
+
+.header-mobile {
+    background: #0E80EB;
+}
+
+.nav-item {
+    text-align: center;
+}
+
+/* background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%); */
+
+.aside {
+    background: #0E80EB;
+    -webkit-box-shadow: 0px 1px 9px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 1px 9px -3px rgba(0, 0, 0, 0.75);
+}
+
+.burger-icon span {
+    background-color: white;
+}
+
+.burger-icon span::before,
+.burger-icon span::after {
+    background-color: white;
+}
+
+.fa {
+    /* margin-right: 2.5px; */
+}
+
+.btn.btn-light-primary {
+    color: #007bff;
+    background-color: whitesmoke;
+    border-color: transparent;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.modal-extra-lg {
+    max-width: 1280px;
+}
+
+[input-type="money_decimal"] {
+    text-align: right;
+}
+
+[input-type="money"] {
+    text-align: right;
+}
+
+.modal-backdrop {
+    z-index: 0;
+    background-color: unset;
+}
+
+.img-center {
+    display: block;
+    margin: 0 auto;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #EBEDF3;
+}
+
+li {
+    margin: unset;
+}
+
+.table th,
+.table td {
+    font-size: 12px !important;
+}
+
+.cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100px;
+    height: 1.2em;
+    white-space: nowrap;
+}
+
+.text-shadow-white {
+    text-shadow: 2px 1px 3px #eee;
+}
+
+.text-shadow {
+    text-shadow: 2px 1px 3px #000;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.checkbox.checkbox-outline.checkbox-white>input:checked~span:after {
+    border-color: #007bff !important;
+}
+
+.annoucement {
+    background-color: black;
+    z-index: 99;
+    padding: 3px 10px;
+    color: white;
+    position: fixed;
+    width: 100%;
+}
+
+.modal-ex-lg {
+    max-width: 1280px;
+}
+
+.card-header {
+    margin-top: 20px;
+    display: block !important;
+}
+
+.card-title {
+    padding-top: 10px;
+}
+
+input:readonly,
+select:readonly {
+    background-color: slategray !important;
+}

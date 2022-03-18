@@ -1,0 +1,51 @@
+.bg-default {
+    background-color: $bg-primary;
+    color: $bg-primary-text
+}
+
+.text-default {
+    color: $bg-primary;
+}
+
+.bg-default-secondary {
+    background-color: $bg-secondary !important;
+    color: $bg-secondary-text
+}
+
+.text-default-secondary {
+    color: $bg-secondary;
+}
+
+.bg-white-light {
+    background-color: rgba(#ffffff, 0.2) !important;
+}
+
+
+.bg-primary-light {
+    background-color: lighten($primary, 50%) !important;
+}
+
+
+.bg-default-light {
+    background-color: lighten($bg-primary, 44%) !important;
+}
+
+.bg-danger-light {
+    background-color: lighten($danger, 40%) !important;
+}
+
+.bg-success-light {
+    background-color: lighten($success, 48%) !important;
+}
+
+.bg-warning-light {
+    background-color: lighten($warning, 38%) !important;
+}
+
+
+.shadow-default {
+    box-shadow: 0 5px 10px rgba($bg-secondary, 0.2) !important;
+    -webkit-box-shadow: 0 5px 10px rgba($bg-secondary, 0.2) !important;
+    -moz-box-shadow: 0 5px 10px rgba($bg-secondary, 0.2) !important;
+    -ms-box-shadow: 0 5px 10px rgba($bg-secondary, 0.2) !important;
+}

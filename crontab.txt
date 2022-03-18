@@ -1,0 +1,25 @@
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan truemoney pgslots
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan truemoney pgman
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan truemoney amb
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan truemoney ambbet
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan truemoney cavie88
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan truemoney bubble88
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan truemoney ambjet
+
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:bank-single pgslots
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:bank-single pgman
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:bank-single amb
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:bank-single ambbet
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:bank-single cavie88
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:bank-single bubble88
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:bank-single ambjet
+
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:deposit-api pgslots
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:deposit-api pgman
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:deposit-api amb
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:deposit-api ambbet
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:deposit-api cavie88
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:deposit-api bubble88
+* * * * * /usr/bin/php /var/www/fast-x.app/artisan bot:deposit-api ambjet
+
+*/5 * * * * /usr/bin/php /var/www/casinoauto.io/artisan bank-account:clear

@@ -1,0 +1,83 @@
+.swiper-container .swiper-pagination {
+    bottom: 0;
+}
+
+.swiper-users {
+    margin-bottom: -5px;
+
+    .swiper-slide {
+        width: auto;
+        padding-bottom: 5px;
+    }
+}
+
+
+.addsendcarousel .swiper-slide {
+    p {
+        opacity: 0.8;
+    }
+
+    &:hover {
+        p {
+            opacity: 1;
+        }
+    }
+}
+
+.swiper-cards .swiper-slide {
+    width: 270px;
+
+}
+
+.categoriestab1 {
+    margin-bottom: -5px;
+
+    .swiper-slide {
+        width: auto;
+        padding-bottom: 5px;
+    }
+}
+
+.offerslide2tab1 .swiper-slide,
+.offerslide2tab2 .swiper-slide {
+    width: 280px;
+    padding: 0 5px 0 15px;
+}
+
+.categories2tab1 .swiper-slide,
+.categories2tab2 .swiper-slide {
+    width: auto;
+}
+
+.introduction {
+    height: 100%
+}
+
+.gallery-top {
+    height: 250px;
+    width: 100%;
+}
+
+.gallery-thumbs {
+    height: 100px;
+    box-sizing: border-box;
+    padding: 10px 0;
+}
+
+.swipercards {
+    .swiper-slide {
+        width: 270px;
+        border-radius: 18px;
+        overflow: hidden;
+    }
+}
+
+.card {
+    .swipercards {
+        .swiper-slide {
+            width: 240px;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+    }
+}

@@ -1,0 +1,45 @@
+.spinner-border {
+  width: $spinner-width;
+  height: $spinner-height;
+  border-width: $spinner-border-width;
+  vertical-align: bottom;
+}
+.spinner-border-lg {
+  width: $spinner-width-lg;
+  height: $spinner-height-lg;
+  border-width: $spinner-border-width-lg;
+  vertical-align: bottom;
+}
+.spinner-border-sm {
+  width: $spinner-width-sm;
+  height: $spinner-height-sm;
+  border-width: $spinner-border-width-sm;
+  vertical-align: bottom;
+}
+.spinner-border-xs {
+  width: $spinner-width-xs;
+  height: $spinner-height-xs;
+  border-width: $spinner-border-width-xs;
+  vertical-align: bottom;
+}
+
+.spinner-grow {
+  width: $spinner-width;
+  height: $spinner-height;
+  vertical-align: bottom;
+}
+.spinner-grow-lg {
+  width: $spinner-width-lg;
+  height: $spinner-height-lg;
+  vertical-align: bottom;
+}
+.spinner-grow-sm {
+  width: $spinner-width-sm;
+  height: $spinner-height-sm;
+  vertical-align: bottom;
+}
+.spinner-grow-xs {
+  width: $spinner-width-xs;
+  height: $spinner-height-xs;
+  vertical-align: bottom;
+}

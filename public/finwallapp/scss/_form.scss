@@ -1,0 +1,347 @@
+.form-control {
+    border-radius: 18px;
+
+    &.is-valid {
+        border-color: $success;
+    }
+
+    &.is-invalid {
+        border-color: $danger;
+    }
+}
+
+.float-label {
+    padding-top: 15px;
+    position: relative;
+
+    .form-control-label {
+        opacity: 0.5;
+        position: absolute;
+        left: 0;
+        top: 22px;
+        margin: 0;
+        font-size: 15px;
+        line-height: 20px;
+        color: #000000;
+        font-size: 15px;
+        transition: ease all 0.5s;
+        -webkit-transition: ease all 0.5s;
+        -ms-transition: ease all 0.5s;
+        -moz-transition: ease all 0.5s;
+        z-index: 0;
+    }
+
+    .form-control {
+        background-color: transparent;
+        border-width: 0 0 1px 0;
+        border-radius: 0;
+        z-index: 1;
+        position: relative;
+        padding-left: 0;
+        padding-right: 0;
+        background-image: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+        &.text-white {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+
+            &.text-white {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            }
+
+            & + .form-control-label {
+                opacity: 1;
+                top: 0;
+                font-size: 11px;
+                line-height: 16px;
+            }
+        }
+
+        &.is-invalid {
+            border-bottom: 1px solid $danger;
+        }
+
+        &.is-valid {
+            border-bottom: 1px solid $success;
+        }
+    }
+
+    &.active {
+
+        .form-control {
+            &.text-white {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        .form-control-label {
+            top: 0;
+            font-size: 11px;
+            line-height: 16px;
+        }
+    }
+
+}
+
+.input-group > .input-group-append > .btn,
+.input-group > .input-group-append > .input-group-text,
+.input-group > .input-group-prepend:not(:first-child) > .btn,
+.input-group > .input-group-prepend:not(:first-child) > .input-group-text,
+.input-group > .input-group-prepend:first-child > .btn:not(:first-child),
+.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.input-group > .input-group-prepend > .btn,
+.input-group > .input-group-prepend > .input-group-text,
+.input-group > .input-group-append:not(:last-child) > .btn,
+.input-group > .input-group-append:not(:last-child) > .input-group-text,
+.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.large-gift-card {
+    font-size: 50px;
+    line-height: 60px;
+    height: auto;
+    font-weight: 500;
+    background: none;
+    border: 0;
+    text-align: center;
+
+    &:focus {
+        border: 0;
+        box-shadow: none
+    }
+}
+
+.custom-control {
+    line-height: 24px;
+}
+
+/* switch customized */
+$width: 60px;
+$height: $width / 2;
+
+.switch-wrap {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.05);
+    width: $width;
+    height: $height;
+    border-radius: $height / 2;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .switch {
+        height: 100%;
+        transition: .2s;
+        -webkit-transition: .2s;
+        -moz-transition: .2s;
+        -ms-transition: .2s;
+        position: relative;
+        width: 100%;
+        border-radius: $height / 2;
+
+        &::after {
+            content: '';
+            border-radius: 50%;
+            background: #ccc;
+            transition: .2s;
+            -webkit-transition: .2s;
+            -moz-transition: .2s;
+            -ms-transition: .2s;
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            height: $width / 2 - 4;
+            width: $width / 2 - 4;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1)
+        }
+
+    }
+
+    &.switch-success {
+        input:checked {
+            & + .switch {
+                background-color: $success;
+            }
+        }
+    }
+
+    &.switch-info {
+        input:checked {
+            & + .switch {
+                background-color: $info;
+            }
+        }
+    }
+
+    &.switch-danger {
+        input:checked {
+            & + .switch {
+                background-color: $danger;
+            }
+        }
+    }
+
+    &.switch-primary {
+        input:checked {
+            & + .switch {
+                background-color: $primary;
+            }
+        }
+    }
+
+    &.switch-warning {
+        input:checked {
+            & + .switch {
+                background-color: $warning;
+            }
+        }
+    }
+
+    input:checked {
+        & + .switch {
+
+            &::after {
+                background-color: #ffffff;
+                left: $width / 2 + 2;
+            }
+        }
+
+    }
+}
+
+.custom-control-input {
+    &.switch-success {
+        &:checked {
+            & + .custom-control-label:before {
+                background-color: $success;
+                border-color: $success;
+            }
+        }
+    }
+
+    &.switch-info {
+        &:checked {
+            & + .custom-control-label:before {
+                background-color: $info;
+                border-color: $info;
+            }
+        }
+    }
+
+    &.switch-danger {
+        &:checked {
+            & + .custom-control-label:before {
+                background-color: $danger;
+                border-color: $danger;
+            }
+        }
+    }
+
+    &.switch-primary {
+        &:checked {
+            & + .custom-control-label:before {
+                background-color: $primary;
+                border-color: $primary;
+            }
+        }
+    }
+
+    &.switch-warning {
+        &:checked {
+            & + .custom-control-label:before {
+                background-color: $warning;
+                border-color: $warning;
+            }
+        }
+    }
+
+}
+
+/* cart count */
+.cart-count {
+    background-color: rgba($bg-primary, 0.1);
+    color: $bg-primary;
+    border-radius: 5px;
+    padding: 2px;
+    width: 66px;
+
+    &.rounded {
+        border-radius: 18px !important;
+    }
+
+    .input-group-prepend,
+    .input-group-append {
+        .btn {
+            height: 20px;
+            width: 20px;
+            line-height: 18px;
+            padding: 0;
+            border-radius: 4px;
+            text-align: center;
+            vertical-align: middle;
+            background-color: rgba($bg-primary, 0.1);
+            color: $bg-primary;
+
+            &:focus,
+            &:active {
+                background-color: rgba($bg-primary, 0.2);
+                box-shadow: none;
+                outline: none;
+            }
+        }
+    }
+
+    .form-control {
+        padding: 0;
+        line-height: 20px;
+        height: 20px;
+        text-align: center;
+        max-width: 25px;
+        vertical-align: middle;
+        border-radius: 4px;
+        border: 0;
+        background: none;
+        font-size: 12px;
+
+        &.rounded {
+            border-radius: 18px;
+        }
+    }
+
+    &.cart-count-lg {
+        width: 125px;
+
+        .input-group-prepend,
+        .input-group-append {
+            .btn {
+                height: 36px;
+                width: 36px;
+                line-height: 38px;
+            }
+        }
+
+        .form-control {
+            line-height: 36px;
+            height: 36px;
+            max-width: 50px;
+            font-size: 18px;
+        }
+    }
+}

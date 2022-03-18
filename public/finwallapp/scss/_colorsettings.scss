@@ -1,0 +1,221 @@
+.btn.colorsettings2 {
+    vertical-align: middle;
+    border-radius: 30px;
+    padding: 0px;
+    height: 38px;
+    width: 38px;
+    text-align: center;
+    line-height: 32px;
+    float: right;
+    span {
+        display: inline-block;
+        vertical-align: middle;
+        margin:0px;
+    }
+
+}
+
+/* sidebar */
+.color-picker {
+    max-width: 100%;
+    position: fixed;
+    right: 10px;
+    left: 10px;
+    margin: 0 auto;
+    top: auto;
+    bottom:-100%;
+    border-radius: 15px;
+    padding: 15px;
+    overflow-y: auto;
+    z-index: 9999;    
+    background-color: #ffffff;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;    
+    transition: ease all 0.5s;
+    -webkit-transition: ease all 0.5s;
+
+    &.active {
+        bottom: 15px;
+    }
+}
+
+
+/* Color select */
+.colorselect,
+.colorselect2 {
+    margin: 0;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 4px solid rgba(0, 0, 0, 0);
+
+    input[type="radio"] {
+        display: none;
+
+        & + label {
+            display: block;
+            height: 34px;
+            line-height: 34px;
+            width: 34px;
+            color: #ffffff;
+            margin-bottom: 0;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 3px solid rgba(255, 255, 255, 0);
+
+            i {
+                font-size: 16px;
+                display: none;
+                height: 24px;
+                width: 24px;
+                border-radius: 50%;
+                text-align: center;
+                line-height: 24px;
+                background-color: $bg-primary;
+                vertical-align: middle;
+            }
+        }
+
+        &:checked {
+            & + label {
+                border: 4px solid rgba(0, 0, 0, 0.5);
+                border-radius: 30px;
+
+                i {
+                    display: inline-block
+                }
+            }
+        }
+    }
+
+    &.active {
+        position: relative;
+        border: 4px solid rgba(0, 0, 0, 0.1);
+    }
+}
+
+
+.selectoption {
+    margin: 0 5px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    border-radius:20px;
+    text-align: center;
+    background-color: #ffffff;
+    min-width: 80px;    
+    transition: ease all 0.5s;
+    -webkit-transition: ease all 0.5s;
+
+    input[type="checkbox"] {
+        display: none;
+
+        & + label {
+            display: block;
+            height: 34px;
+            line-height: 26px;
+            padding: 0 15px;
+            width: auto;
+            color: #666666;
+            margin-bottom: 0;
+            cursor: pointer;
+            border-radius: 18px;
+            border: 4px solid rgba(255, 255, 255, 0);
+        }
+
+        &:checked {
+            & + label {
+                color: #ffffff;
+                background-color: #000000;
+                border: 4px solid rgba(255, 255, 255, 0.3);
+
+                i {
+                    display: inline-block
+                }
+            }
+        }
+    }
+
+    &.active {
+        position: relative;
+        border: 2px solid rgba(0, 0, 0, 0.1);
+    }
+    
+}
+
+
+
+/* colors */
+
+.bg-dark-blue {
+    background-color: $bg-dark-blue;
+}
+
+.bg-dark-purple {
+    background-color: $bg-dark-purple;
+}
+
+.bg-maroon {
+    background-color: $bg-maroon;
+}
+
+.bg-dark-gray {
+    background-color: $bg-dark-grey;
+}
+
+.bg-dark-pink {
+    background-color: $bg-dark-pink;
+}
+
+.bg-dark-brown {
+    background-color: $bg-brown;
+}
+
+.bg-dark-green {
+    background-color: $bg-green;
+}
+
+.bg-red {
+    background-color: $bg-red;
+}
+
+.bg-pink {
+    background-color: $bg-pink;
+}
+
+.bg-purple {
+    background-color: $bg-purple;
+}
+
+.bg-blue {
+    background-color: $bg-blue;
+}
+
+.bg-teal {
+    background-color: $bg-teal;
+}
+
+.bg-skyblue {
+    background-color: $bg-skyblue;
+}
+
+.bg-amber {
+    background-color: $bg-amber;
+}
+
+.bg-gray {
+    background-color: $bg-gray;
+}
+
+.bg-slate {
+    background-color: $bg-slat;
+    color: #ffffff;
+}

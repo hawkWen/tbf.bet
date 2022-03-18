@@ -1,0 +1,93 @@
+/*
+==================================
+Table of content 
+==================================
+
+1. Bootstrap default css
+2. Color settings
+3. Body
+4. Colors
+5. Icons
+6. Header
+7. Main container
+8. Footer
+9. Buttons
+10. Card
+11. Form
+12. Avatar
+13. Carousel
+14. Menu
+15. Loading
+16. List
+17. Dark mode
+18. RTL
+*/
+
+
+/*!
+ * Bootstrap v4.5.2 (https://getbootstrap.com/)
+ * Copyright 2011-2020 The Bootstrap Authors
+ * Copyright 2011-2020 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+
+@import "../vendor/bootstrap/scss/functions";
+@import "../vendor/bootstrap/scss/variables";
+@import "variable-dark-purple";/* app defined variables */
+@import "../vendor/bootstrap/scss/mixins";
+@import "../vendor/bootstrap/scss/root";
+@import "../vendor/bootstrap/scss/reboot";
+@import "../vendor/bootstrap/scss/type";
+@import "../vendor/bootstrap/scss/images";
+@import "../vendor/bootstrap/scss/code";
+@import "../vendor/bootstrap/scss/grid";
+@import "../vendor/bootstrap/scss/tables";
+@import "../vendor/bootstrap/scss/forms";
+@import "../vendor/bootstrap/scss/buttons";
+@import "../vendor/bootstrap/scss/transitions";
+@import "../vendor/bootstrap/scss/dropdown";
+@import "../vendor/bootstrap/scss/button-group";
+@import "../vendor/bootstrap/scss/input-group";
+@import "../vendor/bootstrap/scss/custom-forms";
+@import "../vendor/bootstrap/scss/nav";
+@import "../vendor/bootstrap/scss/navbar";
+@import "../vendor/bootstrap/scss/card";
+@import "../vendor/bootstrap/scss/breadcrumb";
+@import "../vendor/bootstrap/scss/pagination";
+@import "../vendor/bootstrap/scss/badge";
+@import "../vendor/bootstrap/scss/jumbotron";
+@import "../vendor/bootstrap/scss/alert";
+@import "../vendor/bootstrap/scss/progress";
+@import "../vendor/bootstrap/scss/media";
+@import "../vendor/bootstrap/scss/list-group";
+@import "../vendor/bootstrap/scss/close";
+@import "../vendor/bootstrap/scss/toasts";
+@import "../vendor/bootstrap/scss/modal";
+@import "../vendor/bootstrap/scss/tooltip";
+@import "../vendor/bootstrap/scss/popover";
+@import "../vendor/bootstrap/scss/carousel";
+@import "../vendor/bootstrap/scss/spinners";
+@import "../vendor/bootstrap/scss/utilities";
+@import "../vendor/bootstrap/scss/print";
+
+
+
+
+
+@import "colorsettings";
+@import "body";
+@import "colors";
+@import "icons";
+@import "header";
+@import "main-container";
+@import "footer";
+@import "btn";
+@import "card";
+@import "form";
+@import "avatar";
+@import "carousel";
+@import "menu";
+@import "loading";
+@import "list";
+@import "darkmode";
+@import "rtl";

@@ -1,0 +1,121 @@
+.darkmode {
+    color: #ffffff;
+
+    .text-secondary {
+        color: #dddddd !important;
+    }
+
+    .loader-display {
+        background-color: darken($bg-primary, 40%);
+    }
+
+    .main {
+        background-color: darken($bg-primary, 40%);
+
+        .main-container {
+            background-color: darken($bg-primary, 24%);
+        }
+    }
+
+    .card,
+    .list-group-item,
+    .modal-content {
+        background-color: darken($bg-primary, 14%);
+    }
+
+    .btn-outline-secondary {
+        color: #dddddd;
+        border-color: #dddddd;
+    }
+
+    .bg-default {
+        background-color: $bg-primary;
+        color: $bg-primary-text
+    }
+
+    .text-default,
+    .text-dark,
+    a {
+        color: lighten($bg-primary, 48%) !important;
+    }
+
+    .bg-white-light {
+        background-color: rgba(#ffffff, 0.2) !important;
+    }
+
+
+    .bg-primary-light {
+        background-color: lighten($primary, 55%) !important;
+    }
+
+
+    .bg-default-light {
+        background-color: $bg-primary !important;
+    }
+
+    .bg-danger-light {
+        background-color: lighten($danger, 40%) !important;
+    }
+
+    .bg-success-light {
+        background-color: lighten($success, 48%) !important;
+    }
+
+    .bg-warning-light {
+        background-color: lighten($warning, 38%) !important;
+    }
+
+    .border-top {
+        border-top: 1px solid rgba(0, 0, 0, 0.09) !important;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.09) !important;
+    }
+
+    .footer {
+
+        background-color: rgba($bg-primary, 0.98);
+
+        a:not(.btn) {
+            color: lighten($bg-primary, 30%) !important;
+
+            &.active {
+                color: lighten($bg-primary, 48%) !important;
+                border-color: lighten($bg-primary, 48%) !important;
+
+                i,
+                span {
+                    color: lighten($bg-primary, 48%) !important;
+                }
+            }
+        }
+    }
+
+    .modal-header,
+    .modal-footer {
+        border-color: rgba(255, 255, 255, 0.1)
+    }
+    
+    .float-label {
+        .form-control-label{
+            color: #ffffff;
+        }
+        .form-control{
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.5);
+            
+            &:focus{
+                border-color: rgba(255, 255, 255, 0.9)
+            }
+        }
+        select{
+            option{
+                background: #222222;
+            }
+        }
+    }
+    .swiper-pagination-bullet{
+        background-color: #ffffff;
+    }
+}

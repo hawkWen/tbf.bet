@@ -1,0 +1,20 @@
+//
+// Content
+//
+
+// Desktop Mode
+@include media-breakpoint-up(lg) {
+	.content {
+
+	}
+}
+
+// Tablet & Mobile Modes
+@include media-breakpoint-down(md) {
+	.content {
+		// Subheader Enabled & Subheader Transparent Modes
+		.subheader-enabled.subheader-transparent & {
+			padding-top: 0;
+		}
+	}
+}

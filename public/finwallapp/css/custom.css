@@ -1,0 +1,117 @@
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #ffffff82 !important;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #ffffff82 !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #ffffff82 !important;
+}
+
+/* .footer a:not(.btn) {
+    padding: 0px;
+    text-align: center;
+    color: white;
+    display: inline;
+    text-decoration: none;
+    border-top: 4px solid transparent;
+} */
+
+.footer p {
+
+    font-size: 10px;
+}
+
+.float-label .form-control {
+    border-bottom: 1px solid #ffffff30;
+}
+
+.float-label .form-control:focus {
+    border-bottom: 1px solid white;
+}
+
+.fa {
+    margin-right: 2px;
+}
+
+.form-control​ {
+    color: white !important;
+}
+
+.form-control:focus {
+    color: white !important;
+}
+
+.background {
+    background-image: url('https://fastbet.casinoauto.io/storage/games/dIwCf09gPXyT1aRIxwwaoDE1NIj3feoHGaPqYoyV.png')
+}
+
+.text-default-secondary {
+    color: orange !important;
+}
+
+.bg-default-secondary {
+    background-color: orange !important;
+    /* background:linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C); */
+}
+
+.btn-outline-default {
+    color: orange;
+    border-color: orange;
+}
+
+.footer a:not(.btn).active i, .footer a:not(.btn).active span {
+    color: #ffc107;
+}
+
+.footer a:not(.btn).active {
+    color: darkorange;
+    border-color: #ffc107;
+}
+
+.footer a:not(.btn) i, .footer a:not(.btn) span {
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+    font-size: 20px;
+}
+
+a:hover​ {
+    color: orange !important;
+}
+
+.modal-content {
+    background-color: #67686b !important;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.form-control.dark:focus {
+    color: black !important;
+}
+
+.text-danger {
+    color: #d12939  ;
+}
+
+.footer a:not(.btn) {
+    padding: 10px 13px;
+    text-align: center;
+    color: #999999;
+    display: block;
+    text-decoration: none;
+    border-top: 4px solid transparent;
+}

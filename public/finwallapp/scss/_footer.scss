@@ -1,0 +1,63 @@
+.footer {
+    padding: 0 15px;
+    border-radius: 20px 20px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    background: rgba($white, 0.98);
+    box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.15);
+    /*
+    -webkit-backdrop-filter: saturate(125%) blur(10px);
+    -moz-backdrop-filter: saturate(125%) blur(10px);
+    -ms-backdrop-filter: saturate(125%) blur(10px);
+    backdrop-filter: saturate(125%) blur(10px);*/
+
+    a:not(.btn) {
+        padding: 10px 15px;
+        text-align: center;
+        color: #999999;
+        display: block;
+        text-decoration: none;
+        border-top: 4px solid transparent;
+
+        i,
+        span {
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            margin-bottom: 15px;
+            display: block;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        p {
+            font-size: 9px;
+        }
+
+
+        &.active {
+            color: $bg-secondary;
+
+            i,
+            span {
+                color: $bg-primary;
+            }
+
+            border-color: $bg-primary;
+        }
+    }
+
+    &.no-bg-shadow {
+        background: none;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -ms-box-shadow: none;
+    }
+}

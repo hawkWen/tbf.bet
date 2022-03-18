@@ -1,0 +1,282 @@
+html{
+    height:100%;
+}
+
+body {
+    background: linear-gradient(0deg,rgba(102,102,102,1) 0,rgba(145,145,145,1) 47%,rgba(213,213,213,1) 100%) repeat-x #666;
+}
+
+.page-link:not(:disabled):not(.disabled) {
+    color: grey !important;
+}
+
+.page-item.active .page-link {
+    color: white !important;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+.input-group-append {
+    margin-left: 0px;
+    max-width: 39px;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.img-center {
+    margin: 0 auto;
+    display: block;
+}
+
+.card-body img {
+    position: relative;
+    top: -30px;
+}
+
+.nav-link {
+
+    display: block;
+    padding: 5PX 7PX;
+    font-size: 14px;
+}
+
+[input-type="money_decimal"] {
+    text-align: right;
+}
+
+[input-type="money"] {
+    text-align: right;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.card-ufabet label{
+    color: white;
+}
+
+.card-ufabet {
+    background-color: #494949;
+    color: #494949;
+    border-color: #A38A60;
+}
+
+.card-ufabet a, a:hover, a:focus, a:active{
+    color: white !important;
+}
+
+a, a:hover, a:focus, a:active{
+    color: white !important;
+}
+
+.card-ufabet .card-header {
+    background-color: #F7F7F7;
+    color: #494949;
+}
+
+.stepwizard .btn-default {
+    background-color: white;
+}
+
+.stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 16px;
+    line-height: 13.428571;
+    border-radius: 100%;
+}
+
+.box {
+    background-color: grey;
+    padding: 20px 5px;
+    margin-top: 10px;
+    border-radius: 2.5px;
+}
+
+.cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    /* width: 200px;  */
+    height: 1.2em; 
+    white-space: nowrap;
+}
+
+.bs-stepper .line, .bs-stepper-line {
+
+    background-color: #d39e00 !important;
+}
+
+.content {
+    display: block;
+    height: auto;
+    margin-bottom: 50px;
+}
+
+.btn-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.btn-footer .btn {
+    width: 100%;
+}
+
+.btn-footer .btn:first-child {
+
+    border-radius: 10px 0px 0px;
+}
+
+.btn-footer .btn:last-child {
+    border-radius: 0px 10px 0px 0px;
+}
+
+.btn-footer .btn {
+    background-color: #464646;
+    border: 0px;
+    color: #F7F7F7;
+}
+
+.text-left {
+    float: left !important;
+}
+
+.text-right {
+    float: right !important;
+}
+
+.circle {
+    position: relative;
+    margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    border-radius: 9999px;
+    border: 5px solid #F7F7F7;
+}
+  
+.circle {
+    padding: 50px;
+    color: #F7F7F7;
+}
+
+.btn-deposit {
+    position: absolute;
+    top: 80%;
+    right: 10%;
+    padding: 18px;
+    font-size: 22px;
+    box-shadow: 2px 2px 20px #494949;
+}
+
+.btn-footer .btn i {
+    font-size: 20px;
+}
+
+.btn-home {
+    position: relative !important;
+}
+
+.btn-home i {
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: -80%;
+    left: 5%;
+    right: 5%;
+    margin: 0 auto;
+    font-size: 30px !important;
+    padding: 16px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 6px solid white !important;
+    z-index: 99;
+    box-shadow: 2px 2px 20px white;
+}
+
+.btn-home span {
+    padding-top: 20px;
+}
+
+.btn-menu {
+    border: 1px solid #F7F7F7;
+    border-radius: 50%;
+    font-size: 22px;
+    padding: 22px;
+    background-color: transparent;
+    color: #F7F7F7;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #ffc107;
+}
+
+.table thead th {
+    color: white;
+}
+
+
+.text-shadow-white {
+    text-shadow: 2px 1px 3px #eee;
+}
+
+.text-shadow {
+    text-shadow: 2px 1px 3px #000;
+}
+
+.btn-fastbet {
+    background-color: #5b6467;
+    background-image: linear-gradient(315deg, #5b6467 0%, #8b939a 74%);
+    color: black;
+}
+
+a:hover {
+    color: lemonchiffon;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: black;
+}
