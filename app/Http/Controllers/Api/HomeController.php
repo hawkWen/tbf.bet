@@ -1582,6 +1582,7 @@ class HomeController extends Controller
                 CustomerCreditHistory::create([
                     'brand_id' => $brand->id,
                     'customer_id' => $customer->id,
+                    'promotion_id' => $promotion->id,
                     'customer_deposit_id' => 0,
                     'amount_before' => $amount,
                     'amount' => $bonus,
