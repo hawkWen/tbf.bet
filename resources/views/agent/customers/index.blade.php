@@ -197,7 +197,7 @@ use App\Helpers\Helper;
                                     </td>
                                     <td width="265">
                                         @if (Auth::user()->role_id != 4)
-                                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
+                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                 data-target="#changePassword_{{ $customer->id }}" data-toggle="tooltip"
                                                 data-placement="top" title="แก้ไขรหัสผ่าน">
                                                 <span data-toggle="tooltip" data-placement="top" title="แก้ไขรหัสผ่าน">
@@ -205,26 +205,26 @@ use App\Helpers\Helper;
 
                                                 </span>
                                             </button>
-                                            <button type="button" class="btn btn-info btn-xs" data-toggle="modal"
+                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                                 data-target="#updateCustomer_{{ $customer->id }}">
                                                 <span data-toggle="tooltip" data-placement="top" title="แก้ไขรหัสผ่าน">
                                                     <i class="fa fa-credit-card"></i>
                                                 </span>
                                             </button>
-                                            <button class="btn btn-secondary btn-xs"
+                                            <button class="btn btn-secondary btn-sm"
                                                 data-target="#managePromotionModal_{{ $customer->id }}"
                                                 data-toggle="modal">
                                                 <span data-toggle="tooltip" data-placement="top" title="จัดการโปรโมชั่น">
                                                     <i class="fa fa-edit"></i>
                                                 </span>
                                             </button>
-                                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal"
+                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                                 data-target="#minusCreditModal_{{ $customer->id }}">
                                                 <span data-toggle="tooltip" data-placement="top" title="โบนัสพิเศษ">
                                                     <i class="fa fa-minus"></i>
                                                 </span>
                                             </button>
-                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal"
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                                 data-target="#promotionCustomer_{{ $customer->id }}">
                                                 <span data-toggle="tooltip" data-placement="top" title="โบนัสพิเศษ">
                                                     <i class="fa fa-gift"></i>
