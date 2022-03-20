@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Promotion;
 
 class CustomerCreditHistory extends Model
 {
