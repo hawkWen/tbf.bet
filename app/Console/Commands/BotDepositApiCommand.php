@@ -363,6 +363,7 @@ class BotDepositApiCommand extends Command
             'brand_id' => $brand->id,
             'customer_id' => $customer->id,
             'customer_deposit_id' => $customer_deposit->id,
+            'promotion_id' => 0,
             'amount_before' => $customer->credit,
             'amount' => $total_amount,
             'amount_after' => $customer->credit + $total_amount,

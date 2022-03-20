@@ -1,7 +1,6 @@
 @extends('layouts.agent')
 
 @section('css')
-
 @endsection
 
 @section('content')
@@ -14,7 +13,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">Mc88auto</h5>
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">{{ env('APP_NAME') }}</h5>
                     <!--end::Page Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -78,7 +77,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($customer->creditHistories->sortByDesc('created_at')->take(50) as $credit_history)
-                                        <tr>
+                                        <tr @if ($credit_history->promotion_id != 0) class="bg-warning" @endif>
                                             <td align="center">
                                                 {{ $credit_history->created_at->format('d/m/Y H:i:s') }}
                                             </td>
@@ -97,7 +96,6 @@
                                                     <span class="text-danger">
                                                         - {{ number_format($credit_history->amount, 2) }}
                                                     </span>
-
                                                 @endif
                                             </td>
                                             <td>
@@ -176,7 +174,6 @@
 @endsection
 
 @section('javascript')
-
     {!! JsValidator::formRequest('App\Http\Requests\PromotionRequest', '#formCreateDeposit') !!}
     <script>
         // Example 4
@@ -188,5 +185,4 @@
             new KTImageInput('kt_image_' + v);
         });
     </script>
-
 @endsection
