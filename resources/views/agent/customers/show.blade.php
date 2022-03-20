@@ -99,7 +99,7 @@
                                                 @endif
                                                 @if ($credit_history->promotion_id != 0)
                                                     <button type="button" class="btn btn-xs btn-warning pull-right"
-                                                        data-toggle="popover"
+                                                        data-toggle="popover" data-placement="top"
                                                         data-content="{{ $credit_history->promotion->name }}">
                                                         <i class="fa fa-info-circle"></i>
                                                         รับโบนัส</button>
