@@ -77,12 +77,15 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($customer->creditHistories->sortByDesc('created_at')->take(50) as $credit_history)
-                                        <tr @if ($credit_history->promotion_id != 0) class="bg-warning" @endif>
+                                        <tr>
                                             <td align="center">
                                                 {{ $credit_history->created_at->format('d/m/Y H:i:s') }}
                                             </td>
                                             <td>
                                                 {{ $credit_history->customer->username }}
+                                                @if ($credit_history->promotion_id != 0)
+                                                    <span class="badge badge-warning">รับโบนัส</span>
+                                                @endif
                                             </td>
                                             <td>
                                                 {{ number_format($credit_history->amount_before) }}
