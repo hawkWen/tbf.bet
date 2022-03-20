@@ -21,6 +21,10 @@ i {
     color: unset;
 }
 
+.btn-xs {
+    padding: 0px 12px;
+}
+
 .card.card-custom>.card-header .card-title {
 
     margin-bottom: -20px;
