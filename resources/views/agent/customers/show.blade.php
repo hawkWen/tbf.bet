@@ -98,9 +98,11 @@
                                                     </span>
                                                 @endif
                                                 @if ($credit_history->promotion_id != 0)
-                                                    <button type="button" class="btn btn-sm btn-warning pull-right"
+                                                    <button type="button" class="btn btn-xs btn-warning pull-right"
                                                         data-toggle="popover" title="Popover title"
-                                                        data-content="And here's some amazing content. It's very engaging. Right?">รับโบนัส</button>
+                                                        data-content="And here's some amazing content. It's very engaging. Right?">
+                                                        <i class="fa fa-info-circle"></i>
+                                                        รับโบนัส</button>
                                                 @endif
                                             </td>
                                             <td>
