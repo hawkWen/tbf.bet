@@ -83,9 +83,6 @@
                                             </td>
                                             <td>
                                                 {{ $credit_history->customer->username }}
-                                                @if ($credit_history->promotion_id != 0)
-                                                    <span class="badge badge-warning">รับโบนัส</span>
-                                                @endif
                                             </td>
                                             <td>
                                                 {{ number_format($credit_history->amount_before) }}
@@ -99,6 +96,9 @@
                                                     <span class="text-danger">
                                                         - {{ number_format($credit_history->amount, 2) }}
                                                     </span>
+                                                @endif
+                                                @if ($credit_history->promotion_id != 0)
+                                                    <span class="badge badge-warning">รับโบนัส</span>
                                                 @endif
                                             </td>
                                             <td>
