@@ -98,7 +98,7 @@
                                                     </span>
                                                 @endif
                                                 @if ($credit_history->promotion_id != 0)
-                                                    <span class="badge badge-warning">รับโบนัส</span>
+                                                    <span class="badge badge-warning pull-right">รับโบนัส</span>
                                                 @endif
                                             </td>
                                             <td>
