@@ -99,8 +99,8 @@
                                                 @endif
                                                 @if ($credit_history->promotion_id != 0)
                                                     <button type="button" class="btn btn-xs btn-warning pull-right"
-                                                        data-toggle="popover" title="Popover title"
-                                                        data-content="And here's some amazing content. It's very engaging. Right?">
+                                                        data-toggle="popover"
+                                                        data-content="{{ $credit_history->promotion->name }}">
                                                         <i class="fa fa-info-circle"></i>
                                                         รับโบนัส</button>
                                                 @endif

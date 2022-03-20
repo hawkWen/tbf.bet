@@ -27,5 +27,9 @@ class CustomerCreditHistory extends Model
     public function deposit() {
         return $this->belongsTo(CustomerDeposit::class);
     }
-    
+
+    public function promotion() {
+        return $this->belongsTo(Promotion::class);
+    }
+     
 }
