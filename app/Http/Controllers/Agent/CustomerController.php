@@ -64,7 +64,7 @@ class CustomerController extends Controller
 
         $customer_count = Customer::whereBrandId($brand->id)->get();
 
-        return view('agent.customers.index', compact('brand', 'dates', 'customers', 'banks', 'promotions', 'search'));
+        return view('agent.customers.index', compact('brand', 'dates', 'customers', 'banks', 'promotions', 'search','customer_count'));
     }
 
     public function lastPromotion(Request $request)
