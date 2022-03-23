@@ -61,7 +61,8 @@ class CustomerController extends Controller
 
             $customers = Customer::whereBrandId($brand->id)->orderBy('created_at', 'desc')->withTrashed()->paginate(10);
         }
-        
+
+        $customer_count = Customer::whereBrandId($brand->id)->get();
 
         return view('agent.customers.index', compact('brand', 'dates', 'customers', 'banks', 'promotions', 'search'));
     }

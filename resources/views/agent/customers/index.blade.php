@@ -77,6 +77,11 @@ use App\Helpers\Helper;
                 <!--end::Header-->
                 <!--begin::Body-->
                 <div class="card-body">
+                    <div class="pull-right">
+                        ลูกค้าทั้งหมดในระบบ {{ number_format($customer_count->count()) }} คน
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
                     <form action="{{ route('agent.customer') }}">
                         <div class="row">
                             <div class="col-lg-4">
@@ -94,7 +99,7 @@ use App\Helpers\Helper;
                         <div class="row">
                             <div class="col-lg-4">
                                 <label for="">ค้นหาเลขที่บัญชีที่ซ้ำกัน</label>
-                                <input type="text" class="form-control" name="bank_account" value="{{ $search }}">
+                                <input type="text" class="form-control" name="bank_account" value="">
                                 <span class="badge badge-info">เลขบัญชีไทยพาณิชย์ 4 หลักสุดท้าย , ธนาคารกสิกรไทย 6
                                     หลักสุดท้าย</span>
                             </div>
@@ -207,7 +212,7 @@ use App\Helpers\Helper;
                                             </button>
                                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                                 data-target="#updateCustomer_{{ $customer->id }}">
-                                                <span data-toggle="tooltip" data-placement="top" title="แก้ไขรหัสผ่าน">
+                                                <span data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูลลูกค้า">
                                                     <i class="fa fa-credit-card"></i>
                                                 </span>
                                             </button>

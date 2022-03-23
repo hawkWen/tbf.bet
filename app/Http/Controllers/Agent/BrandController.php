@@ -60,7 +60,9 @@ class BrandController extends Controller
 
         }
 
-        $input['withdraw_auto_max'] = str_replace(',','',$input['withdraw_auto_max']);
+        $input['withdraw_auto_max'] = (isset($input['withdraw_auto_max'])) ? str_replace(',','',$input['withdraw_auto_max']) : $brand->withdraw_auto_max;
+
+        $input['withdraw_min'] = (isset($input['withdraw_min'])) ? str_replace(',','',$input['withdraw_min']) : $brand->withdraw_min;
 
         $brand->update($input);
 

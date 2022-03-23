@@ -114,8 +114,14 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="">ถอนขั้นต่ำ </label>
+                                        <input type="text" class="form-control" name="withdraw_min"
+                                            input-type="money_decimal" placeholder="0"
+                                            value="{{ $brand->withdraw_min }}">
 
-                                    <div class="col-lg-12">
+                                    </div>
+                                    <div class="col-lg-6">
                                         <label for="">ถอนอัตโนมัติในวงเงินไม่เกิน </label>
                                         <input type="text" class="form-control" name="withdraw_auto_max"
                                             input-type="money_decimal" placeholder="10,000"
@@ -291,8 +297,8 @@
                                         </td>
                                         <th width="300">
                                             <textarea name="description[{{ $rank->id }}]" name="description" class="form-control">
-                                                                                                                                        {{ $rank->description }}
-                                                                                                                                    </textarea>
+                                                {{ $rank->description }}
+                                            </textarea>
                                         </th>
                                     </tr>
                                 @endforeach

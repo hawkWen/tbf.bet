@@ -86,7 +86,16 @@ class Api {
                 $response = [
                     'status' => true,
                     'data' => [
-                        'username' => $ufa_api_register['ufa_username']
+                        'username' => $ufa_api_register['ufa_username'],
+                    ]
+                ];
+
+            } else {
+
+                $response = [
+                    'status' => false,
+                    'data' => [
+                        'message' => $ufa_api_register['errorCode'].' '.$ufa_api_register['message']
                     ]
                 ];
 

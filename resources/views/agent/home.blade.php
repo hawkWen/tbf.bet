@@ -284,7 +284,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card card-custom card-stretch card-shadowless gutter-b">
+                        <div class="card card-custom card-stretch card-shadowless gutter-b"
+                            style="height: 500px;overflow: scroll;">
                             <!--begin::Header-->
                             <div class="card-header border-0 py-5">
                                 <h3 class="card-title align-items-start flex-column">

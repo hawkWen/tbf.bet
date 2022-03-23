@@ -218,15 +218,28 @@ class AuthController extends Controller
 
             DB::rollback();
 
-            return response()->json([
-                'message' => 'ลองใหม่อีกครั้งค่ะ'
-            ], 401);
+            if($brand->game_id === 2) {
+
+                return response()->json([
+                    'status' => false,
+                    'message' => $api_register['data']['message']
+                ]);
+
+            } else {
+
+                return response()->json([
+                    'status' => false,
+                    'message' => 'เกิดข้อผิดพลาดทางระบบ กรุณาติดต่อพนักงาน'
+                ]);
+
+            }
 
         }
 
         DB::commit();
 
         return response()->json([
+            'status' => true,
             'message' => 'สมัครสมาชิกใหม่เรียบร่อย',
             'data' => $customer
         ], 200);
