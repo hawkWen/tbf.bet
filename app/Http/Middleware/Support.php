@@ -16,7 +16,7 @@ class Support
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check() && in_array([1,2],Auth::user()->user_role_id)) {
+        if (Auth::guard($guard)->check() && in_array(Auth::user()->user_role_id,[1,2,6,7])) {
             return $next($request);
         }
         return redirect()->route('support.login');
