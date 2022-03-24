@@ -53,7 +53,7 @@ class UserController extends Controller
 
         $users = $users->whereIn('user_role_id',$array_roles);
 
-        $users = $users->orderBy('user_role_id','desc')->paginate(10);
+        $users = $users->orderBy('user_role_id')->paginate(10);
 
         $brands = Brand::whereIn('type_api',['1','2'])->get();
 
