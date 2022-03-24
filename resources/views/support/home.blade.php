@@ -4,212 +4,514 @@
 @endsection
 
 @section('content')
+
     <div class="content d-flex flex-column flex-column-fluid">
         <div class="d-flex flex-column-fluid">
             {{-- @if (Auth::user()->user_role_id != 3) --}}
             <div class="container-fluid">
-                <h3 class="text-dark ">
-
-                    {{-- <div class="clearfix"></div> --}}<i class="fas fa-tachometer-alt mr-3"></i> แผงควบคุมการทำงาน
-                </h3>
-                <div class="clearfix"></div>
+                <p class="text-dark ">ภาพรวมประจำวัน {{ $dates['input_start_date'] }} -
+                    {{ $dates['input_end_date'] }}
+                </p>
                 <hr>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="pull-right">
-                            <p> รีเฟรชใน
-                                <span id="secondTransaction">5</span> วินาที
-                            </p>
+                <form action="{{ route('support') }}" method="get">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label for="">เลือกแบรนด์</label>
+                            <select name="brand_id" id="brand_id" class="form-control" required>
+                                <option value="">เลือกแบรนด์</option>
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}" @if ($brand_select == $brand->id) selected @endif>
+                                        {{ $brand->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <h3 class=""> <i class=" fa fa-money-check-alt mr-3"></i>
-                            รายการ transaction ล่าสุด</h3>
-                        <hr>
-                        <div class="card card-custom card-shadowless gutter-b bg-white">
+                        <div class="col-lg-4">
+                            <label for="">ตั้งแต่วันที่</label>
+                            <div class="input-group date">
+                                <input type="text" class="form-control" readonly name="start_date"
+                                    value="{{ $dates['input_start_date'] }}" id="kt_datepicker_1" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="la la-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">ถึงวันที่</label>
+                            <div class="input-group date">
+                                <input type="text" class="form-control" readonly name="end_date"
+                                    value="{{ $dates['input_end_date'] }}" id="kt_datepicker_2" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="la la-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <button class="btn btn-primary" style="margin-top: 25px">
+                                <i class="fa fa-search mr-0 pr-0"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                @if ($brand_select != 0)
+                    <div class="row mt-0 mt-lg-8">
+                        <div class="col-lg-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!--begin::Mixed Widget 4-->
+                                    <div class="card card-custom card-stretch card-shadowless gutter-b">
+                                        <!--begin::Header-->
+                                        <div class="card-header border-0 py-5">
 
-                            <div id="tableTransaction">
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>วันที่/เวลา</th>
-                                            <th>แบรนด์</th>
-                                            <th>statementกำกับ</th>
-                                            <th>สถานะ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($bank_account_transactions as $bank_account_transaction)
-                                            <tr>
-                                                <td align="center">
-                                                    {{ $bank_account_transaction->created_at->format('d/m/Y') }}
-                                                    <br>
-                                                    {{ $bank_account_transaction->created_at->format('H:i:s') }}
-                                                </td>
-                                                <td>{{ $bank_account_transaction->brand->name }}</td>
-                                                <td>{{ $bank_account_transaction->bank_account }} /
-                                                    {{ $bank_account_transaction->amount }}</td>
-                                                <td>
-                                                    @if ($bank_account_transaction->status == 0)
-                                                        <span class="text-info">
-                                                            <i class="fas fa-robot mr-2"></i>
-                                                            รอบอทเติมเงิน
-                                                        </span>
-                                                    @elseif($bank_account_transaction->status == 1)
-                                                        <span class="text-success">
-                                                            <i class="fa fa-check mr-2"></i>
-                                                            เติมเงินเสร็จแล้ว
-                                                        </span>
-                                                        <span class="text-center">
-                                                            @if ($bank_account_transaction->deposit)
-                                                                <p>
-                                                                    ลูกค้า:
-                                                                    {{ $bank_account_transaction->deposit->customer->username }}
-                                                                </p>
-                                                            @endif
-                                                        </span>
-                                                    @elseif($bank_account_transaction->status == 2)
-                                                        <span class="text-warning mr-2">
-                                                            <i class="far fa-clock"></i>
-                                                            กำลังเชื่อมต่อ API
-                                                        </span>
-                                                    @elseif($bank_account_transaction->status == 3)
-                                                        @if ($bank_account_transaction->code == 'X1')
-                                                            <span class="text-danger mr-2">
-                                                                <i class="fa fa-times"></i>
-                                                                เบิ้ล
-                                                            </span>
-                                                        @else
-                                                            <span class="text-warning mr-2">
-                                                                <i class="fa fa-credit-card"></i>
-                                                                ยอดโอนออก
-                                                            </span>
+                                            <h3 class="card-title font-weight-bolder text-info">ภาพรวม
+
+                                            </h3>
+                                            <h3 class="card-title font-weight-bolder text-info">
+                                                จำนวนใบงานทั้งหมด
+                                                {{ number_format($customer_deposits->count() + $customer_withdraws->count()) }}
+                                            </h3>
+                                        </div>
+                                        <!--end::Header-->
+                                        <!--begin::Body-->
+                                        <div class="card-body d-flex flex-column p-0">
+                                            <!--begin::Chart-->
+                                            <!--end::Chart-->
+                                            <!--begin::Stats-->
+                                            <div class="card-spacer bg-white card-rounded flex-grow-1">
+                                                <!--begin::Row-->
+                                                <div class="row m-0">
+                                                    <div class="col px-8 py-6 mr-8">
+                                                        <div class="font-size-sm text-dark font-weight-bold">ยอดเติมเงิน
+                                                        </div>
+                                                        <div class="font-size-h4 font-weight-bolder text-success">$
+                                                            {{ number_format($customer_deposits->sum('amount'), 2) }}
+                                                        </div>
+                                                        <small
+                                                            class="text-success">{{ number_format($customer_deposits->count()) }}
+                                                            ครั้ง</small>
+                                                    </div>
+                                                    <div class="col px-8 py-6">
+                                                        <div class="font-size-sm text-dark font-weight-bold">ยอดถอนเงิน
+                                                        </div>
+                                                        <div class="font-size-h4 font-weight-bolder text-danger">$
+                                                            {{ number_format($customer_withdraws->sum('amount'), 2) }}
+                                                        </div>
+                                                        <small
+                                                            class="text-success">{{ number_format($customer_withdraws->count()) }}
+                                                            ครั้ง</small>
+                                                    </div>
+                                                </div>
+                                                <!--end::Row-->
+                                                <!--begin::Row-->
+                                                <div class="row m-0">
+                                                    <div class="col px-8 py-6 mr-8">
+                                                        <div class="font-size-sm text-dark font-weight-bold">ลูกค้าใหม่
+                                                        </div>
+                                                        <div class="font-size-h4 font-weight-bolder">
+                                                            {{ number_format($customer_news->count()) }} /
+                                                            {{ number_format($customers->count()) }}</div>
+                                                    </div>
+                                                    <div class="col px-8 py-6">
+                                                        <div class="font-size-sm font-weight-bold">
+                                                            ลูกค้าที่มีการเติมเงินในวันนี้</div>
+                                                        <div class="font-size-h4 font-weight-bolder text-info"> <i
+                                                                class="fa fa-users text-info"></i>
+                                                            {{ $customer_active->count() }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Stats-->
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Mixed Widget 4-->
+                                </div>
+                                <div class="col-lg-12">
+                                    <!--begin::Mixed Widget 4-->
+                                    <div class="card card-custom card-stretch card-shadowless gutter-b">
+                                        <!--begin::Header-->
+                                        <div class="card-header border-0 py-5">
+                                            <h3 class="card-title font-weight-bolder text-warning">โปรโมชั่นที่ใช้วันนี้
+                                            </h3>
+                                        </div>
+                                        <!--end::Header-->
+                                        <!--begin::Body-->
+                                        <div class="card-body d-flex flex-column p-4">
+                                            <table class="table table-head-custom table-vertical-center">
+                                                <thead>
+                                                    <tr class="text-left">
+                                                        <td>โปรโมชั่น</td>
+                                                        <td align="right">เครดิตที่ใช้ไป</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($group_by_promotion_costs as $group_by_promotion_cost)
+                                                        @php
+                                                            $promotion = App\Models\Promotion::find($group_by_promotion_cost->promotion_id);
+                                                        @endphp
+                                                        <tr>
+                                                            <td>
+                                                                @if ($group_by_promotion_cost->promotion)
+                                                                    {{ $group_by_promotion_cost->promotion->name }}
+                                                                @else
+                                                                    โบนัสวงล้อ
+                                                                @endif
+                                                            </td>
+                                                            <td align="right">
+                                                                {{ number_format($group_by_promotion_cost->bonus, 2) }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="2" align="right">
+                                                            โปรโมชั่นทั่วไป $
+                                                            {{ number_format($promotion_costs->where('promotion.type_promotion', '!=', 6)->sum('bonus'), 2) }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" align="right">
+                                                            เครดิตฟรี $
+                                                            {{ number_format($promotion_costs->where('promotion.type_promotion', '=', 6)->sum('bonus'), 2) }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" align="right">
+                                                            ยอดรวม $
+                                                            {{ number_format($promotion_costs->sum('bonus'), 2) }}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Mixed Widget 4-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="card card-custom card-stretch gutter-b">
+                                        <!--begin::Header-->
+                                        <div class="card-header border-0">
+                                            <h3 class="card-title font-weight-bolder text-success">ลูกค้าที่เติมเงินสูงสุด 5
+                                                อันดับ</h3>
+                                        </div>
+                                        <!--end::Header-->
+                                        <!--begin::Body-->
+                                        <div class="card-body pt-2">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <td>ลูกค้า</td>
+                                                        <td>จำนวนเงินที่เติม</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($customer_deposit_tops as $customer_deposit_top)
+                                                        <tr>
+                                                            <td>{{ $customer_deposit_top->customer->name }}</td>
+                                                            <td align="right">
+                                                                {{ number_format($customer_deposit_top->total_deposit, 2) }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card card-custom card-stretch gutter-b">
+                                        <!--begin::Header-->
+                                        <div class="card-header border-0">
+                                            <h3 class="card-title font-weight-bolder text-danger">ลูกค้าที่ถอนเงินสูงสุด 5
+                                                อันดับ</h3>
+                                        </div>
+                                        <!--end::Header-->
+                                        <div class="card-body pt-2">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <td>ลูกค้า</td>
+                                                        <td>จำนวนเงินที่ถอน</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($customer_withdraw_tops as $customer_withdraw_top)
+                                                        <tr>
+                                                            <td>{{ $customer_withdraw_top->customer->name }}</td>
+                                                            <td align="right">
+                                                                {{ number_format($customer_withdraw_top->total_withdraw, 2) }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card card-custom card-stretch gutter-b">
+                                        <!--begin::Header-->
+                                        <div class="card-header border-0">
+                                            <h3 class="card-title font-weight-bolder text-warning">
+                                                ลูกค้าที่รับโปรโมชั่สูงสุด 5
+                                                อันดับ</h3>
+                                        </div>
+                                        <!--end::Header-->
+                                        <!--begin::Body-->
+                                        <div class="card-body pt-2">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <td>ลูกค้า</td>
+                                                        <td>จำนวนโบนัสที่ได้</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($customer_promotion_tops as $customer_promotion_top)
+                                                        <tr>
+                                                            <td>{{ $customer_promotion_top->customer->name }}</td>
+                                                            <td align="right">
+                                                                {{ number_format($customer_promotion_top->total_bonus, 2) }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-custom card-stretch card-shadowless gutter-b"
+                                style="height: 500px;overflow: scroll;">
+                                <!--begin::Header-->
+                                <div class="card-header border-0 py-5">
+                                    <h3 class="card-title align-items-start flex-column">
+                                        <span class="card-label font-weight-bolder text-dark">รายการธนาคารของฉัน</span>
+                                        <span class="text-muted mt-3 font-weight-bold font-size-sm"></span>
+                                    </h3>
+                                    <div class="card-toolbar">
+                                    </div>
+                                </div>
+                                <!--end::Header-->
+                                <!--begin::Body-->
+                                <div class="card-body py-0">
+                                    @foreach ($bank_accounts->sortByDesc('type') as $bank_account)
+                                        <div class="d-flex align-items-center mb-9 bg-light-success rounded p-5">
+                                            <!--begin::Icon-->
+                                            @if ($bank_account->bank)
+                                                <img src="{{ asset($bank_account->bank->logo) }}" width="50"
+                                                    class="mr-5 img-rounded" alt="">
+                                                <!--end::Icon-->
+                                            @endif
+
+                                            <!--begin::Title-->
+                                            <div class="d-flex flex-column flex-grow-1 mr-2">
+                                                <a href="#"
+                                                    class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">
+                                                    @if ($bank_account->bank)
+                                                        {{ $bank_account->bank->name }}
+                                                    @endif
+                                                    <span>
+                                                        @if ($bank_account->type == 1)
+                                                            <span class="text-success">ขาเข้า (auto)</span>
+                                                        @elseif($bank_account->type == 2)
+                                                            <span class="text-danger">ขาเข้าสำรอง (manual)</span>
+                                                        @elseif($bank_account->type == 3)
+                                                            <span class="text-warning">ขาออก (auto)</span>
+                                                        @elseif($bank_account->type == 4)
+                                                            <span class="text-primary">ขาออกสำรอง (manual)</span>
+                                                        @elseif($bank_account->type == 5)
+                                                            <span class="text-primary">กลาง</span>
                                                         @endif
-                                                    @elseif($bank_account_transaction->status == 4)
-                                                        <span class="text-danger mr-2">
-                                                            <i class="fa fa-times"></i>
-                                                            ไม่พบบัญชีนี้ในระบบ
-                                                        </span>
-                                                    @elseif($bank_account_transaction->status == 5)
-                                                        <span class="text-warning mr-2">
-                                                            <i class="fa fa-times"></i>
-                                                            รายการนี้เติมมือแล้ว
-                                                        </span>
-                                                    @elseif($bank_account_transaction->status == 6)
-                                                        <span class="text-warning mr-2">
-                                                            <i class="fa fa-times"></i>
-                                                            ติดโปรโมชั่น
-                                                        </span>
-                                                    @elseif($bank_account_transaction->status == 8)
-                                                        <span class="text-warning mr-2">
-                                                            <i class="fa fa-times"></i>
-                                                            เลขที่บัญชี SCB 4 หลักซ้ำกัน
-                                                        </span>
-                                                    @elseif($bank_account_transaction->status == 9)
-                                                        <span class="text-danger mr-2">
-                                                            <i class="fa fa-times"></i>
-                                                            ลูกค้าออนไลน์อยู่
-                                                            @if ($bank_account_transaction->customer)
-                                                                {{ $bank_account_transaction->customer->username }}
-                                                            @endif
-                                                        </span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8" id="tableHelper">
-                        <div class="pull-right">
-                            <p> รีเฟรชใน
-                                <span id="secondHelper">30</span> วินาที
-                            </p>
-                        </div>
-                        <h3> <i class="fa fa-question-circle"></i> สถานะบอทธนาคาร</h3>
-                        <hr>
-                        <div class="card card-custom card-shadowless gutter-b bg-white">
+                                                    </span>
+                                                </a>
+                                                <span class="text-dark font-weight-bold">{{ $bank_account->name }}
+                                                    {{ $bank_account->account }}</span>
+                                            </div>
+                                            <!--end::Title-->
 
-                            <!--begin::Body-->
-                            <div class="card-body pt-2" id="refreshBankAccount">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <td>แบรนด์</td>
-                                            <td>บัญชีธนาคาร</td>
-                                            <td>ประเภท</td>
-                                            <td>สถานะ</td>
-                                            <td>Last Execution Time</td>
-                                            <td>อัพเดทล่าสุด</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($bank_accounts as $bank_account)
-                                            <tr>
-                                                <td>
-                                                    @if ($bank_account->brand)
-                                                        {{ $bank_account->brand->subdomain }}
-                                                    @else
-                                                        {{ $bank_account->brand_id }}
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <p>{{ $bank_account->name }}</p>
-                                                    <p>{{ $bank_account->bank_account }}</p>
-                                                </td>
-                                                <td>
-                                                    @if ($bank_account->type == 0)
-                                                        <span class="text-success">เข้า/ออก (auto)</span>
-                                                    @elseif($bank_account->type == 1)
-                                                        <span class="text-success">ขาเข้า (auto)</span>
-                                                    @elseif($bank_account->type == 2)
-                                                        <span class="text-danger">ขาเข้าสำรอง (manual)</span>
-                                                    @elseif($bank_account->type == 3)
-                                                        <span class="text-warning">ขาออก (auto)</span>
-                                                    @elseif($bank_account->type == 4)
-                                                        <span class="text-primary">ขาออกสำรอง (manual)</span>
-                                                    @elseif($bank_account->type == 5)
-                                                        <span class="text-primary">กลาง</span>
-                                                    @elseif($bank_account->type == 6)
-                                                        <span class="text-primary">ขาเข้า SCB EASY</span>
-                                                    @elseif($bank_account->type == 7)
-                                                        <span class="text-danger">ขาออก SCB EASY</span>
-                                                    @elseif($bank_account->type == 8)
-                                                        <span class="text-danger">truemoney manual</span>
-                                                    @elseif($bank_account->type == 9)
-                                                        <span class="text-success">SCB PIN ขาเข้า</span>
-                                                    @elseif($bank_account->type == 10)
-                                                        <span class="text-danger">SCB PIN ขาออก</span>
-                                                    @elseif($bank_account->type == 11)
-                                                        <span class="text-danger">SCB PIN ขาเข้า/ขาออก</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if ($bank_account->active == 0)
-                                                        <span class="text-success">Active</span>
-                                                    @elseif($bank_account->active == 1)
-                                                        <span class="text-success">Wait</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    {{ number_format($bank_account->last_execution_time, 2) }} s
-                                                </td>
-                                                <td>
-                                                    {{ $bank_account->updated_at->format('d/m/Y H:i:s') }}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                            <!--begin::Lable-->
+                                            <span
+                                                class="font-weight-bolder text-warning py-1 font-size-lg">{{ number_format($bank_account->amount, 2) }}</span>
+                                            <!--end::Lable-->
+                                            <br>
+                                            @if ($bank_account->type == 0 || $bank_account->type == 1 || $bank_account->type == 3 || $bank_account->type == 9 || $bank_account->type == 10 || $bank_account->type == 11)
+                                                @if ($bank_account->bank_id != 0)
+                                                    <a href="{{ route('agent.bank-account.update-amount-bot', $bank_account->id) }}"
+                                                        class="btn btn-primary btn-xs ml-3 pull-right" data-toggle="tooltip"
+                                                        data-placement="top" title="อัพเดทเงินในัญชี">
+                                                        <i class="fa fa-sync"></i>
+                                                    </a>
+                                                @endif
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <!--end::Body-->
                             </div>
-                            <!--end::Body-->
                         </div>
                     </div>
-                </div>
+                    <div class="row mt-0 mt-lg-8">
+                        <div class="col-lg-8">
+                            <div class="card card-custom card-stretch card-shadowless gutter-b">
+                                <!--begin::Header-->
+                                <div class="card-header border-0 py-5">
+                                    <h3 class="card-title align-items-start flex-column">
+                                        <span class="card-label font-weight-bolder text-success">เติมเงินล่าสุด</span>
+                                        <span class="text-muted mt-3 font-weight-bold font-size-sm"></span>
+                                    </h3>
+                                    <div class="card-toolbar">
+                                    </div>
+                                </div>
+                                <!--end::Header-->
+                                <!--begin::Body-->
+                                <div class="card-body py-0">
+                                    <!--begin::Table-->
+                                    <div class="table-responsive">
+                                        <table class="table table-head-custom table-vertical-center">
+                                            <thead>
+                                                <tr class="text-left">
+                                                    <th>วันที่/เวลา</th>
+                                                    {{-- <th class="pr-0">ธนาคาร</th> --}}
+                                                    <th style="min-width: 200px">ลูกค้า</th>
+                                                    <th>โปรโมชั่น</th>
+                                                    <th style="min-width: 150px">ยอดเงิน</th>
+                                                    <th style="min-width: 150px">โบนัส</th>
+                                                    <th>พนักงาน</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($customer_deposits->sortByDesc('created_at')->take(20) as $customer_deposit)
+                                                    <tr>
+                                                        <td>{{ $customer_deposit->created_at->format('d/m/y') }}
+                                                            <br>{{ $customer_deposit->created_at->format('H:i:s') }}
+                                                        </td>
+                                                        <td>{{ $customer_deposit->name }}
+                                                            @if ($customer_deposit->customer)
+                                                                ({{ $customer_deposit->customer->username }})
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <div class="cut-text">
+                                                                @if ($customer_deposit->promotion)
+                                                                    {{ $customer_deposit->promotion->name }}
+                                                                @else
+                                                                    ไม่รับโบนัส
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                        <td align="center">
+                                                            {{ number_format($customer_deposit->amount, 2) }}
+                                                        </td>
+                                                        <td>
+                                                            @if ($customer_deposit->bonus > 0)
+                                                                + <span
+                                                                    class="text-success">{{ $customer_deposit->bonus }}</span>
+                                                            @endif
+                                                        </td>
+                                                        <td align="center">
+                                                            @if ($customer_deposit->type_withdraw == 1)
+                                                                @if ($customer_deposit->user)
+                                                                    ({{ $customer_deposit->user->name }})
+                                                                @endif
+                                                            @else
+                                                                <span class="text-success">BOT</span>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--end::Table-->
+                                </div>
+                                <!--end::Body-->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-custom card-stretch card-shadowless gutter-b">
+                                <!--begin::Header-->
+                                <div class="card-header border-0 py-5">
+                                    <h3 class="card-title align-items-start flex-column">
+                                        <span class="card-label font-weight-bolder text-danger">ถอนเงินล่าสุด</span>
+                                        <span class="text-muted mt-3 font-weight-bold font-size-sm"></span>
+                                    </h3>
+                                    <div class="card-toolbar">
+                                    </div>
+                                </div>
+                                <!--end::Header-->
+                                <!--begin::Body-->
+                                <div class="card-body py-0">
+                                    <!--begin::Table-->
+                                    <div class="table-responsive">
+                                        <table class="table table-head-custom table-vertical-center">
+                                            <thead>
+                                                <tr class="text-left">
+                                                    <th style="min-width: 150px;">วันที่/เวลา</th>
+                                                    {{-- <th class="pr-0">ธนาคารที่โอน</th> --}}
+                                                    <th style="min-width: 200px">ลูกค้า</th>
+                                                    <th style="min-width: 150px">ยอดเงิน</th>
+                                                    <th>พนักงาน</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($customer_withdraws->sortByDesc('created_at')->take(20) as $customer_withdraw)
+                                                    <tr>
+                                                        <td>{{ $customer_withdraw->created_at->format('d/m/y H:i:s') }}
+                                                        </td>
+                                                        {{-- <td class="pr-0">
+                                                    @if (isset($customer_withdraw->bankAccount))
+                                                        <img src="{{asset($customer_withdraw->bankAccount->bank->logo)}}" width="20" class="h-75 align-self-end" alt="" width="20">
+                                                        {{$customer_withdraw->bankAccount->bank->name}} {{$customer_withdraw->bankAccount->account}} {{$customer_withdraw->bankAccount->name}}
+                                                    @endif
+                                                </td> --}}
+                                                        <td>{{ $customer_withdraw->name }}
+                                                            ({{ $customer_withdraw->customer->username }})
+                                                        </td>
+                                                        <td align="center">
+                                                            {{ number_format($customer_withdraw->amount, 2) }}
+                                                            @if ($customer_withdraw->bonus > 0)
+                                                                + <span
+                                                                    class="text-success">{{ $customer_withdraw->bonus }}</span>
+                                                            @endif
+                                                        </td>
+                                                        <td align="center">
+                                                            @if ($customer_withdraw->type_withdraw == 1)
+                                                                @if ($customer_withdraw->user)
+                                                                    ({{ $customer_withdraw->user->name }})
+                                                                @endif
+                                                            @else
+                                                                <span class="text-success">BOT</span>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--end::Table-->
+                                </div>
+                                <!--end::Body-->
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
             {{-- @endif --}}
         </div>
     </div>
+
 @endsection
 
 @section('javascript')
@@ -228,51 +530,6 @@
                 todayHighlight: true,
                 format: 'dd/mm/yyyy',
             });
-
-            var iSecondTransaction = 5;
-
-            var iSecondHelper = 30;
-
-            setInterval(function() {
-
-                iSecondTransaction--;
-
-                if (iSecondTransaction == 0) {
-
-                    refershTransaction();
-
-                    iSecondTransaction = 5;
-
-                }
-
-                $('#secondTransaction').html(iSecondTransaction);
-
-            }, 1000);
-
-            setInterval(function() {
-
-                iSecondHelper--;
-
-                if (iSecondHelper == 0) {
-
-                    iSecondHelper = 30;
-
-                }
-
-                $('#secondHelper').html(iSecondHelper);
-
-            }, 1000);
-
         });
-
-        function refershTransaction() {
-
-            $('#tableTransaction').load('/transaction');
-
-        }
-
-        function refreshBankAccount() {
-            $('#refreshBankAccount').load('/bank-accounts');
-        }
     </script>
 @endsection
