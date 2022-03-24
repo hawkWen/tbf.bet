@@ -5,10 +5,11 @@
         <!--begin::Item-->
         <li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body"
             data-boundary="window" title="ภาพรวม">
-            <a href="{{ route('support') }}" class="nav-link btn btn-icon btn-hover-text-primary btn-lg active">
+            <a href="{{ route('support.monitor') }}"
+                class="nav-link btn btn-icon btn-hover-text-primary btn-lg active">
                 <i class="fas fa-layer-group d-block"></i>
             </a>
-            <span class="d-block text-white">ภาพรวม</span>
+            <span class="d-block text-white">มอนิเตอร์ </span>
         </li>
         <!--end::Item-->
         <!--begin::Item-->
