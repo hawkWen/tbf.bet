@@ -13,7 +13,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">{{ env('APP_NAME') }}</h5>
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">Casnio auto</h5>
                     <!--end::Page Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -74,7 +74,7 @@
                                 <td>ชื่อบัญชี</td>
                                 <td>เลขที่บัญชี</td>
                                 <td>ประเภท</td>
-                                <td>เปิด/ปิดใช้งาน</td>
+                                {{-- <td>เปิด/ปิดใช้งาน</td> --}}
                                 <td>เปิด/ปิด Bot</td>
                                 <td>จัดการ</td>
                             </tr>
@@ -101,27 +101,30 @@
                                     <td>
                                         ทรูมันนี่ auto
                                     </td>
-                                    <td align="center">
+                                    {{-- <td align="center">
                                         <input data-switch="true" type="checkbox"
                                             @if ($bank_account->status == 1) checked="checked" @endif
                                             id="status_{{ $bank_account->id }}" data-on-color="primary"
                                             onchange="updateStatus({{ $bank_account->id }},'status')" />
-                                    </td>
+                                    </td> --}}
                                     <td align="center">
                                         <input data-switch="true" type="checkbox"
                                             @if ($bank_account->status_bot == 1) checked="checked" @endif
                                             id="status_bot_{{ $bank_account->id }}" data-on-color="primary"
                                             onchange="updateStatus({{ $bank_account->id }},'status_bot')" />
                                     </td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                    <td align="center">
+                                        {{-- <button type="button" class="btn btn-warning" data-toggle="modal"
                                             data-target="#editBankAccountModal_{{ $bank_account->id }}">
-                                            แก้ไข
-                                        </button>
+                                            แก้ไข --}}
                                         <button type="button" class="btn btn-danger" data-toggle="modal"
                                             data-target="#deleteBankAccountModal_{{ $bank_account->id }}">
                                             ลบ
                                         </button>
+                                        <a href="{{ route('support.truemoney.check', $bank_account->id) }}"
+                                            class="btn btn-info">
+                                            เช็คสถานะ
+                                        </a>
                                         <!-- Modal-->
                                         <div class="modal fade" id="deleteBankAccountModal_{{ $bank_account->id }}"
                                             data-backdrop="static" tabindex="-1" role="dialog"

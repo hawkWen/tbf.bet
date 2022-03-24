@@ -19,6 +19,7 @@ use App\Models\CustomerRefer;
 use App\Helpers\FastbetBotApi;
 use App\Models\CustomerBetDetail;
 use App\Helpers\AmbKingApi;
+use App\Models\BotLog;
 
 class Api {
 
@@ -65,7 +66,7 @@ class Api {
             }
             
 
-        } else if ($this->brand->game_id == 2) {
+        }else if($this->brand->game_id == 2) {
 
             $ufa_api = new UfaApi();
 
@@ -86,7 +87,7 @@ class Api {
                 $response = [
                     'status' => true,
                     'data' => [
-                        'username' => $ufa_api_register['ufa_username'],
+                        'username' => $ufa_api_register['ufa_username']
                     ]
                 ];
 
@@ -98,6 +99,11 @@ class Api {
                         'message' => $ufa_api_register['errorCode'].' '.$ufa_api_register['message']
                     ]
                 ];
+
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $ufa_api_register['errorCode'].' : '.$ufa_api_register['message']
+                ]);
 
             }
 
@@ -151,11 +157,18 @@ class Api {
             $register = $fastbet_api->create($data);
 
             if($register['code'] == 0) {
+                
                 $response['status'] = true;
                 $response['data']['username'] = $register['result']['username'];
+
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $register['message']
+                ]);
             }
 
-        } else if ($this->brand->game_id == 6) {
+        } else if($this->brand->game_id == 6) {
             //Uking
             $uking_api = new UkingApi();
 
@@ -176,7 +189,12 @@ class Api {
             if($register['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['username'] = $register['result']['username'];
-            }
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $register['message']
+                ]);
+            } 
 
         } else if($this->brand->game_id == 7) {
             //Uking
@@ -199,6 +217,11 @@ class Api {
             if($register['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['username'] = $register['result']['username'];
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $register['message']
+                ]);
             }
         } else if($this->brand->game_id == 8) {
             //PG
@@ -217,6 +240,11 @@ class Api {
             if($pg_api_register['status']['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['username'] = $pg_api_register['data']['username'];
+            }else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $pg_api_register['status']['message'],
+                ]);
             }
 
         } else if($this->brand->game_id == 9) {
@@ -240,6 +268,11 @@ class Api {
             if($register['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['username'] = $register['result']['username'];
+            }else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $register['message']
+                ]);
             }
         } else if($this->brand->game_id == 10) {
             //456bet
@@ -262,9 +295,15 @@ class Api {
             if($register['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['username'] = $register['result']['username'];
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $register['message']
+                ]);
             }
+
         } else if($this->brand->game_id == 11) {
-            //AmbFunAPi
+            
             $auto_api = new AmbFunApi();
 
             $auto_api->agent = $this->brand->agent_username;
@@ -284,8 +323,12 @@ class Api {
             if($register['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['username'] = $register['result']['username'];
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $register['message']
+                ]);
             }
-
         } else if ($this->brand->game_id == 12) {
 
             $amb_king_api = new AmbKingApi();
@@ -376,6 +419,13 @@ class Api {
                     ]
                 ];
 
+            } else {
+
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $ufa_api_deposit['errorCode'].' : '.$ufa_api_deposit['message']
+                ]);
+
             }
 
         } else if($this->brand->game_id == 3) {
@@ -403,7 +453,7 @@ class Api {
                     ]
                 ];
 
-            }
+            } 
 
         } else if($this->brand->game_id == 5) {
             //Fastbet
@@ -418,11 +468,15 @@ class Api {
             $data['amount'] = $data['amount'];
 
             $deposit = $fastbet_api->deposit($data);
-            
 
             if($deposit['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['ref'] = $deposit['result']['ref'];
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
             
 
@@ -443,6 +497,11 @@ class Api {
             if($deposit['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['ref'] = $deposit['result']['ref'];
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 7) {
@@ -463,6 +522,11 @@ class Api {
                 $response['status'] = true;
                 $response['data']['ref'] = $deposit['result']['ref'];
                 $response['data']['credit'] = $deposit['result']['after'];
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 8) {
@@ -483,6 +547,11 @@ class Api {
                 $response['status'] = true;
                 $response['data']['username'] = $data['username'];
                 $response['data']['ref'] = 0;
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $pg_api_deposit['status']['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 9) {
@@ -502,6 +571,11 @@ class Api {
             if($deposit['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['ref'] = $deposit['result']['ref'];
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 10) {
@@ -521,6 +595,11 @@ class Api {
             if($deposit['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['ref'] = $deposit['result']['ref'];
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 11) {
@@ -540,6 +619,11 @@ class Api {
             if($deposit['code'] == 0) {
                 $response['status'] = true;
                 $response['data']['ref'] = $deposit['result']['ref'];
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if ($this->brand->game_id == 12) {
@@ -639,6 +723,11 @@ class Api {
                     'status' => true
                 ];
 
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $ufa_api_withdraw['errorCode'].' : '.$ufa_api_withdraw['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 3) {
@@ -684,6 +773,11 @@ class Api {
             if($deposit['code'] == 0) {
                 
                 $response['status'] = true;
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 6) {
@@ -703,6 +797,11 @@ class Api {
             if($deposit['code'] == 0) {
 
                 $response['status'] = true;
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 7) {
@@ -722,6 +821,11 @@ class Api {
             if($deposit['code'] == 0) {
 
                 $response['status'] = true;
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 8) {
@@ -740,6 +844,11 @@ class Api {
 
             if($pg_api_withdraw['status']['code'] == 0) {
                 $response['status'] = true;
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['status']['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 9) {
@@ -759,6 +868,11 @@ class Api {
             if($deposit['code'] == 0) {
 
                 $response['status'] = true;
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 10) {
@@ -778,6 +892,11 @@ class Api {
             if($deposit['code'] == 0) {
 
                 $response['status'] = true;
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 11) {
@@ -797,6 +916,11 @@ class Api {
             if($deposit['code'] == 0) {
 
                 $response['status'] = true;
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $deposit['message']
+                ]);
             }
 
         } else if ($this->brand->game_id == 12) {
@@ -888,6 +1012,11 @@ class Api {
                     ]
                 ];
 
+            } else {
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $ufa_api_credit['status']['message']
+                ]);
             }
 
         } else if($this->brand->game_id == 3) {
@@ -930,6 +1059,14 @@ class Api {
                 $response['status'] = true;
 
                 $response['data']['credit'] = $credit['result']['credit'];
+
+            } else {
+
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $ufa_api_credit['message']
+                ]);
+                
             }
 
         } else if($this->brand->game_id == 6) {
@@ -949,6 +1086,14 @@ class Api {
                 $response['status'] = true;
 
                 $response['data']['credit'] = $credit['result']['credit'];
+
+            } else {
+
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $credit['message']
+                ]);
+                
             }
 
         } else if($this->brand->game_id == 7) {
@@ -968,6 +1113,14 @@ class Api {
                 $response['status'] = true;
 
                 $response['data']['credit'] = $credit['result']['credit'];
+
+            } else {
+
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $credit['message']
+                ]);
+                
             }
 
         } else if($this->brand->game_id == 8) {
@@ -988,6 +1141,13 @@ class Api {
                 $response['data']['credit'] = $pg_api_credit['data']['balance'];
                 $response['data']['outstanding'] = $pg_api_credit['data']['outstanding'];
                 
+            } else {
+
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $pg_api_credit['status']['message']
+                ]);
+                
             }
 
         } else if($this->brand->game_id == 9) {
@@ -1007,6 +1167,14 @@ class Api {
                 $response['status'] = true;
 
                 $response['data']['credit'] = $credit['result']['credit'];
+
+            } else {
+
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $credit['message']
+                ]);
+                
             }
 
         } else if($this->brand->game_id == 10) {
@@ -1026,8 +1194,16 @@ class Api {
                 $response['status'] = true;
 
                 $response['data']['credit'] = $credit['result']['credit'];
+
+            } else {
+
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $credit['message']
+                ]);
+                
             }
-            
+
         } else if($this->brand->game_id == 11) {
             //Amb
             $auto_api = new AmbFunApi();
@@ -1046,8 +1222,14 @@ class Api {
 
                 $response['data']['credit'] = $credit['result']['credit'];
 
-            }
+            } else {
 
+                BotLog::create([
+                    'brand_id' => $this->brand->id,
+                    'logs' => $credit['message']
+                ]);
+                
+            }
         } else if ($this->brand->game_id == 12) {
 
             $amb_king_api = new AmbKingApi();

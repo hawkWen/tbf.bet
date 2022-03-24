@@ -43,10 +43,17 @@
                             กำลังเชื่อมต่อ API
                         </span>
                     @elseif($bank_account_transaction->status == 3)
-                        <span class="text-danger mr-2">
-                            <i class="fa fa-times"></i>
-                            เบิ้ล
-                        </span>
+                        @if ($bank_account_transaction->code == 'X1')
+                            <span class="text-danger mr-2">
+                                <i class="fa fa-times"></i>
+                                เบิ้ล
+                            </span>
+                        @else
+                            <span class="text-warning mr-2">
+                                <i class="fa fa-credit-card"></i>
+                                ยอดโอนออก
+                            </span>
+                        @endif
                     @elseif($bank_account_transaction->status == 4)
                         <span class="text-danger mr-2">
                             <i class="fa fa-times"></i>
@@ -71,6 +78,7 @@
                         <span class="text-danger mr-2">
                             <i class="fa fa-times"></i>
                             ลูกค้าออนไลน์อยู่
+                            {{ $bank_account_transaction->customer->username }}
                         </span>
                     @endif
                 </td>

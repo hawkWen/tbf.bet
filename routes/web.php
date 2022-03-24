@@ -324,6 +324,8 @@ Route::group(['domain' => 'support.' . env('APP_NAME') . '.' . env('APP_DOMAIN')
             Route::get('', 'HomeController@index')->name('support');
             Route::post('/change-password', 'HomeController@changePassword')->name('support.change-password');
             Route::get('/transaction','HomeController@transaction')->name('support.transaction');
+            Route::get('/bankAccount','HomeController@bankAccount')->name('support.bankAccount');
+            Route::geT('/logs','HomeController@logs')->name('support.logs');
 
             // Annoucement Module
             Route::get('/annoucement','AnnoucementController@index')->name('support.annoucement');
@@ -342,6 +344,15 @@ Route::group(['domain' => 'support.' . env('APP_NAME') . '.' . env('APP_DOMAIN')
             Route::post('/truemoney', 'TruemoneyController@store')->name('support.truemoney.store');
             Route::post('/truemoney/delete', 'TruemoneyController@delete')->name('support.truemoney.delete');
             Route::post('/truemoney/update', 'TruemoneyController@update')->name('support.truemoney.update');
+            Route::get('/truemoney/check/{bank_account_id}','TruemoneyController@check')->name('support.truemoney.check');
+
+            //User Modeul
+            Route::get('/user', 'UserController@index')->name('support.user');
+            Route::post('/user', 'UserController@store')->name('support.user.store');
+            Route::post('/user/reset-password', 'UserController@resetPassword')->name('support.user.reset-password');
+            Route::post('/user/delete', 'UserController@delete')->name('support.user.delete');
+            Route::post('/user/update', 'UserController@update')->name('support.user.update');
+            Route::post('/user/update-staus', 'UserController@updateStatus')->name('support.user.update-status');
 
             //Brand Module
             Route::get('/brand', 'BrandController@index')->name('support.brand');
@@ -357,6 +368,7 @@ Route::group(['domain' => 'support.' . env('APP_NAME') . '.' . env('APP_DOMAIN')
             Route::post('/bank-account/delete', 'BankAccountController@delete')->name('support.bank-account.delete');
             Route::post('/bank-account/update', 'BankAccountController@update')->name('support.bank-account.update');
             Route::post('/bank-account/update-status', 'BankAccountController@updateStatus')->name('support.bank-account.update-status');
+            Route::get('/bank-account/check/{bank_account_id}','BankAccountController@check')->name('support.bank-account.check');
             
         });
 

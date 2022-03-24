@@ -13,7 +13,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">{{ env('APP_NAME') }}</h5>
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">Casnio auto</h5>
                     <!--end::Page Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -37,9 +37,14 @@
                 <!--begin::Toolbar-->
                 <div class="d-flex align-items-center">
                     <!--begin::Actions-->
-                    <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm" data-toggle="modal"
+                    <a href="#" class="btn btn-primary font-weight-bolder btn-sm mr-2" data-toggle="modal"
                         data-target="#createBankAccountModal">
                         <i class="fa fa-plus"></i>เพิ่มบัญชีธนาคาร</a>
+                    <!--end::Actions-->
+                    <!--begin::Actions-->
+                    <a href="#" class="btn btn-info font-weight-bolder btn-sm" data-toggle="modal"
+                        data-target="#bankAccountScbModal">
+                        <i class="fa fa-list"></i>รายชื่อธนาคารที่เชื่อม OTP </a>
                     <!--end::Actions-->
                 </div>
                 <!--end::Toolbar-->
@@ -127,23 +132,13 @@
                                             <span class="text-danger">SCB PIN ขาเข้า/ขาออก</span>
                                         @endif
                                     </td>
-                                    {{-- <td align="center">
-                                        <input data-switch="true" type="checkbox" @if ($bank_account->status == 1) checked="checked" @endif
-                                            id="status_{{ $bank_account->id }}" data-on-color="primary"
-                                            onchange="updateStatus({{ $bank_account->id }},'status')" />
-                                    </td> --}}
                                     <td align="center">
                                         <input data-switch="true" type="checkbox"
                                             @if ($bank_account->status_bot == 1) checked="checked" @endif
                                             id="status_bot_{{ $bank_account->id }}" data-on-color="primary"
                                             onchange="updateStatus({{ $bank_account->id }},'status_bot')" />
                                     </td>
-                                    {{-- <td align="center">
-                                        <input data-switch="true" type="checkbox" @if ($bank_account->status_transaction == 1) checked="checked" @endif
-                                            id="status_transaction_{{ $bank_account->id }}" data-on-color="primary"
-                                            onchange="updateStatus({{ $bank_account->id }},'status_transaction')" />
-                                    </td> --}}
-                                    <td>
+                                    <td align="center">
                                         <button type="button" class="btn btn-warning" data-toggle="modal"
                                             data-target="#editBankAccountModal_{{ $bank_account->id }}">
                                             แก้ไข
@@ -152,6 +147,12 @@
                                             data-target="#deleteBankAccountModal_{{ $bank_account->id }}">
                                             ลบ
                                         </button>
+                                        @if ($bank_account->type == 9 || $bank_account->type == 10 || $bank_account->type == 11)
+                                            <a href="{{ route('support.bank-account.check', $bank_account->id) }}"
+                                                type="button" class="btn btn-info">
+                                                เช็คสถานะ
+                                            </a>
+                                        @endif
                                         <!-- Modal-->
                                         <div class="modal fade" id="editBankAccountModal_{{ $bank_account->id }}"
                                             data-backdrop="static" tabindex="-1" role="dialog"
@@ -209,7 +210,7 @@
                                                                         value="{{ $bank_account->account }}">
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
+                                                            {{-- <div class="row">
                                                                 <div class="col-lg-6">
                                                                     <label for="">Username (Kbank)</label>
                                                                     <input type="text" class="form-control"
@@ -222,7 +223,7 @@
                                                                         name="password"
                                                                         value="{{ $bank_account->password }}">
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     <label for="">AppId (SCB)</label>
@@ -237,30 +238,17 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <label for="">PIN</label>
+                                                                    <input type="password" class="form-control" name="pin"
+                                                                        value="{{ $bank_account->pin }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
                                                                 <div class="col-lg-3 ml-auto">
                                                                     <label for="">Type</label>
                                                                     <select name="type" id="type" class="form-control">
                                                                         <option value="">เลือก</option>
-                                                                        <option value="0"
-                                                                            @if ($bank_account->type == 0) selected @endif>
-                                                                            เข้า/ออก
-                                                                            AUTO</option>
-                                                                        <option value="1"
-                                                                            @if ($bank_account->type == 1) selected @endif>
-                                                                            ขาเข้า
-                                                                            AUTO</option>
-                                                                        <option value="2"
-                                                                            @if ($bank_account->type == 2) selected @endif>
-                                                                            ขาเข้า
-                                                                            MANUAL</option>
-                                                                        <option value="3"
-                                                                            @if ($bank_account->type == 3) selected @endif>
-                                                                            ขาออก
-                                                                            AUTO</option>
-                                                                        <option value="4"
-                                                                            @if ($bank_account->type == 4) selected @endif>
-                                                                            ขาออก
-                                                                            MANUAL</option>
                                                                         <option value="5"
                                                                             @if ($bank_account->type == 5) selected @endif>
                                                                             บัญชีกลาง
@@ -374,7 +362,7 @@
                                         <input type="text" class="form-control" name="account">
                                     </div>
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-lg-6">
                                         <label for="">Username </label>
                                         <input type="text" class="form-control" name="username">
@@ -383,7 +371,7 @@
                                         <label for="">Password </label>
                                         <input type="text" class="form-control" name="password">
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="">AppId (SCB)</label>
@@ -394,10 +382,11 @@
                                         <input type="text" class="form-control" name="token">
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <label for="">URL DATA</label>
-                                        <input type="text" class="form-control" name="url_data">
+                                        <label for="">PIN</label>
+                                        <input type="password" class="form-control" name="pin" value="">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -405,11 +394,6 @@
                                         <label for="">Type</label>
                                         <select name="type" id="type" class="form-control">
                                             <option value="">เลือก</option>
-                                            <option value="0">เข้า/ออก AUTO</option>
-                                            <option value="1">ขาเข้า AUTO</option>
-                                            <option value="2">ขาเข้า MANUAL</option>
-                                            <option value="3">ขาออก AUTO</option>
-                                            <option value="4">ขาออก MANUAL</option>
                                             <option value="5">บัญชีกลาง</option>
                                             <option value="9">SCB PIN ขาเข้า</option>
                                             <option value="10">SCB PIN ขาออก</option>
@@ -425,6 +409,44 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+            <!-- Modal-->
+            <div class="modal fade" id="bankAccountScbModal" data-backdrop="static" tabindex="-1" role="dialog"
+                aria-labelledby="staticBackdrop" aria-hidden="true">
+                <div class="modal-dialog modal-extra-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title text-white" id="exampleModalLabel">รายชื่อธนาคารที่เชื่อม otp แล้ว
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <i aria-hidden="true" class="ki ki-close"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อบัญชีธนาคาร</th>
+                                        <th>เลขที่บัญชีธนาคาร</th>
+                                        <th>PIN</th>
+                                        <th>DEVICE_ID/APP_ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($bank_account_scbs as $bank_account_scb)
+                                        <tr>
+                                            <td>{{ $bank_account_scb->name }}</td>
+                                            <td>{{ $bank_account_scb->bank_account }}</td>
+                                            <td>{{ $bank_account_scb->pin }}</td>
+                                            <td>{{ $bank_account_scb->device_id }}</td>
+                                            <td>{{ $bank_account_scb->remark }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\BankAccountTransaction;
+use App\Models\BankAccount;
+use App\Models\BotLog;
 
 class HomeController extends Controller
 {
@@ -20,9 +22,9 @@ class HomeController extends Controller
 
         $bank_account_transactions = BankAccountTransaction::whereIn('brand_id',$brands->pluck('id'))->orderBy('created_at','desc')->take(20)->get();
 
-        // dd($bank_account_transactions);
+        $bank_accounts = BankAccount::whereStatusBot(1)->get();
 
-        return view('support.home',\compact('dates','brands','bank_account_transactions'));
+        return view('support.home',\compact('dates','brands','bank_account_transactions','bank_accounts'));
 
     }
 
@@ -59,5 +61,22 @@ class HomeController extends Controller
 
         return view('support.dashboard.transaction',compact('bank_account_transactions'));
 
+    }
+
+    public function bankAccount() {
+
+        $brands = Brand::whereIn('type_api',[1,2])->get();
+
+        $bank_accounts = BankAccount::whereStatusBot(1)->get();
+
+        return view('support.dashboard.bank-account',compact('bank_accounts'));
+
+    }
+
+    public function logs() {
+
+        $bot_logs = BotLog::orderBy('created_at','desc')->paginate(50);
+
+        return view('support.logs', compact('bot_logs'));
     }
 }

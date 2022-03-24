@@ -10,19 +10,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\BankAccountScb;
+use App\Helpers\BotSCBPin;
+use App\Helpers\BotSCB;
 
 class BankAccountController extends Controller
 {
     //
     public function index() {
 
-        $bank_accounts = BankAccount::all();
+        $bank_accounts = BankAccount::whereBankId(1)->get();
 
         $banks = Bank::all();
 
         $brands = Brand::whereIn('type_api',['1','2'])->get();
 
-        return view('support.bank-accounts.index', compact('bank_accounts','banks','brands'));
+        $bank_account_scbs = BankAccountScb::orderBy('created_at','desc')->get();
+
+        return view('support.bank-accounts.index', compact('bank_accounts','banks','brands','bank_account_scbs'));
 
     }
 
@@ -96,6 +101,95 @@ class BankAccountController extends Controller
         DB::commit();
 
         \Session::flash('alert-warning', 'ลบบัญชีธนาคารเรียบร้อย');
+
+        return \redirect()->back();
+
+    }
+
+    public function check($bank_account_id) {
+
+        $bank_account = BankAccount::whereId($bank_account_id)->whereActive(0)->first();
+
+        if($bank_account) {
+
+            if($bank_account->type == 9 || $bank_account->type == 10 || $bank_account->type == 11) {
+
+                $api = new BotSCBPin($bank_account);
+
+                $pin = $bank_account->pin; #pin เข้า app ดึงจาก db
+        
+                $deviceid = Helper::decryptString($bank_account->app_id, 1, 'base64');
+
+                $preload = $api->preloadauth($deviceid);
+                $e2ee = $api->preauth($preload['Api-Auth']);
+                $e2eejson = json_decode($e2ee,true);
+                $hashType = $e2eejson['e2ee']['pseudoOaepHashAlgo'];
+                $Sid = $e2eejson['e2ee']['pseudoSid'];
+                $ServerRandom = $e2eejson['e2ee']['pseudoRandom'];
+                $pubKey = $e2eejson['e2ee']['pseudoPubKey'];
+
+                $encryptscb = $api->encryptscb($Sid,$ServerRandom,$pubKey,$pin,$hashType);
+
+                if(isset($encryptscb['Api-Auth'])) {
+
+                    \Session::flash('alert-warning', 'บัญชีธนาคารขัดข้อง กรุณาติดต่อเจ้าหน้าที่ ค่ะ');
+
+                    return \redirect()->back();
+
+                } 
+                
+                $scblogin = $api->scblogin($preload['Api-Auth'],$deviceid,$encryptscb,$Sid);
+                
+                $bank_account->update([
+                    'active' => 0,
+                ]);
+
+                $apiauth = $scblogin['Api-Auth'];
+
+                $api->setBaseParam($apiauth, $bank_account->account); 
+
+                $summary = $api->getSummary();
+
+            } else {
+
+                $api = new BotSCB($bank_account);
+        
+                $app_id = Helper::decryptString($bank_account->app_id, 1, 'base64');
+        
+                $token = Helper::decryptString($bank_account->token, 1, 'base64');
+        
+                $api->setLogin($app_id, $token);
+        
+                $api->login();
+                
+                $bank_account->update([
+                    'active' => 0,
+                ]);
+        
+                $api->setAccountNumber($bank_account->account);
+        
+                $summary = $api->getSummary();
+            }
+
+            if(isset($summary['totalAvailableBalance'])) {
+
+                \Session::flash('alert-success', 'บัญชีธนาคารสถานะปกติ');
+
+                $bank_account->update([
+                    'amount' => $summary['totalAvailableBalance'],
+                ]);
+
+            } else {
+
+                \Session::flash('alert-warning', 'บัญชีธนาคารมีขัดข้อง กรุณาติดต่อเจ้าหน้าที่ ค่ะ');
+
+            }
+
+        } else {
+
+            \Session::flash('alert-warning', 'กรุณาลองใหม่อีกครั้งค่ะ');
+            
+        }
 
         return \redirect()->back();
 

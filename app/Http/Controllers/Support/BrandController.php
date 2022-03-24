@@ -39,22 +39,12 @@ class BrandController extends Controller
 
         if($input['logo'] !== 'null') {
 
-            //put new image
-            $storage  = Storage::disk('public')->put('brands', $request->file('logo'));
+            //put new image 
+            $api_upload = Helper::uploadApiService('logo', 'casinoauto.logo');
 
-            // return response()->json($storage);
+            $input['logo_url'] = $api_upload['data']['url'];
 
-            if(env('APP_ENV') == 'local') {
-
-                $input['logo_url'] = Storage::url($storage);
-
-            } else {
-
-                $input['logo_url'] = secure_url(Storage::url($storage));
-
-            }
-
-            $input['logo'] = $storage;
+            $input['logo'] = $api_upload['data']['name'];
 
         } else {
 
@@ -66,19 +56,19 @@ class BrandController extends Controller
 
         $input['code_sms'] = strtolower(Helper::generateCode());
 
-        $input['cost_service'] = str_replace(',','',$input['cost_service']);
+        // $input['cost_service'] = str_replace(',','',$input['cost_service']);
 
-        $input['cost_working'] = str_replace(',','',$input['cost_working']);
+        // $input['cost_working'] = str_replace(',','',$input['cost_working']);
 
-        $input['deposit_min'] = str_replace(',','',$input['deposit_min']);
+        // $input['deposit_min'] = str_replace(',','',$input['deposit_min']);
 
-        $input['withdraw_min'] = str_replace(',','',$input['withdraw_min']);
+        // $input['withdraw_min'] = str_replace(',','',$input['withdraw_min']);
 
-        $input['withdraw_auto_max'] = str_replace(',','',$input['withdraw_auto_max']);
+        // $input['withdraw_auto_max'] = str_replace(',','',$input['withdraw_auto_max']);
 
-        $input['status_telephone'] = (isset($input['status_telephone'])) ? 1 : 0;
+        $input['status_telephone'] = 1;
 
-        $input['status_line_id'] = (isset($input['status_line_id'])) ? 1 : 0;
+        $input['status_line_id'] = 1;
 
         $brand = Brand::create($input);
 
@@ -121,21 +111,12 @@ class BrandController extends Controller
 
         if(isset($input['logo'])) {
 
-            $delete = Storage::disk('public')->delete($brand->logo);
+            //put new image 
+            $api_upload = Helper::uploadApiService('logo', 'casinoauto.logo');
 
-            $storage  = Storage::disk('public')->put('brands', $request->file('logo'));
+            $input['logo_url'] = $api_upload['data']['url'];
 
-            if(env('APP_ENV') == 'local') {
-
-                $input['logo_url'] = Storage::url($storage);
-
-            } else {
-
-                $input['logo_url'] = secure_url(Storage::url($storage));
-
-            }
-
-            $input['logo'] = $storage;
+            $input['logo'] = $api_upload['data']['name'];
 
         } else {
 
@@ -177,7 +158,7 @@ class BrandController extends Controller
 
         $brand = Brand::find($input['brand_id']);
 
-        Storage::disk('public')->delete($brand->logo);
+        // Storage::disk('public')->delete($brand->logo);
 
         $brand->delete();
 

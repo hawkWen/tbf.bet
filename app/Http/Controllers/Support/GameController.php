@@ -28,21 +28,11 @@ class GameController extends Controller
         if($input['logo'] !== 'null') {
             
             //put new image 
-            $storage  = Storage::disk('public')->put('games', $request->file('logo'));
+            $api_upload = Helper::uploadApiService('logo', 'casinoauto.logo');
 
-            // return response()->json($storage);
+            $input['logo_url'] = $api_upload['data']['url'];
 
-            if(env('APP_ENV') == 'local') {
-
-                $input['logo_url'] = Storage::url($storage);
-
-            } else {
-
-                $input['logo_url'] = secure_url(Storage::url($storage));
-
-            }
-
-            $input['logo'] = $storage;
+            $input['logo'] = $api_upload['data']['name'];
 
         } else {
 
@@ -72,21 +62,12 @@ class GameController extends Controller
 
         if(isset($input['logo'])) {
 
-            $delete = Storage::disk('public')->delete($game->logo);
+            //put new image 
+            $api_upload = Helper::uploadApiService('logo', 'casinoauto.game');
 
-            $storage  = Storage::disk('public')->put('games', $request->file('logo'));
+            $input['logo_url'] = $api_upload['data']['url'];
 
-            if(env('APP_ENV') == 'local') {
-
-                $input['logo_url'] = Storage::url($storage);
-
-            } else {
-
-                $input['logo_url'] = secure_url(Storage::url($storage));
-
-            }
-
-            $input['logo'] = $storage;
+            $input['logo'] = $api_upload['data']['name'];
 
         } else {
 
@@ -114,7 +95,7 @@ class GameController extends Controller
 
         $game = Game::find($input['game_id']);
 
-        Storage::disk('public')->delete($game->logo);
+        // Storage::disk('public')->delete($game->logo);
 
         $game->delete();
 

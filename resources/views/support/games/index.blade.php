@@ -12,7 +12,7 @@
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">{{ env('APP_NAME') }}</h5>
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">Casnio auto</h5>
                     <!--end::Page Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -77,7 +77,7 @@
                                 <!--begin::User-->
                                 <div class="mt-7">
                                     <div class="symbol symbol-circle symbol-lg-75">
-                                        <img src="{{ $game->logo_url }}" alt="" class="img-fluid"
+                                        <img src="https://via.placeholder.com/150x150" alt="" class="img-fluid"
                                             style="width: 150px" />
                                     </div>
                                     <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
@@ -92,8 +92,6 @@
                                         class="text-dark font-weight-bold text-hover-primary font-size-h4">{{ $game->name }}</a>
                                 </div>
                                 <!--end::Name-->
-
-
                                 <!--begin::Buttons-->
                                 <div class="mt-9 mb-6">
                                     <a href="#" class="btn btn-md btn-icon btn-light-facebook btn-pill mx-2"
@@ -193,9 +191,10 @@
                                         <div class="form-group row">
                                             <label class="col-xl-3 col-lg-3 col-form-label text-right">แนะนำเกมส์</label>
                                             <div class="col-lg-9 col-xl-6">
-                                                <textarea name="description" id="" cols="30" rows="10" class="form-control">
-                                                    {{ $game->description }}
-                                                </textarea>
+                                                <textarea name="description" id="" cols="30" rows="10"
+                                                    class="form-control">
+                                                                    {{ $game->description }}
+                                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -310,7 +309,7 @@
                                     <div class="col-lg-9 col-xl-6">
                                         <textarea name="description" id="" cols="30" rows="10" class="form-control">
 
-                                        </textarea>
+                                                        </textarea>
                                     </div>
                                 </div>
                             </div>
