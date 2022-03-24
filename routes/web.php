@@ -327,6 +327,11 @@ Route::group(['domain' => 'support.' . env('APP_NAME') . '.' . env('APP_DOMAIN')
             Route::get('/bankAccount','HomeController@bankAccount')->name('support.bankAccount');
             Route::geT('/logs','HomeController@logs')->name('support.logs');
 
+            // Monitor Module
+            Route::get('/monitor','MonitorController@index')->name('support.monitor');
+            Route::get('/transaction','HomeController@monitor')->name('support.monitor.transaction');
+            Route::get('/bankAccount','HomeController@bankAccount')->name('support.monitor.bankAccount');
+
             // Annoucement Module
             Route::get('/annoucement','AnnoucementController@index')->name('support.annoucement');
             Route::post('/annoucement','AnnoucementController@store')->name('support.annoucement.store');
