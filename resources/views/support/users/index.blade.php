@@ -102,7 +102,7 @@
                                                 @if (isset($user->brand))
                                                     {{ $user->brand->name }}
                                                 @else
-                                                    Team Support
+                                                    Support Team
                                                 @endif
                                             </td>
                                             <td>{{ $user->username }} <br><small>{{ $user->name }}</small></td>
@@ -364,6 +364,7 @@
                                     <div class="col-lg-4 col-xl-6">
                                         <select name="user_role_id" id="user_role_id" class="form-control">
                                             <option value="">เลือก</option>
+                                            <option value="0">Support Team</option>
                                             @foreach ($user_roles as $user_role)
                                                 <option value="{{ $user_role->id }}">{{ $user_role->name }}
                                                 </option>
