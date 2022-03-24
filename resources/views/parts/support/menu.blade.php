@@ -24,15 +24,6 @@
         <li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body"
             data-boundary="window" title="">
             <a href="{{ route('support.game') }}" class="nav-link btn btn-icon btn-hover-text-primary btn-lg">
-                <i class="fa fa-question-circle"></i>
-            </a>
-            <span class="d-block text-white">แจ้งปัญหา</span>
-        </li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body"
-            data-boundary="window" title="">
-            <a href="{{ route('support.game') }}" class="nav-link btn btn-icon btn-hover-text-primary btn-lg">
                 <i class="fa fa-gamepad"></i>
             </a>
             <span class="d-block text-white">จัดการเกมส์</span>
@@ -56,13 +47,34 @@
             <span class="d-block text-white">เลขที่บัญชีธนาคาร</span>
         </li>
         <!--end::Item-->
+        @if (Auth::user()->user_role_id == 7)
+            <!--begin::Item-->
+            <li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body"
+                data-boundary="window" title="จัดการแบรนด์">
+                <a href="{{ route('support.truemoney') }}"
+                    class="nav-link btn btn-icon btn-hover-text-primary btn-lg">
+                    <i class="fab fa-tumblr"></i>
+                </a>
+                <span class="d-block text-white">บัญชีทรูมันนี่</span>
+            </li>
+            <!--end::Item-->
+        @endif
         <!--begin::Item-->
         <li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body"
-            data-boundary="window" title="จัดการแบรนด์">
-            <a href="{{ route('support.truemoney') }}" class="nav-link btn btn-icon btn-hover-text-primary btn-lg">
-                <i class="fab fa-tumblr"></i>
+            data-boundary="window" title="">
+            <a href="{{ route('support.user') }}" class="nav-link btn btn-icon btn-hover-text-primary btn-lg">
+                <i class="fa fa-users"></i>
             </a>
-            <span class="d-block text-white">บัญชีทรูมันนี่</span>
+            <span class="d-block text-white">จัดการผู้ใช้งาน</span>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body"
+            data-boundary="window" title="">
+            <a href="{{ route('support.logs') }}" class="nav-link btn btn-icon btn-hover-text-primary btn-lg">
+                <i class="far fa-robot"></i>
+            </a>
+            <span class="d-block text-white">LOGS</span>
         </li>
         <!--end::Item-->
     </ul>

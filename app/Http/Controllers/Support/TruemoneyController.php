@@ -15,6 +15,11 @@ class TruemoneyController extends Controller
     //
     public function index() {
 
+        if (Auth::user()->user_role_id != 7) {
+            # code...
+            dd('401');
+        }
+
         $brands = Brand::whereIn('type_api',['1','2'])->get();
 
         $bank_accounts = BankAccount::whereBankId(0)->whereType(9)->get();
