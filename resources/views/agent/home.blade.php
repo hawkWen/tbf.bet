@@ -171,13 +171,13 @@
                                                 <tr>
                                                     <td colspan="2" align="right">
                                                         โปรโมชั่นทั่วไป $
-                                                        {{ number_format($promotion_costs->where('type_promotion', '!=', 6)->sum('bonus'), 2) }}
+                                                        {{ number_format($promotion_costs->where('promotion.type_promotion', '!=', 6)->sum('bonus'), 2) }}
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" align="right">
                                                         เครดิตฟรี $
-                                                        {{ number_format($promotion_costs->where('type_promotion', '=', 6)->sum('bonus'), 2) }}
+                                                        {{ number_format($promotion_costs->where('promotion.type_promotion', '=', 6)->sum('bonus'), 2) }}
                                                     </td>
                                                 </tr>
                                                 <tr>

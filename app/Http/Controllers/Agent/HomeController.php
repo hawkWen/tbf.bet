@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers\Agent;
@@ -37,7 +38,7 @@ class HomeController extends Controller
 
         $customer_withdraws = CustomerWithdraw::whereBrandId($brand->id)->whereBetween('created_at', [$dates['start_date'],$dates['end_date']])->get();
 
-        $promotion_costs = PromotionCost::whereBrandId($brand->id)->whereIn('status',[0,1])->whereBetween('created_at', [$dates['start_date'],$dates['end_date']])->get();
+        $promotion_costs = PromotionCost::with('promotion')->whereBrandId($brand->id)->whereIn('status',[0,1])->whereBetween('created_at', [$dates['start_date'],$dates['end_date']])->get();
         
         $group_by_promotion_costs = PromotionCost::with('promotion')->select('promotion_id',DB::raw('SUM(bonus) as bonus'))->whereBetween('created_at', [$dates['start_date'],$dates['end_date']])->whereBrandId($brand->id)->groupBy('promotion_id')->get();
 
