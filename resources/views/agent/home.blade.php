@@ -116,22 +116,13 @@
                                                         {{ number_format($customers->count()) }}</div>
                                                 </div>
                                                 <div class="col px-8 py-6">
-                                                    <div class="font-size-sm text-dark font-weight-bold">โปรโมชั่นที่ใช้
-                                                    </div>
-                                                    <div class="font-size-h4 font-weight-bolder text-warning">$
-                                                        {{ number_format($promotion_costs->sum('bonus'), 2) }}</div>
-                                                </div>
-                                            </div>
-                                            <div class="row m-0">
-                                                <div class="col-12 px-8 py-6">
                                                     <div class="font-size-sm font-weight-bold">
-                                                        จำนวนลูกค้าที่มีการเติมเงินในวันนี้</div>
+                                                        ลูกค้าที่มีการเติมเงินในวันนี้</div>
                                                     <div class="font-size-h4 font-weight-bolder text-info"> <i
                                                             class="fa fa-users text-info"></i>
                                                         {{ $customer_active->count() }}</div>
                                                 </div>
                                             </div>
-                                            <!--end::Row-->
                                         </div>
                                         <!--end::Stats-->
                                     </div>
@@ -177,6 +168,25 @@
                                                     </tr>
                                                 @endforeach
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="2" align="right">
+                                                        โปรโมชั่นทั่วไป $
+                                                        {{ number_format($promotion_costs->where('type_promotion', '!=', 6)->sum('bonus'), 2) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" align="right">
+                                                        เครดิตฟรี $
+                                                        {{ number_format($promotion_costs->where('type_promotion', '=', 6)->sum('bonus'), 2) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" align="right">
+                                                        ยอดรวม $
+                                                        {{ number_format($promotion_costs->sum('bonus'), 2) }}</td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                     <!--end::Body-->
