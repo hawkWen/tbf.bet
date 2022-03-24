@@ -7,7 +7,7 @@
             data-boundary="window" title="ภาพรวม">
             <a href="{{ route('support.monitor') }}"
                 class="nav-link btn btn-icon btn-hover-text-primary btn-lg active">
-                <i class="fas fa-layer-group d-block"></i>
+                <i class="fas fa-desktop d-block"></i>
             </a>
             <span class="d-block text-white">มอนิเตอร์ </span>
         </li>
