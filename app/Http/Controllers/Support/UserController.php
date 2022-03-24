@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,6 +19,13 @@ class UserController extends Controller
     public function index() {
         
         $users = new User();
+
+        if (Auth::user()->user_role_id == 6) {
+            # code...
+            $array_roles = [4,6];
+        } else {
+            $array_roles = [1,4,6];
+        }
 
         if(isset($_GET['brand_id'])) {
 
@@ -43,11 +51,13 @@ class UserController extends Controller
 
         }
 
+        $users = $users->whereIn('user_role_id',$array_roles);
+
         $users = $users->paginate(10);
 
         $brands = Brand::whereIn('type_api',['1','2'])->get();
 
-        $user_roles = UserRole::all();
+        $user_roles = UserRole::whereIn('id',$array_roles)->get();
 
         return view('support.users.index', compact('users','brands','user_roles','brand_select','user_role_select'));
 
@@ -95,7 +105,7 @@ class UserController extends Controller
         DB::beginTransaction();
 
         User::find($input['user_id'])->update([
-            'password' => \bcrypt('Aa123123++'),
+            'password' => \bcrypt('Aa123123'),
         ]);
 
         DB::commit();

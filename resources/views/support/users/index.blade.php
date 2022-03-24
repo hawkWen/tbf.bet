@@ -101,6 +101,8 @@
                                             <td>
                                                 @if (isset($user->brand))
                                                     {{ $user->brand->name }}
+                                                @else
+                                                    Team Support
                                                 @endif
                                             </td>
                                             <td>{{ $user->username }} <br><small>{{ $user->name }}</small></td>
@@ -418,7 +420,7 @@
 
         function resetPassword(user_id) {
 
-            if (confirm('รหัสผ่านจะถูกรีเซ็ตเป็น Aa123123++')) {
+            if (confirm('รหัสผ่านจะถูกรีเซ็ตเป็น Aa123123')) {
 
                 $.post('{{ route('support.user.reset-password') }}', {
                     user_id: user_id
