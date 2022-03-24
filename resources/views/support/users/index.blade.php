@@ -353,6 +353,7 @@
                                     <div class="col-lg-4 col-xl-6">
                                         <select name="brand_id" id="brand_id" class="form-control">
                                             <option value="">เลือก</option>
+                                            <option value="0">Support Team</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                             @endforeach
@@ -364,7 +365,6 @@
                                     <div class="col-lg-4 col-xl-6">
                                         <select name="user_role_id" id="user_role_id" class="form-control">
                                             <option value="">เลือก</option>
-                                            <option value="0">Support Team</option>
                                             @foreach ($user_roles as $user_role)
                                                 <option value="{{ $user_role->id }}">{{ $user_role->name }}
                                                 </option>
