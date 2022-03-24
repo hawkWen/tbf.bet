@@ -140,8 +140,7 @@
                                     </div>
                                     <!--end::Header-->
                                     <!--begin::Body-->
-                                    <div class="card-body d-flex flex-column p-4"
-                                        style="overflow-y: auto;overflow-y: scroll; height:300px">
+                                    <div class="card-body d-flex flex-column p-4">
                                         <table class="table table-head-custom table-vertical-center">
                                             <thead>
                                                 <tr class="text-left">
