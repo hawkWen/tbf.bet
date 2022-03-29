@@ -194,25 +194,28 @@
                                                                         <label class="radio radio-success">
                                                                             <input type="radio" name="type_promotion"
                                                                                 value="1"
-                                                                                @if ($promotion->type_promotion == 1) checked @endif />
+                                                                                @if ($promotion->type_promotion == 1) checked @endif
+                                                                                onchange="changeTypePromotion({{ $promotion->id }}, $(this))" />
                                                                             <span></span>
                                                                             เติมเงินครั้งเดียวต่อวัน
                                                                         </label>
                                                                         <label class="radio radio-success">
                                                                             <input type="radio" name="type_promotion"
                                                                                 value="2"
-                                                                                @if ($promotion->type_promotion == 2) checked @endif />
+                                                                                @if ($promotion->type_promotion == 2) checked @endif
+                                                                                onchange="changeTypePromotion({{ $promotion->id }}, $(this))" />
                                                                             <span></span>
                                                                             เติมเงินทุกครั้ง
                                                                         </label>
                                                                         <label class="radio radio-success">
                                                                             <input type="radio" name="type_promotion"
                                                                                 value="3"
-                                                                                @if ($promotion->type_promotion == 3) checked @endif />
+                                                                                @if ($promotion->type_promotion == 3) checked @endif
+                                                                                onchange="changeTypePromotion({{ $promotion->id }}, $(this))" />
                                                                             <span></span>
                                                                             สมัครสมาชิกใหม่
                                                                         </label>
-                                                                        <label class="radio radio-success">
+                                                                        {{-- <label class="radio radio-success">
                                                                             <input type="radio" name="type_promotion"
                                                                                 value="4"
                                                                                 @if ($promotion->type_promotion == 4) checked @endif />
@@ -225,7 +228,7 @@
                                                                                 @if ($promotion->type_promotion == 5) checked @endif />
                                                                             <span></span>
                                                                             แนะนำเพื่อน
-                                                                        </label>
+                                                                        </label> --}}
                                                                         <label class="radio radio-success">
                                                                             <input type="radio" name="type_promotion"
                                                                                 value="6"
@@ -236,10 +239,23 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="row"
+                                                                id="typePromotion_{{ $promotion->id }}_1"
+                                                                @if ($promotion->type_promotion != 1) style="display: none;" @endif>
+                                                                <div class="col-lg-3">
+                                                                    <label for="">
+                                                                        จำนวน
+                                                                    </label>
+                                                                    <input type="number"
+                                                                        value="{{ $promotion->amount_per_day }}"
+                                                                        name="amount_per_day"
+                                                                        class="form-control">ครั้งต่อวัน
+                                                                </div>
+                                                            </div>
                                                             @if ($promotion->type_promotion == 5)
                                                                 <div class="row">
                                                                     <div class="col-lg-12 mt-5 mb-5"
-                                                                        id="typePromotionInvite_0">
+                                                                        id="typePromotionInvite_{{ $promotion->id }}">
                                                                         <label for="">ประเภทโปรโมชั่น แนะนำเพื่อน</label>
                                                                         <div class="radio-inline">
                                                                             <label class="radio radio-success">
@@ -503,7 +519,7 @@
                                             input-type="money_decimal" />
                                     </div>
                                 </div>
-                                <div class="row mb-5 mt-5">
+                                <div class="row mt-5">
                                     <div class="col-lg-12 mt-5 mb-5">
                                         <label for="">ประเภทการได้รับ</label>
                                         <div class="radio-inline">
@@ -511,7 +527,7 @@
                                                 <input type="radio" name="type_promotion" value="1" checked="checked"
                                                     onchange="changeTypePromotion(0,$(this))" />
                                                 <span></span>
-                                                เติมเงินครั้งเดียวต่อวัน
+                                                เติมเงิน
                                             </label>
                                             <label class="radio radio-success">
                                                 <input type="radio" name="type_promotion" value="2"
@@ -525,19 +541,19 @@
                                                 <span></span>
                                                 สมัครสมาชิก
                                             </label>
-                                            <label class="radio radio-success">
+                                            {{-- <label class="radio radio-success">
                                                 <input type="radio" name="type_promotion" value="4"
                                                     onchange="changeTypePromotion(0, $(this))" />
                                                 <span></span>
                                                 คืนยอดเสีย
-                                            </label>
-                                            <label class="radio radio-success">
+                                            </label> --}}
+                                            {{-- <label class="radio radio-success">
                                                 <input type="radio" name="type_promotion" value="5"
                                                     onchange="changeTypePromotion(0, $(this))"
                                                     @if ($brand->promotions->where('type_promotion', '=', 5)->count() > 0) disabled @endif />
                                                 <span></span>
                                                 แนะนำเพื่อน
-                                            </label>
+                                            </label> --}}
                                             <label class="radio radio-success">
                                                 <input type="radio" name="type_promotion" value="6"
                                                     onchange="changeTypePromotion(0, $(this))" />
@@ -547,7 +563,18 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12 mt-5 mb-5" id="typePromotionInvite_0" style="display: none;">
+                                </div>
+                                <div class="row" id="typePromotion_0_1">
+                                    <div class="col-lg-3">
+                                        <label for="">
+                                            จำนวน
+                                        </label>
+                                        <input type="number" value="1" name="amount_per_day"
+                                            class="form-control">ครั้งต่อวัน
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    {{-- <div class="col-lg-12 mt-5 mb-5" id="typePromotionInvite_0" style="display: none;">
                                         <label for="">ประเภทโปรโมชั่น แนะนำเพื่อน</label>
                                         <div class="radio-inline">
                                             <label class="radio radio-success">
@@ -569,7 +596,7 @@
                                                 </label>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-lg-3 mt-5 mb-5">
                                         <label for="">การเพิ่มของโบนัส</label>
                                         <div class="radio-list">
@@ -714,24 +741,59 @@
         });
 
         function changeTypePromotion(id, ele) {
-            if (ele.val() == 5) {
+
+            if (ele.val() == 1) {
+
+                $('#typeCost_' + id + '_1').show();
+                $('#typeCost_' + id + '_2').show();
+
+                $('#typePromotion_' + id + '_1').show();
+
+            } else if (ele.val() == 2) {
+
+                $('#typeCost_' + id + '_1').show();
+                $('#typeCost_' + id + '_2').show();
+
+                $('#typePromotion_' + id + '_1').hide();
+
+            } else if (ele.val() == 3) {
+
+                $('#typeCost_' + id + '_1').show();
+                $('#typeCost_' + id + '_2').show();
+
+                $('#typePromotion_' + id + '_1').hide();
+
+            } else if (ele.val() == 4) {
+
+                $('#typeCost_' + id + '_1').show();
+                $('#typeCost_' + id + '_2').show();
+
+                $('#typePromotion_' + id + '_1').hide();
+
+            } else if (ele.val() == 5) {
 
                 $('#typePromotionInvite_' + id).fadeIn();
 
                 $('#typeCost_0_1').show();
                 $('#typeCost_0_2').hide();
 
+                $('#typePromotion_' + id + '_1').hide();
+
             } else if (ele.val() == 6) {
 
-                $('#typeCost_0_1').hide();
-                $('#typeCost_0_2').show();
+                $('#typeCost_' + id + '_1').hide();
+                $('#typeCost_' + id + '_2').show();
+
+                $('#typePromotion_' + id + '_1').hide();
 
                 $('#typePromotionInvite_' + id).fadeOut('fast');
 
             } else {
 
-                $('#typeCost_0_1').show();
-                $('#typeCost_0_2').show();
+                $('#typeCost_' + id + '_1').hide();
+                $('#typeCost_' + id + '_2').show();
+
+                $('#typePromotion_' + id + '_1').hide();
 
                 $('#typePromotionInvite_' + id).fadeOut('fast');
 

@@ -27,6 +27,7 @@ class Promotion extends Model
         'type_promotion',
         'type_promotion_invite',
         'type_promotion_cost',
+        'amount_per_day',
         'status',
         'active',
     ];
