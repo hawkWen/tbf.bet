@@ -564,10 +564,10 @@ class HomeController extends Controller
 
         $promotion_cost = PromotionCost::whereBrandId($brand->id)->where('promotion_id','!=',0)->whereCustomerId($customer->id)->whereStatus(0)->first();
 
-        $promotion = Promotion::find($promotion_cost->promotion_id);
-
         //ติดโปร 
         if($promotion_cost){
+
+            $promotion = Promotion::find($promotion_cost->promotion_id);
 
             $input['promotion_id'] = $promotion->id;
 
