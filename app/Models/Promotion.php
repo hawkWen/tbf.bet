@@ -20,6 +20,7 @@ class Promotion extends Model
         'min_break_promotion',
         'max',
         'withdraw_max',
+        'withdraw_max_type',
         'turn_over',
         'type_game',
         'type_turn_over',

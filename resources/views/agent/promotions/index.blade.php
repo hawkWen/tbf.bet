@@ -159,34 +159,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <br>
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <label for="">ชื่อโปรโมชั่น</label>
-                                                                    <input type="text" class="form-control" name="name"
-                                                                        placeholder="สมัครใหม่ฟรี 100% สูงสุด 300 บาท เทิร์น 5 เท่า"
-                                                                        value="{{ $promotion->name }}" />
-                                                                </div>
-                                                                <div class="col-lg-4">
-                                                                    <label for="">ขั้นต่ำ</label>
-                                                                    <input type="text" class="form-control" name="min"
-                                                                        placeholder="100" input-type="money_decimal"
-                                                                        value="{{ $promotion->min }}" />
-                                                                </div>
-                                                                <div class="col-lg-4">
-                                                                    <label for="">สูงสุด</label>
-                                                                    <input type="text" class="form-control" name="max"
-                                                                        placeholder="300" input-type="money_decimal"
-                                                                        value="{{ $promotion->max }}" />
-                                                                </div>
-                                                                <div class="col-lg-4">
-                                                                    <label for="">ถอนสูงสุด</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="withdraw_max" placeholder="300"
-                                                                        input-type="money_decimal"
-                                                                        value="{{ $promotion->withdraw_max }}" />
-                                                                </div>
-                                                            </div>
                                                             <div class="row mb-5 mt-5">
                                                                 <div class="col-lg-12">
                                                                     <label for="">ประเภทการได้รับ</label>
@@ -244,12 +216,72 @@
                                                                 @if ($promotion->type_promotion != 1) style="display: none;" @endif>
                                                                 <div class="col-lg-3">
                                                                     <label for="">
-                                                                        จำนวน
+                                                                        จำนวน ... ครั้ง/วัน
                                                                     </label>
                                                                     <input type="number"
                                                                         value="{{ $promotion->amount_per_day }}"
-                                                                        name="amount_per_day"
-                                                                        class="form-control">ครั้งต่อวัน
+                                                                        name="amount_per_day" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <label for="">ชื่อโปรโมชั่น</label>
+                                                                    <input type="text" class="form-control" name="name"
+                                                                        placeholder="สมัครใหม่ฟรี 100% สูงสุด 300 บาท เทิร์น 5 เท่า"
+                                                                        value="{{ $promotion->name }}" />
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <label for="">ขั้นต่ำ</label>
+                                                                    <input type="text" class="form-control" name="min"
+                                                                        placeholder="100" input-type="money_decimal"
+                                                                        value="{{ $promotion->min }}" />
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <label for="">สูงสุด</label>
+                                                                    <input type="text" class="form-control" name="max"
+                                                                        placeholder="300" input-type="money_decimal"
+                                                                        value="{{ $promotion->max }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-12 mt-1">
+                                                                    <label for="">ถอนสูงสุดจำนวนเงิน (บาท)</label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <input type="radio" name="withdraw_max_type"
+                                                                                    value="1"
+                                                                                    onchange="changeWithdrawTypeMax({{ $promotion->id }},$(this))"
+                                                                                    @if ($promotion->withdraw_max_type == 1) checked @endif>
+                                                                            </div>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                            input-type="money_decimal" name="withdraw_max"
+                                                                            id="withdrawMax_{{ $promotion->id }}_1"
+                                                                            placeholder="ตัวอย่าง 50,000 บาท "
+                                                                            @if ($promotion->withdraw_max_type == 2) disabled @endif>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12 mt-1">
+                                                                    <label for="">ถอนสูงสุดกี่เท่า
+                                                                        (คูณกับยอดเติมเงิน)
+                                                                    </label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <input type="radio" name="withdraw_max_type"
+                                                                                    value="2"
+                                                                                    onchange="changeWithdrawTypeMax({{ $promotion->id }},$(this))"
+                                                                                    @if ($promotion->withdraw_max_type == 2) checked @endif>
+                                                                            </div>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                            input-type="money" name="withdraw_max"
+                                                                            id="withdrawMax_{{ $promotion->id }}_2"
+                                                                            placeholder="ตัวอย่าง 10 เท่า"
+                                                                            @if ($promotion->withdraw_max_type == 1) disabled @endif>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             @if ($promotion->type_promotion == 5)
@@ -497,29 +529,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <label for="">ชื่อโปรโมชั่น</label>
-                                        <input type="text" class="form-control" name="name"
-                                            placeholder="สมัครใหม่ฟรี 100% สูงสุด 300 บาท เทิร์น 5 เท่า" />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label for="">ขั้นต่ำ</label>
-                                        <input type="text" class="form-control" name="min" placeholder="100"
-                                            input-type="money_decimal" />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label for="">โบนัสสูงสุด</label>
-                                        <input type="text" class="form-control" name="max" placeholder="300"
-                                            input-type="money_decimal" />
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label for="">ถอนสูงสุด</label>
-                                        <input type="text" class="form-control" name="withdraw_max" placeholder="50,000"
-                                            input-type="money_decimal" />
-                                    </div>
-                                </div>
-                                <div class="row mt-5">
+                                <div class="row mt-2">
                                     <div class="col-lg-12 mt-5 mb-5">
                                         <label for="">ประเภทการได้รับ</label>
                                         <div class="radio-inline">
@@ -564,39 +574,66 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row" id="typePromotion_0_1">
                                     <div class="col-lg-3">
                                         <label for="">
-                                            จำนวน
+                                            จำนวน ... ครั้ง/วัน
                                         </label>
-                                        <input type="number" value="1" name="amount_per_day"
-                                            class="form-control">ครั้งต่อวัน
+                                        <input type="number" value="1" name="amount_per_day" class="form-control">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label for="">ชื่อโปรโมชั่น</label>
+                                        <input type="text" class="form-control" name="name"
+                                            placeholder="สมัครใหม่ฟรี 100% สูงสุด 300 บาท เทิร์น 5 เท่า" />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="">ขั้นต่ำ</label>
+                                        <input type="text" class="form-control" name="min" placeholder="100"
+                                            input-type="money_decimal" />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="">โบนัสสูงสุด</label>
+                                        <input type="text" class="form-control" name="max" placeholder="300"
+                                            input-type="money_decimal" />
                                     </div>
                                 </div>
                                 <div class="row">
-                                    {{-- <div class="col-lg-12 mt-5 mb-5" id="typePromotionInvite_0" style="display: none;">
-                                        <label for="">ประเภทโปรโมชั่น แนะนำเพื่อน</label>
-                                        <div class="radio-inline">
-                                            <label class="radio radio-success">
-                                                <input type="radio" name="type_promotion_invite" value="1"
-                                                    checked="checked" />
-                                                <span></span>
-                                                ยอดฝากแรก
-                                            </label>
-                                            <label class="radio radio-success">
-                                                <input type="radio" name="type_promotion_invite" value="2" />
-                                                <span></span>
-                                                เทิร์นโอนเวอร์ของเพื่อน
-                                            </label>
-                                            @if ($brand->game_id == 1)
-                                                <label class="radio radio-success">
-                                                    <input type="radio" name="type_promotion_invite" value="3" />
-                                                    <span></span>
-                                                    ยอดเสียของเพื่อน
-                                                </label>
-                                            @endif
+
+                                    <div class="col-lg-12 mt-1">
+
+                                        <label for="">ถอนสูงสุดจำนวนเงิน (บาท)</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <input type="radio" name="withdraw_max_type" value="1"
+                                                        onchange="changeWithdrawTypeMax(0,$(this))" checked>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" input-type="money_decimal"
+                                                name="withdraw_max" id="withdrawMax_0_1" placeholder="ตัวอย่าง 50,000 บาท ">
                                         </div>
-                                    </div> --}}
+                                    </div>
+                                    <div class="col-lg-12 mt-1">
+
+                                        <label for="">ถอนสูงสุดกี่เท่า (คูณกับยอดเติมเงิน)</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <input type="radio" name="withdraw_max_type" value="2"
+                                                        onchange="changeWithdrawTypeMax(0,$(this))">
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" input-type="money"
+                                                name="withdraw_max" id="withdrawMax_0_2" placeholder="ตัวอย่าง 10 เท่า"
+                                                disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-lg-3 mt-5 mb-5">
                                         <label for="">การเพิ่มของโบนัส</label>
                                         <div class="radio-list">
@@ -739,6 +776,24 @@
         jQuery(document).ready(function() {
             KTBootstrapSwitch.init();
         });
+
+        function changeWithdrawTypeMax(id, ele) {
+
+            if (ele.val() == 1) {
+
+                $('#withdrawMax_' + id + '_1').attr('disabled', false);
+
+                $('#withdrawMax_' + id + '_2').attr('disabled', true);
+
+            } else if (ele.val() == 2) {
+
+                $('#withdrawMax_' + id + '_1').attr('disabled', true);
+
+                $('#withdrawMax_' + id + '_2').attr('disabled', false);
+
+            }
+
+        }
 
         function changeTypePromotion(id, ele) {
 

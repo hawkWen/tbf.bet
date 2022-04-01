@@ -473,6 +473,8 @@ class HomeController extends Controller
         ]);
     }
 
+
+
     public function withdraw(Request $request)
     {
 
@@ -562,24 +564,26 @@ class HomeController extends Controller
 
         $promotion_cost = PromotionCost::whereBrandId($brand->id)->where('promotion_id','!=',0)->whereCustomerId($customer->id)->whereStatus(0)->first();
 
+        $promotion = Promotion::find($promotion_cost->promotion_id);
+
         //ติดโปร 
         if($promotion_cost){
 
-            $input['promotion_id'] = $promotion_cost->promotion->id;
+            $input['promotion_id'] = $promotion->id;
 
             $input['promotion_cost_id'] = $promotion_cost->id;
 
             $credit_cut = $api_credit['data']['credit'];
 
-            $credit_withdraw = ($promotion_cost->promotion->withdraw_max != 0 && $credit_cut > $promotion_cost->promotion->withdraw_max) ? $promotion_cost->promotion->withdraw_max : $api_credit['data']['credit'];
+            $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max : $api_credit['data']['credit'];
 
             // pro turn over amount ;
-            if($promotion_cost->promotion->type_turn_over == 1) {
+            if($promotion->type_turn_over == 1) {
     
-                $total_turn_over = ($promotion_cost->amount + $promotion_cost->bonus) * $promotion_cost->promotion->turn_over;
+                $total_turn_over = ($promotion_cost->amount + $promotion_cost->bonus) * $promotion->turn_over;
 
                 //creditFree 
-                if($promotion_cost->promotion->type_promotion == 6) {
+                if($promotion->type_promotion == 6) {
 
                     if($api_credit['data']['credit'] < $total_turn_over) {
 
@@ -593,7 +597,15 @@ class HomeController extends Controller
 
                     $credit_cut = $api_credit['data']['credit'];
 
-                    $credit_withdraw = ($promotion_cost->promotion->withdraw_max != 0 && $credit_cut > $promotion_cost->promotion->withdraw_max) ? $promotion_cost->promotion->withdraw_max : $api_credit['data']['credit'];
+                    if($promotion->withdraw_max_type == 1) {
+
+                        $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max : $api_credit['data']['credit'];
+
+                    } else {
+
+                        $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max * ($promotion_cost->amount + $promotion_cost->bonus) : $api_credit['data']['credit'];
+
+                    }
 
                     //ถอนออโต้ไม่เกินวงเงิน
                     if ($credit_withdraw <= $brand->withdraw_auto_max) {
@@ -624,7 +636,9 @@ class HomeController extends Controller
 
                     $credit_cut = $api_credit['data']['credit'];
 
-                    $credit_withdraw = ($promotion_cost->promotion->withdraw_max != 0 && $credit_cut > $promotion_cost->promotion->withdraw_max) ? $promotion_cost->promotion->withdraw_max : $api_credit['data']['credit'];
+                    if($promotion )
+
+                    $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max : $api_credit['data']['credit'];
 
                     //ถอนออโต้ไม่เกินวงเงิน
                     if ($credit_withdraw <= $brand->withdraw_auto_max) {
@@ -647,7 +661,7 @@ class HomeController extends Controller
 
                 $credit_cut = $api_credit['data']['credit'];
 
-                $credit_withdraw = ($promotion_cost->promotion->withdraw_max > 0) ? $promotion_cost->promotion->withdraw_max : $api_credit['data']['credit'];
+                $credit_withdraw = ($promotion->withdraw_max > 0) ? $promotion->withdraw_max : $api_credit['data']['credit'];
 
                 //ถอนออโต้ไม่เกินวงเงิน
                 if ($credit_withdraw <= $brand->withdraw_auto_max) {
@@ -710,7 +724,7 @@ class HomeController extends Controller
 
             if ($promotion_cost) {
 
-                $message .= "โปรโมชั่นที่รับล่าสุด : " . $promotion_cost->promotion->name;
+                $message .= "โปรโมชั่นที่รับล่าสุด : " . $promotion->name;
             }
 
             if ($input['type_withdraw'] == 2) {

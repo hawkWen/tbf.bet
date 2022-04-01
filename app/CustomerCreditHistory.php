@@ -31,7 +31,7 @@ class CustomerCreditHistory extends Model
     }
 
     public function promotion() {
-        return $this->belongsTo(Promotion::class);
+        return $this->belongsTo(Promotion::class)->withTrashed();
     }
      
 }
