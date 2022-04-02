@@ -97,6 +97,8 @@ class HomeController extends Controller
                 $promotion_costs = PromotionCost::whereCustomerId($customer->id)->wherePromotionId($promotion_query->id) 
                         ->whereBetween('created_at', [$dates[0], $dates[1]])->get();
 
+                dd($promotion_cost,$promotion_query->amount_per_day);
+
                 if(!($promotion_costs->count() != 0) && ($promotion_costs->count() >= $promotion_query->amount_per_day)) {
 
                     $promotion_query['active'] = 0;
