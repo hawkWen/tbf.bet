@@ -99,7 +99,7 @@ class HomeController extends Controller
 
                 // return response()->json([$promotion_costs->count(),$promotion_query->amount_per_day]);
 
-                if(($promotion_costs->count() != 0) && ($promotion_costs->count() > $promotion_query->amount_per_day)) {
+                if(($promotion_costs->count() != 0) && ($promotion_costs->count() >= $promotion_query->amount_per_day)) {
 
                     $promotion_query['active'] = 0;
 
