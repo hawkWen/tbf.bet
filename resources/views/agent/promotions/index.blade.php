@@ -260,7 +260,7 @@
                                                                             input-type="money_decimal" name="withdraw_max"
                                                                             id="withdrawMax_{{ $promotion->id }}_1"
                                                                             placeholder="ตัวอย่าง 50,000 บาท "
-                                                                            @if ($promotion->withdraw_max_type == 2) disabled @endif>
+                                                                            @if ($promotion->withdraw_max_type == 2) disabled @else value="{{ $promotion->withdraw_max }}" @endif>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12 mt-1">
@@ -280,7 +280,7 @@
                                                                             input-type="money" name="withdraw_max"
                                                                             id="withdrawMax_{{ $promotion->id }}_2"
                                                                             placeholder="ตัวอย่าง 10 เท่า"
-                                                                            @if ($promotion->withdraw_max_type == 1) disabled @endif>
+                                                                            @if ($promotion->withdraw_max_type == 1) disabled  @else value="{{ $promotion->withdraw_max }}" @endif>>
                                                                     </div>
                                                                 </div>
                                                             </div>
