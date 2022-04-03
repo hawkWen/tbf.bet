@@ -1,4 +1,5 @@
 @php
+
 $annoucement = App\Models\Annoucement::orderBy('created_at', 'desc')->first();
 
 $notifications = App\Helpers\Helper::notification($brand->id);
@@ -99,53 +100,33 @@ $notifications = App\Helpers\Helper::notification($brand->id);
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="bell">
                             <i class="fa fa-bell fa-2x"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right p-0" style="">
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right p-0" style="width: 500px">
                             <!--begin::Navigation-->
                             <ul class="navi navi-hover">
                                 <li class="navi-header font-weight-bold py-4">
                                     <span class="font-size-lg">การแจ้งเตือน</span>
                                     <i class="flaticon2-information icon-md text-muted"></i>
                                 </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-                                        <span class="navi-text">
-                                            ทดสอบ
-
+                                @if ($notifications->count() > 0)
+                                    @foreach ($notifications->sortByDesc('created_at') as $notification)
+                                        <li class="navi-item">
+                                            <span
+                                                class="navi-link @if ($notification['type'] == 1) bg-warning @else bg-info @endif">
+                                                <span class="navi-text ">
+                                                    {{ $notification['message'] }}
+                                                </span>
+                                            </span>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <li class="navi-item">
+                                        <span class="navi-link">
+                                            <span class="navi-text text-center">
+                                                ไม่พบการแจ้งเตือน
+                                            </span>
                                         </span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-                                        <span class="navi-text">
-                                            ทดสอบ
-
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-                                        <span class="navi-text">
-                                            ทดสอบ
-
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-                                        <span class="navi-text">
-                                            ทดสอบ
-
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-                                        <span class="navi-text">
-                                            ทดสอบ
-
-                                        </span>
-                                    </a>
-                                </li>
+                                    </li>
+                                @endif
                             </ul>
                             <!--end::Navigation-->
                         </div>
@@ -263,6 +244,8 @@ $notifications = App\Helpers\Helper::notification($brand->id);
         </div>
     </div>
 
+    <input type="hidden" id="notificationCount" value="0">
+
     @include('parts.agent.javascript')
 
     @yield('javascript')
@@ -295,19 +278,22 @@ $notifications = App\Helpers\Helper::notification($brand->id);
         //         };
         //     }
         // }
+        var notificationCount = $('#notificationCount').val();
 
         $(function() {
 
-            // withdrawList();
+
             setInterval(() => {
-                // soundAlert.play();
+                checkNotification();
+                console.log(notificationCount);
             }, 5000);
         });
 
-        function bellClick() {
+        function checkNotification() {
 
-            $('#bell').click();
-            // soundAlert.play();
+            $.get('{{ route('agent.notification') }}', function(r) {
+                console.log(r);
+            });
 
         }
     </script>

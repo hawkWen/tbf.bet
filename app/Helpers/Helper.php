@@ -29,15 +29,15 @@ class Helper
 
         $customer_black_lists = Customer::whereBrandId($brand_id)->whereType(1)->get();
 
-        $customer_deposits = CustomerDeposit::select('id','promotion_id','customer_id','amount','bonus','created_at')
+        $customer_deposits = CustomerDeposit::whereBrandId($brand_id)->select('id','promotion_id','customer_id','amount','bonus','created_at')
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
-            ->whereBetween('created_at',['Y-m-d 00:00:00','Y-m-d 23:59:59'])
-            ->orderBy('created_at','desc')->take(5);
+            ->whereBetween('created_at',[date('Y-m-d 00:00:00'),date('Y-m-d 23:59:59')])
+            ->orderBy('created_at','desc')->take(5)->get();
 
-        $customer_promotion_costs = PromotionCost::select('id','promotion_id','customer_id','amount','bonus','created_at')
+        $customer_promotion_costs = PromotionCost::whereBrandId($brand_id)->select('id','promotion_id','customer_id','amount','bonus','created_at')
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
-            ->whereBetween('created_at',['Y-m-d 00:00:00','Y-m-d 23:59:59'])
-            ->orderBy('created_at','desc')->take(5);
+            ->whereBetween('created_at',[date('Y-m-d 00:00:00'),date('Y-m-d 23:59:59')])
+            ->orderBy('created_at','desc')->take(5)->get();
 
         $notifications = $customer_deposits->merge($customer_promotion_costs);
         
@@ -53,7 +53,7 @@ class Helper
 
             } else if($notification->getTable() == 'promotion_costs') {
 
-                $message = 'ลูกค้า ('.$notification->customer->username.') ถูกแบล็คลิสต์ได้ รับโปรโมชั่น '.substr($notification->promotion->name,0,50).' เป็นจำนวนเงิน '. number_format($notification->bonus,2).' บาท เมื่อเวลา '.$notification->created_at->format('d/m/Y H:i');
+                $message = 'ลูกค้า ('.$notification->customer->username.') ถูกแบล็คลิสต์ได้ รับโปรโมชั่น '.$notification->promotion->name.' เป็นจำนวนเงิน '. number_format($notification->bonus,2).' บาท เมื่อเวลา '.$notification->created_at->format('d/m/Y H:i');
 
                 $type = 2;
 
@@ -69,6 +69,8 @@ class Helper
             $result_notifications->push($data);
 
         }
+
+        // dd($result_notifications);
 
         return $result_notifications;
 
