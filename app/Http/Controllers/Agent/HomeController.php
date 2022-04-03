@@ -590,11 +590,13 @@ class HomeController extends Controller
 
         $customer_deposits = CustomerDeposit::select('id','promotion_id','customer_id','amount','bonus','created_at')
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
-            ->orderBy('created_at','desc',)->whereBetween('created_at',[date('Y-m-d 00:00:00'),date('Y-m-d 23:59:59')])->get();
+            ->orderBy('created_at','desc')->where('created_at','>',date('Y-m-d H:i:s'))->get();
 
+
+            
         $customer_promotion_costs = PromotionCost::select('id','promotion_id','customer_id','amount','bonus','created_at')
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
-            ->orderBy('created_at','desc')->whereBetween('created_at',[date('Y-m-d 00:00:00'),date('Y-m-d 23:59:59')])->get();
+            ->orderBy('created_at','desc')->where('created_at','>',date('Y-m-d H:i:s'))->get();
 
         $notifications = $customer_deposits->merge($customer_promotion_costs);
         

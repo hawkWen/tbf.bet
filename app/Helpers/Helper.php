@@ -32,12 +32,12 @@ class Helper
         $customer_deposits = CustomerDeposit::select('id','promotion_id','customer_id','amount','bonus','created_at')
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
             ->whereBetween('created_at',['Y-m-d 00:00:00','Y-m-d 23:59:59'])
-            ->orderBy('created_at','desc')->get();
+            ->orderBy('created_at','desc')->take(5);
 
         $customer_promotion_costs = PromotionCost::select('id','promotion_id','customer_id','amount','bonus','created_at')
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
             ->whereBetween('created_at',['Y-m-d 00:00:00','Y-m-d 23:59:59'])
-            ->orderBy('created_at','desc')->get();
+            ->orderBy('created_at','desc')->take(5);
 
         $notifications = $customer_deposits->merge($customer_promotion_costs);
         
@@ -69,8 +69,6 @@ class Helper
             $result_notifications->push($data);
 
         }
-
-        dd($result_notifications);
 
         return $result_notifications;
 

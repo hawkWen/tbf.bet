@@ -3,7 +3,8 @@ $annoucement = App\Models\Annoucement::orderBy('created_at', 'desc')->first();
 
 $notifications = App\Helpers\Helper::notification($brand->id);
 
-dd($notifications);
+// dd($notifications);
+
 @endphp
 
 <!DOCTYPE html>
