@@ -93,14 +93,20 @@ $notifications = App\Helpers\Helper::notification($brand->id);
                     @yield('content')
                     <!-- Default dropup button -->
                     <!-- Default dropup button -->
-                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="left"
-                        data-original-title="More links">
-                        <a href="#"
-                            class="btn btn-icon btn-primary btn-notification btn-extra-lg btn-circle ml-3 flex-shrink-0"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="bell">
+                    <div class="dropdown dropdown-inline btn-notification" data-toggle="tooltip" title=""
+                        data-placement="left" data-original-title="แจ้งเตือน">
+                        <a href="#" class="btn btn-icon btn-primary  btn-extra-lg btn-circle ml-3 flex-shrink-0"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="bell"
+                            style="position: relative;">
+                            <span class=""
+                                style="z-index: 10;position: absolute;top: 0;right: 0;color: red !important;">
+                                @if ($notifications->count() > 0)
+                                    <i class="fa fa-circle text-danger"></i>
+                                @endif
+                            </span>
                             <i class="fa fa-bell fa-2x"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right p-0" style="width: 500px"
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right p-0 mb-2" style="width: 500px"
                             id="divNotification">
                             <!--begin::Navigation-->
                             <ul class="navi navi-hover">
@@ -108,12 +114,11 @@ $notifications = App\Helpers\Helper::notification($brand->id);
                                     <span class="font-size-lg">การแจ้งเตือน</span>
                                     <i class="flaticon2-information icon-md text-muted"></i>
                                 </li>
-
                                 @if ($notifications->count() > 0)
                                     @foreach ($notifications->sortByDesc('created_at') as $notification)
                                         <li class="navi-item">
                                             <span
-                                                class="navi-link @if ($notification['type'] == 1) bg-warning @else bg-info @endif">
+                                                class="navi-link @if ($notification['type'] == 1) bg-warning @else bg-danger @endif">
                                                 <span class="navi-text ">
                                                     {{ $notification['message'] }}
                                                 </span>
