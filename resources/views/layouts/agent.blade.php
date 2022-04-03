@@ -119,7 +119,7 @@ $notifications = App\Helpers\Helper::notification($brand->id);
                                         <li class="navi-item">
                                             <span
                                                 class="navi-link @if ($notification['type'] == 1) bg-warning @else bg-danger @endif">
-                                                <span class="navi-text ">
+                                                <span class="navi-text text-white">
                                                     {{ $notification['message'] }}
                                                 </span>
                                             </span>
