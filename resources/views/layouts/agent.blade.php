@@ -291,8 +291,9 @@ $notifications = App\Helpers\Helper::notification($brand->id);
         function checkNotification() {
 
             $.get('{{ route('agent.notification') }}', function(r) {
-                if (r.length > 0) {
+                if (r.count > 0) {
                     soundAlert.play();
+                    $('#divNotification').html(r.html);
                 }
             });
 

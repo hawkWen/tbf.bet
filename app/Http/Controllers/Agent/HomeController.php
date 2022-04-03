@@ -646,8 +646,6 @@ class HomeController extends Controller
             }
         $html .= '</ul>';
 
-        dd($html);
-
         return response()->json([
             'count' => $result_notifications->count(),
             'data' => $result_notifications,
