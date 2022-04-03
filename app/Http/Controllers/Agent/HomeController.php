@@ -581,4 +581,57 @@ class HomeController extends Controller
 
 
     }
+
+    public function notification() {
+
+        $brand = Brand::find(Auth::user()->brand_id);
+
+        $customer_black_lists = Customer::whereBrandId($brand->id)->get();
+
+        $customer_deposits = CustomerDeposit::select('id','promotion_id','customer_id','amount','bonus','created_at')
+            ->whereIn('customer_id', $customer_black_lists->pluck('id'))
+            ->orderBy('created_at','desc',)->whereBetween('created_at',[date('Y-m-d 00:00:00'),date('Y-m-d 23:59:59')])->get();
+
+        $customer_promotion_costs = PromotionCost::select('id','promotion_id','customer_id','amount','bonus','created_at')
+            ->whereIn('customer_id', $customer_black_lists->pluck('id'))
+            ->orderBy('created_at','desc')->whereBetween('created_at',[date('Y-m-d 00:00:00'),date('Y-m-d 23:59:59')])->get();
+
+        $notifications = $customer_deposits->merge($customer_promotion_costs);
+        
+        $result_notifications = collect([]);
+
+        foreach($notifications as $notification) {
+
+            if($notification->getTable() == 'customer_deposits') {
+
+                $message = 'ลูกค้า ('.$notification->customer->username.') ที่ถูกแบล็คลิสต์ได้เติมเงินเข้ามาเป็นจำนวนเงิน '. number_format($notification->amount,2).' บาท เมื่อเวลา '.$notification->created_at->format('d/m/Y H:i');
+
+                $type = 1;
+
+            } else if($notification->getTable() == 'promotion_costs') {
+
+                $message = 'ลูกค้า ('.$notification->customer->username.') ถูกแบล็คลิสต์ได้ รับโปรโมชั่น '.substr($notification->promotion->name,0,50).' เป็นจำนวนเงิน '. number_format($notification->bonus,2).' บาท เมื่อเวลา '.$notification->created_at->format('d/m/Y H:i');
+
+                $type = 2;
+
+            }
+
+            $data = [
+                'id' => $notification->id,
+                'message' => $message,
+                'created_at' => $notification->created_at->format('d/m/Y H:i'),
+                'type' => $type,
+            ];
+
+            $result_notifications->push($data);
+
+        }
+
+        print_r($result_notifications->sortByDesc('created_at'));
+
+        return response()->json($result_notifications);
+
+        // $notification =
+
+    }
 }

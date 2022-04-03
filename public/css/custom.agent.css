@@ -21,6 +21,31 @@ i {
     color: unset;
 }
 
+.btn.btn-icon.btn-extra-lg {
+    height: calc(1.5em + 1.65rem + 20px);
+    width: calc(1.5em + 1.65rem + 20px);
+}
+
+.btn-notification {
+    position: fixed;
+    bottom: 2.5%;
+    right: 2.5%;
+}
+
+.circle-icon {
+    background: #ffc0c0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    padding: 30px;
+    background: #ffc0c0;
+    padding:30px;
+    border-radius: 50%;
+}
+
 .btn-xs {
     padding: 0px 12px;
 }

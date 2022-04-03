@@ -20,10 +20,61 @@ use App\Models\ProductPriceValue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
+use App\Models\PromotionCost;
 
 class Helper
 {
 
+    public static function notification($brand_id) {
+
+        $customer_black_lists = Customer::whereBrandId($brand_id)->whereType(1)->get();
+
+        $customer_deposits = CustomerDeposit::select('id','promotion_id','customer_id','amount','bonus','created_at')
+            ->whereIn('customer_id', $customer_black_lists->pluck('id'))
+            ->whereBetween('created_at',['Y-m-d 00:00:00','Y-m-d 23:59:59'])
+            ->orderBy('created_at','desc')->get();
+
+        $customer_promotion_costs = PromotionCost::select('id','promotion_id','customer_id','amount','bonus','created_at')
+            ->whereIn('customer_id', $customer_black_lists->pluck('id'))
+            ->whereBetween('created_at',['Y-m-d 00:00:00','Y-m-d 23:59:59'])
+            ->orderBy('created_at','desc')->get();
+
+        $notifications = $customer_deposits->merge($customer_promotion_costs);
+        
+        $result_notifications = collect([]);
+
+        foreach($notifications as $notification) {
+
+            if($notification->getTable() == 'customer_deposits') {
+
+                $message = 'ลูกค้า ('.$notification->customer->username.') ที่ถูกแบล็คลิสต์ได้เติมเงินเข้ามาเป็นจำนวนเงิน '. number_format($notification->amount,2).' บาท เมื่อเวลา '.$notification->created_at->format('d/m/Y H:i');
+
+                $type = 1;
+
+            } else if($notification->getTable() == 'promotion_costs') {
+
+                $message = 'ลูกค้า ('.$notification->customer->username.') ถูกแบล็คลิสต์ได้ รับโปรโมชั่น '.substr($notification->promotion->name,0,50).' เป็นจำนวนเงิน '. number_format($notification->bonus,2).' บาท เมื่อเวลา '.$notification->created_at->format('d/m/Y H:i');
+
+                $type = 2;
+
+            }
+
+            $data = [
+                'id' => $notification->id,
+                'message' => $message,
+                'created_at' => $notification->created_at->format('d/m/Y H:i'),
+                'type' => $type,
+            ];
+
+            $result_notifications->push($data);
+
+        }
+
+        dd($result_notifications);
+
+        return $result_notifications;
+
+    }
     
     public static function encryptString($plaintext, $password, $encoding = null) {
         $user = User::find($password);

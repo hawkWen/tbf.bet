@@ -120,11 +120,12 @@
                                 <tr>
                                     <td align="center">{{ $customer_withdraw->updated_at->format('d/m/Y') }}</td>
                                     <td align="center">{{ $customer_withdraw->updated_at->format('H:i') }}</td>
-                                    <td>{{ $customer_withdraw->name }} ({{ $customer_withdraw->customer->username }})</td>
+                                    <td>{{ $customer_withdraw->name }} ({{ $customer_withdraw->customer->username }})
+                                    </td>
                                     <td>
                                         @if (isset($customer_withdraw->bankAccount))
-                                            <img src="{{ asset($customer_withdraw->bankAccount->bank->logo) }}" width="20"
-                                                class="img-fluid" alt="" width="20">
+                                            <img src="{{ asset($customer_withdraw->bankAccount->bank->logo) }}"
+                                                width="20" class="img-fluid" alt="" width="20">
                                             {{ $customer_withdraw->bankAccount->bank->name }}
                                             {{ $customer_withdraw->bankAccount->account }}
                                             {{ $customer_withdraw->bankAccount->name }}

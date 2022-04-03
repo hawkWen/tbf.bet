@@ -172,7 +172,6 @@
 
         $(function() {
             $("form").each(function() {
-                console.log($(this));
                 $(this).preventDoubleSubmission();
             });
         });
@@ -251,7 +250,7 @@
             $.get('{{ route('agent.withdraw.notify') }}', function(r) {
 
                 if (r.count > withdrawCount) {
-                    soundWithdraw.play();
+                    // soundWithdraw.play();
                     var notification = new Notification('คุณมีการแจ้งถอนใหม่จากระบบ ' + r.brand.name, {
                         // icon: '{{ asset('images/fastX.png') }}',
                         body: 'คลิกเพื่อตรวจสอบ',

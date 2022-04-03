@@ -139,6 +139,7 @@ Route::group(['domain' => 'agent.' . env('APP_NAME') . '.' . env('APP_DOMAIN')],
             Route::post('/change-password', 'HomeController@changePassword')->name('agent.change-password');
             Route::post('/bank-account/update-status', 'HomeController@bankAccountUpdateStatus')->name('agent.bank-account.update-status');
             Route::post('/check-credit','HomeController@checkCredit')->name('agent.check-credit');
+            Route::get('/notification','HomeController@notification')->name('agent.notification');
 
             //Wheel Modules
             Route::get('/wheel','WheelController@index')->name('agent.wheel');

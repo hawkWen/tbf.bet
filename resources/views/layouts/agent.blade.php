@@ -1,5 +1,9 @@
 @php
 $annoucement = App\Models\Annoucement::orderBy('created_at', 'desc')->first();
+
+$notifications = App\Helpers\Helper::notification($brand->id);
+
+dd($notifications);
 @endphp
 
 <!DOCTYPE html>
@@ -85,6 +89,66 @@ $annoucement = App\Models\Annoucement::orderBy('created_at', 'desc')->first();
                     </div>
 
                     @yield('content')
+                    <!-- Default dropup button -->
+                    <!-- Default dropup button -->
+                    <div class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="left"
+                        data-original-title="More links">
+                        <a href="#"
+                            class="btn btn-icon btn-primary btn-notification btn-extra-lg btn-circle ml-3 flex-shrink-0"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="bell">
+                            <i class="fa fa-bell fa-2x"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right p-0" style="">
+                            <!--begin::Navigation-->
+                            <ul class="navi navi-hover">
+                                <li class="navi-header font-weight-bold py-4">
+                                    <span class="font-size-lg">การแจ้งเตือน</span>
+                                    <i class="flaticon2-information icon-md text-muted"></i>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link">
+                                        <span class="navi-text">
+                                            ทดสอบ
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link">
+                                        <span class="navi-text">
+                                            ทดสอบ
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link">
+                                        <span class="navi-text">
+                                            ทดสอบ
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link">
+                                        <span class="navi-text">
+                                            ทดสอบ
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link">
+                                        <span class="navi-text">
+                                            ทดสอบ
+
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--end::Navigation-->
+                        </div>
+                    </div>
 
                 </div>
                 <!--end::Content-->
@@ -203,6 +267,49 @@ $annoucement = App\Models\Annoucement::orderBy('created_at', 'desc')->first();
     @yield('javascript')
 
     {!! JsValidator::formRequest('App\Http\Requests\PasswordRequest', '#formChangePassword') !!}
+
+    <script>
+        const soundAlert = new Audio("sound/sound-alert-2.wav");
+        // request permission on page load
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     if (!Notification) {
+        //         alert('Desktop notifications not available in your browser. Try Chromium.');
+        //         return;
+        //     }
+
+        //     if (Notification.permission !== 'granted')
+        //         Notification.requestPermission();
+        // });
+
+        // function notifyMe() {
+        //     if (Notification.permission !== 'granted')
+        //         Notification.requestPermission();
+        //     else {
+        //         var notification = new Notification('Notification title', {
+        //             // icon: '{{ asset('images/fastX.png') }}',
+        //             body: 'Hey there! You\'ve been notified!',
+        //         });
+        //         notification.onclick = function() {
+        //             // window.open('http://stackoverflow.com/a/13328397/1269037');
+        //         };
+        //     }
+        // }
+
+        $(function() {
+
+            // withdrawList();
+            setInterval(() => {
+                // soundAlert.play();
+            }, 5000);
+        });
+
+        function bellClick() {
+
+            $('#bell').click();
+            // soundAlert.play();
+
+        }
+    </script>
 
 </body>
 <!--end::Body-->
