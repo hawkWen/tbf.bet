@@ -630,21 +630,21 @@ class HomeController extends Controller
         }
 
         $html = '<ul class="navi navi-hover">';
-        $html += '<li class="navi-header font-weight-bold py-4">';
-        $html += '<span class="font-size-lg">การแจ้งเตือน</span>';
-        $html += '<i class="flaticon2-information icon-md text-muted"></i>';
-        $html += '</li>';
+        $html .= '<li class="navi-header font-weight-bold py-4">';
+        $html .= '<span class="font-size-lg">การแจ้งเตือน</span>';
+        $html .= '<i class="flaticon2-information icon-md text-muted"></i>';
+        $html .= '</li>';
             foreach ($notifications->sortByDesc('created_at') as $notification){
                 $bg_color = ($notification['type'] == 1) ? 'bg-warning' : 'bg-info';
-                $html += '<li class="navi-item">';
-                    $html += '<span class="navi-link '.$bg_color.'">';
-                        $html +='<span class="navi-text ">';
-                            $html += $notification['message'];
-                        $html += '</span>';
-                    $html += '</span>';
-                $html += '</li>';
+                $html .= '<li class="navi-item">';
+                    $html .= '<span class="navi-link '.$bg_color.'">';
+                        $html .='<span class="navi-text ">';
+                            $html .= $notification['message'];
+                        $html .= '</span>';
+                    $html .= '</span>';
+                $html .= '</li>';
             }
-        $html += '</ul>';
+        $html .= '</ul>';
 
         dd($html);
 
