@@ -285,14 +285,13 @@ $notifications = App\Helpers\Helper::notification($brand->id);
 
             setInterval(() => {
                 checkNotification();
-                console.log(notificationCount);
             }, 5000);
         });
 
         function checkNotification() {
 
             $.get('{{ route('agent.notification') }}', function(r) {
-                console.log(r);
+                // if(r.)
             });
 
         }

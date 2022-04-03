@@ -589,12 +589,14 @@ class HomeController extends Controller
         $customer_black_lists = Customer::whereBrandId($brand->id)->get();
 
         $customer_deposits = CustomerDeposit::select('id','promotion_id','customer_id','amount','bonus','created_at')
+            ->whereBrandId($brand->id)
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
             ->orderBy('created_at','desc')->where('created_at','>',date('Y-m-d H:i:s'))->get();
 
 
             
         $customer_promotion_costs = PromotionCost::select('id','promotion_id','customer_id','amount','bonus','created_at')
+            ->whereBrandId($brand->id)
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
             ->orderBy('created_at','desc')->where('created_at','>',date('Y-m-d H:i:s'))->get();
 
@@ -628,8 +630,6 @@ class HomeController extends Controller
             $result_notifications->push($data);
 
         }
-
-        print_r($result_notifications->sortByDesc('created_at'));
 
         return response()->json($result_notifications);
 
