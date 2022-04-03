@@ -586,7 +586,7 @@ class HomeController extends Controller
 
         $brand = Brand::find(Auth::user()->brand_id);
 
-        $customer_black_lists = Customer::whereBrandId($brand->id)->get();
+        $customer_black_lists = Customer::whereBrandId($brand->id)->whereType(1)->get();
 
         $customer_deposits = CustomerDeposit::select('id','promotion_id','customer_id','amount','bonus','created_at')
             ->whereBrandId($brand->id)
@@ -596,7 +596,7 @@ class HomeController extends Controller
         $customer_promotion_costs = PromotionCost::select('id','promotion_id','customer_id','amount','bonus','created_at')
             ->whereBrandId($brand->id)
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
-            ->orderBy('created_at','desc')->where('created_at','>',date('Y-m-d H:i:s'))->take(1)->get();
+            ->orderBy('created_at','desc')->where('createหd_at','>',date('Y-m-d H:i:s'))->take(1)->get();
 
         $notifications = $customer_deposits->merge($customer_promotion_costs);
         
