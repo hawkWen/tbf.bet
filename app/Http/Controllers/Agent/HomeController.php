@@ -591,12 +591,12 @@ class HomeController extends Controller
         $customer_deposits = CustomerDeposit::select('id','promotion_id','customer_id','amount','bonus','created_at')
             ->whereBrandId($brand->id)
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
-            ->orderBy('created_at','desc')->where('created_at','>',date('Y-m-d H:i:s'))->take(5)->get();
+            ->orderBy('created_at','desc')->where('created_at','>',date('Y-m-d H:i:s'))->take(1)->get();
 
         $customer_promotion_costs = PromotionCost::select('id','promotion_id','customer_id','amount','bonus','created_at')
             ->whereBrandId($brand->id)
             ->whereIn('customer_id', $customer_black_lists->pluck('id'))
-            ->orderBy('created_at','desc')->where('created_at','>',date('Y-m-d H:i:s'))->take(5)->get();
+            ->orderBy('created_at','desc')->where('created_at','>',date('Y-m-d H:i:s'))->take(1)->get();
 
         $notifications = $customer_deposits->merge($customer_promotion_costs);
         
@@ -629,7 +629,30 @@ class HomeController extends Controller
 
         }
 
-        return response()->json($result_notifications);
+        $html = '<ul class="navi navi-hover">
+            <li class="navi-header font-weight-bold py-4">
+                <span class="font-size-lg">การแจ้งเตือน</span>
+                <i class="flaticon2-information icon-md text-muted"></i>
+            </li>';
+            foreach ($notifications->sortByDesc('created_at') as $notification){
+                $bg_color = ($notification['type'] == 1) ? 'bg-warning' : 'bg-info';
+                $html += '<li class="navi-item">';
+                    $html += '<span class="navi-link '.$bg_color.'">';
+                        $html +='<span class="navi-text ">';
+                            $html += $notification['message'];
+                        $html += '</span>';
+                    $html += '</span>';
+                $html += '</li>';
+            }
+        $html += '</ul>';
+
+        dd($html);
+
+        return response()->json([
+            'count' => $result_notifications->count(),
+            'data' => $result_notifications,
+            'html' => $html
+        ]);
 
         // $notification =
 
