@@ -285,7 +285,7 @@ $notifications = App\Helpers\Helper::notification($brand->id);
 
             setInterval(() => {
                 checkNotification();
-            }, 5000);
+            }, 10000);
         });
 
         function checkNotification() {
