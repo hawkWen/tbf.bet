@@ -167,11 +167,42 @@ class BotSCBPin
         return $headers;
     }
 
-    public function setBaseParam($api_auth, $account_num)
+    public function setBaseParam()
     {
-        // $this->deviceId = $deviceId;
+        $deviceId = Helper::decryptString($bank_account->app_id, 1, 'base64');
+        $api_auth = Helper::decryptString($bank_account->token, 1, 'base64');
+        $pin = $this->bank_account->pin;
+
+        $diiHours = Carbon::parse($bank_account->token_refresh)->diffInHours(Carbon::now());
+        if ($diiHours >= 3) {
+            $preload = $api->preloadauth($deviceId);
+            $e2ee = $api->preauth($preload['Api-Auth']);
+            $e2eejson = json_decode($e2ee,true);
+            $hashType = $e2eejson['e2ee']['pseudoOaepHashAlgo'];
+            $Sid = $e2eejson['e2ee']['pseudoSid'];
+            $ServerRandom = $e2eejson['e2ee']['pseudoRandom'];
+            $pubKey = $e2eejson['e2ee']['pseudoPubKey'];
+            
+            $encryptscb = $api->encryptscb($Sid,$ServerRandom,$pubKey,$pin,$hashType);
+
+            if(isset($encryptscb['Api-Auth'])) {
+                \Session::flash('alert-warning', 'บัญชีธนาคารขัดข้อง กรุณาติดต่อเจ้าหน้าที่ ค่ะ');
+                return \redirect()->back();
+            }
+
+            $scblogin = $api->scblogin($preload['Api-Auth'],$deviceId,$encryptscb,$Sid);
+            $api_auth = $scblogin['Api-Auth'];
+
+            $this->bank_account->update([
+                'token' => Helper::encryptString($scblogin['Api-Auth'], 1, 'base64'),
+                'otp_updated_at' => Carbon::now()
+            ]);
+
+            $api_auth = Helper::decryptString($bank_account->token, 1, 'base64');
+        }
+
         $this->api_auth = $api_auth;
-        $this->account_num = $account_num;
+        $this->account_num = $this->bank_account->account;
     }
 
     public function getTransaction()

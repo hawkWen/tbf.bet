@@ -173,40 +173,12 @@ class BankAccountController extends Controller
                 // ]);
 
                 $api= new BotSCBPin($bank_account);
-
-                $pin = $bank_account->pin; #pin เข้า app ดึงจาก db
-        
-                $deviceid = Helper::decryptString($bank_account->app_id, 1, 'base64');
-
-                $preload = $api->preloadauth($deviceid);
-
-                $e2ee = $api->preauth($preload['Api-Auth']);
-                $e2eejson = json_decode($e2ee,true);
-                $hashType = $e2eejson['e2ee']['pseudoOaepHashAlgo'];
-                $Sid = $e2eejson['e2ee']['pseudoSid'];
-                $ServerRandom = $e2eejson['e2ee']['pseudoRandom'];
-                $pubKey = $e2eejson['e2ee']['pseudoPubKey'];
-
-                $encryptscb = $api->encryptscb($Sid,$ServerRandom,$pubKey,$pin,$hashType);
-
-                if(isset($encryptscb['Api-Auth'])) {
-
-                    \Session::flash('alert-warning', 'บัญชีธนาคารขัดข้อง กรุณาติดต่อเจ้าหน้าที่ ค่ะ');
-
-                    return \redirect()->back();
-
-                } 
-
-                $scblogin = $api->scblogin($preload['Api-Auth'],$deviceid,$encryptscb,$Sid);
                 
                 $bank_account->update([
                     'active' => 0,
                 ]);
 
-                $apiauth = $scblogin['Api-Auth'];
-
-                $api->setBaseParam($apiauth, $bank_account->account); 
-
+                $api->setBaseParam(); 
                 $summary = $api->getSummary();
 
             } else {
@@ -216,39 +188,11 @@ class BankAccountController extends Controller
                 // ]);
 
                 $api = new BotSCBPin($bank_account);
-
-                $pin = $bank_account->pin; #pin เข้า app ดึงจาก db
-        
-                $deviceid = Helper::decryptString($bank_account->app_id, 1, 'base64');
-
-                $preload = $api->preloadauth($deviceid);
-
-                $e2ee = $api->preauth($preload['Api-Auth']);
-                $e2eejson = json_decode($e2ee,true);
-                $hashType = $e2eejson['e2ee']['pseudoOaepHashAlgo'];
-                $Sid = $e2eejson['e2ee']['pseudoSid'];
-                $ServerRandom = $e2eejson['e2ee']['pseudoRandom'];
-                $pubKey = $e2eejson['e2ee']['pseudoPubKey'];
-
-                $encryptscb = $api->encryptscb($Sid,$ServerRandom,$pubKey,$pin,$hashType);
-
-                if(isset($encryptscb['Api-Auth'])) {
-
-                    \Session::flash('alert-warning', 'บัญชีธนาคารขัดข้อง กรุณาติดต่อเจ้าหน้าที่ ค่ะ');
-
-                    return \redirect()->back();
-
-                } 
-
-                $scblogin = $api->scblogin($preload['Api-Auth'],$deviceid,$encryptscb,$Sid);
-                
                 $bank_account->update([
                     'active' => 0,
                 ]);
 
-                $apiauth = $scblogin['Api-Auth'];
-
-                $api->setBaseParam($apiauth, $bank_account->account); 
+                $api->setBaseParam(); 
 
                 $summary = $api->getSummary();
 

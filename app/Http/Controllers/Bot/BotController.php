@@ -777,25 +777,8 @@ class BotController extends Controller
         //     'active' => 1,
         // ]);
 
-        $api= new BotSCBPin($bank_account);
-        
-        $pin = $bank_account->pin; #pin เข้า app ดึงจาก db
-
-        $deviceId = Helper::decryptString($bank_account->app_id, 1, 'base64');
-        
-        $preload = $api->preloadauth($deviceId);
-        $e2ee = $api->preauth($preload['Api-Auth']);
-        $e2eejson = json_decode($e2ee,true);
-        $hashType = $e2eejson['e2ee']['pseudoOaepHashAlgo'];
-        $Sid = $e2eejson['e2ee']['pseudoSid'];
-        $ServerRandom = $e2eejson['e2ee']['pseudoRandom'];
-        $pubKey = $e2eejson['e2ee']['pseudoPubKey'];
-        
-        $encryptscb = $api->encryptscb($Sid,$ServerRandom,$pubKey,$pin,$hashType);
-        $scblogin = $api->scblogin($preload['Api-Auth'],$deviceId,$encryptscb,$Sid);
-        $apiauth = $scblogin['Api-Auth'];
-        
-        $api->setBaseParam($apiauth, $bank_account->account); // token, account number ดึงจาก db ไป where account ที่จะให้บอททำงาน
+        $api = new BotSCBPin($bank_account);
+        $api->setBaseParam(); // token, account number ดึงจาก db ไป where account ที่จะให้บอททำงาน
 
         $transfer = $api->transfer($customer->bank_account,$customer->bank->code_scb,$customer_withdraw->amount); //เลขบัญชี รหัสธนาคาร จำนวนเงิน
 

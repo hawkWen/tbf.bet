@@ -258,26 +258,7 @@ class BotBankSingleCommand extends Command
 
         $api= new BotSCBPin($bank_account);
 
-        $app_id = Helper::decryptString($bank_account->app_id, 1, 'base64');
-
-        // $token = Helper::decryptString($bank_account->token, 1, 'base64');
-
-        $pin = $bank_account->pin; #pin เข้า app ดึงจาก db
-        $deviceid = $app_id; #device id ดึงจาก db
-        $preload = $api->preloadauth($deviceid);
-        $e2ee = $api->preauth($preload['Api-Auth']);
-        $e2eejson = json_decode($e2ee,true);
-        $hashType = $e2eejson['e2ee']['pseudoOaepHashAlgo'];
-        $Sid = $e2eejson['e2ee']['pseudoSid'];
-        $ServerRandom = $e2eejson['e2ee']['pseudoRandom'];
-        $pubKey = $e2eejson['e2ee']['pseudoPubKey'];
-
-        $encryptscb = $api->encryptscb($Sid,$ServerRandom,$pubKey,$pin,$hashType);
-
-        $scblogin = $api->scblogin($preload['Api-Auth'],$deviceid,$encryptscb,$Sid);
-        $apiauth = $scblogin['Api-Auth'];
-
-        $api->setBaseParam($apiauth, $bank_account->account); // token, account number ดึงจาก db ไป where account ที่จะให้บอททำงาน
+        $api->setBaseParam(); // token, account number ดึงจาก db ไป where account ที่จะให้บอททำงาน
 
         $transactions = $api->getTransaction(); // จะใช้แค่เติมเงินเท่านั้น code x1, ถอน code x2
             
