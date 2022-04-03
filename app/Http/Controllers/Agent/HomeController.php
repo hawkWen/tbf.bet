@@ -629,11 +629,11 @@ class HomeController extends Controller
 
         }
 
-        $html = '<ul class="navi navi-hover">
-            <li class="navi-header font-weight-bold py-4">
-                <span class="font-size-lg">การแจ้งเตือน</span>
-                <i class="flaticon2-information icon-md text-muted"></i>
-            </li>';
+        $html = '<ul class="navi navi-hover">';
+        $html += '<li class="navi-header font-weight-bold py-4">';
+        $html += '<span class="font-size-lg">การแจ้งเตือน</span>';
+        $html += '<i class="flaticon2-information icon-md text-muted"></i>';
+        $html += '</li>';
             foreach ($notifications->sortByDesc('created_at') as $notification){
                 $bg_color = ($notification['type'] == 1) ? 'bg-warning' : 'bg-info';
                 $html += '<li class="navi-item">';
