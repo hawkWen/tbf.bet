@@ -291,7 +291,7 @@ $notifications = App\Helpers\Helper::notification($brand->id);
         function checkNotification() {
 
             $.get('{{ route('agent.notification') }}', function(r) {
-                // if(r.)
+                // if(r.notification > 0) 
             });
 
         }
