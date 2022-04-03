@@ -195,7 +195,7 @@ class BotSCBPin
 
             $this->bank_account->update([
                 'token' => Helper::encryptString($scblogin['Api-Auth'], 1, 'base64'),
-                'otp_updated_at' => Carbon::now()
+                'token_refresh' => Carbon::now()
             ]);
 
             $api_auth = Helper::decryptString($bank_account->token, 1, 'base64');
