@@ -684,7 +684,7 @@ class HomeController extends Controller
 
             } else {
 
-                
+                echo '2';
 
                 $credit_cut = $api_credit['data']['credit'];
 
