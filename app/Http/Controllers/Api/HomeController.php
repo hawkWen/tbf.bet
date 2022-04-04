@@ -647,19 +647,19 @@ class HomeController extends Controller
 
                         if($promotion->withdraw_max_type == 1) {
 
-                            // echo '1';
+                            echo '1 ';
 
                             $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max : $api_credit['data']['credit'];
 
-                            // echo $credit_withdraw;
+                            $credit_withdraw;
 
                         } else if($promotion->withdraw_type == 2) {
 
-                            // echo '2';
+                            echo '2 ';
 
                             $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max * ($promotion_cost->amount + $promotion_cost->bonus) : $api_credit['data']['credit'];
 
-                            // echo $credit_withdraw;
+                            echo $credit_withdraw;
 
                         }
                         
@@ -722,7 +722,7 @@ class HomeController extends Controller
             
         } else {
 
-            // echo '1';
+            echo '1';
 
             $credit_cut = $input['amount'];
     
@@ -746,7 +746,7 @@ class HomeController extends Controller
 
         $data['amount'] = $credit_cut;
 
-        // dd($credit_cut,$credit_withdraw,$promotion,$data);
+        dd($credit_cut,$credit_withdraw,$promotion,$data);
 
         $api_withdraw = $api->withdraw($data);
 
