@@ -651,6 +651,8 @@ class HomeController extends Controller
 
                             $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max : $api_credit['data']['credit'];
 
+                            echo $credit_withdraw;
+
                         } else if($promotion->withdraw_type == 2) {
 
                             echo '2';
