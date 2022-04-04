@@ -588,7 +588,7 @@ class HomeController extends Controller
                 //creditFree 
                 if($promotion->type_promotion == 6) {
 
-                    
+                    echo '1';
 
                     if($api_credit['data']['credit'] < $total_turn_over) {
 
@@ -629,7 +629,7 @@ class HomeController extends Controller
                 //normal
                 } else {
 
-                    
+                    echo '2';
 
                     if($api_credit['data']['credit'] < $total_turn_over) {
 
@@ -647,7 +647,7 @@ class HomeController extends Controller
 
                         if($promotion->withdraw_max_type == 1) {
 
-                            echo '1 ';
+                            echo '1- ';
 
                             $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max : $api_credit['data']['credit'];
 
@@ -655,7 +655,7 @@ class HomeController extends Controller
 
                         } else if($promotion->withdraw_type == 2) {
 
-                            echo '2 ';
+                            echo '2- ';
 
                             $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max * ($promotion_cost->amount + $promotion_cost->bonus) : $api_credit['data']['credit'];
 
@@ -684,7 +684,7 @@ class HomeController extends Controller
 
             } else {
 
-                echo '2';
+                echo '3';
 
                 $credit_cut = $api_credit['data']['credit'];
 
@@ -722,7 +722,7 @@ class HomeController extends Controller
             
         } else {
 
-            echo '1';
+            echo '4s';
 
             $credit_cut = $input['amount'];
     
