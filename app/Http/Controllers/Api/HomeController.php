@@ -714,7 +714,7 @@ class HomeController extends Controller
             
         } else {
 
-            echo '1'
+            echo '1';
 
             $credit_cut = $input['amount'];
     
