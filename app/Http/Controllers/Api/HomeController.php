@@ -676,6 +676,20 @@ class HomeController extends Controller
 
                 $credit_withdraw = ($promotion->withdraw_max > 0) ? $promotion->withdraw_max : $api_credit['data']['credit'];
 
+                if($promotion ) {
+
+                    if($promotion->withdraw_max_type == 1) {
+
+                        $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max : $api_credit['data']['credit'];
+
+                    } else if($promotion->withdraw_type == 2) {
+
+                        $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max * ($promotion_cost->amount + $promotion_cost->bonus) : $api_credit['data']['credit'];
+
+                    }
+                    
+                }
+
                 //ถอนออโต้ไม่เกินวงเงิน
                 if ($credit_withdraw <= $brand->withdraw_auto_max) {
 

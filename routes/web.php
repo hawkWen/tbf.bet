@@ -13,10 +13,15 @@ error_reporting(E_ALL);
 
 
 Route::get('test', function() {
-    
-    $promotion_credit_frees = Promotion::whereBrandId(30)->whereTypePromotion(6)->get();
 
-    $promotion_costs = PromotionCost::with('promotion')->whereCustomerId($customer->id)->whereIn('promotion_id', $promotion_credit_frees->pluck('id'))->get()->take(5);
+    $x = 9;
+    $y = 9;
+
+    if($x == $y) {
+
+        echo 'equal';
+
+    }
 
 });
 
