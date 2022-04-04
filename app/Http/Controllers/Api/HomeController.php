@@ -580,7 +580,7 @@ class HomeController extends Controller
 
             $credit_withdraw = ($promotion->withdraw_max != 0 && $credit_cut > $promotion->withdraw_max) ? $promotion->withdraw_max : $api_credit['data']['credit'];
 
-            dd($credit_cut,$credit_withdraw);
+            dd($credit_cut,$credit_withdraw,$promotion);
 
             // pro turn over amount ;
             if($promotion->type_turn_over == 1) {
