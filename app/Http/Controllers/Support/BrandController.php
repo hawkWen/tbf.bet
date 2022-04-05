@@ -37,20 +37,29 @@ class BrandController extends Controller
 
         DB::beginTransaction();
 
-        if($input['logo'] !== 'null') {
+        if(isset($input['logo'])) {
 
-            //put new image 
-            $api_upload = Helper::uploadApiService('logo', 'casinoauto.logo');
+            $delete = Storage::disk('public')->delete($brand->logo);
 
-            $input['logo_url'] = $api_upload['data']['url'];
+            $storage  = Storage::disk('public')->put('brands', $request->file('logo'));
 
-            $input['logo'] = $api_upload['data']['name'];
+            if(env('APP_ENV') == 'local') {
+
+                $input['logo_url'] = Storage::url($storage);
+
+            } else {
+
+                $input['logo_url'] = secure_url(Storage::url($storage));
+
+            }
+
+            $input['logo'] = $storage;
 
         } else {
 
-            $input['logo_url'] = 'https://via.placeholder.com/150';
+            $input['logo'] = $brand->logo;
 
-            $input['logo'] = '';
+            $input['logo_url'] = $brand->logo_url;
 
         }
 
