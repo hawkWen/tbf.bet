@@ -36,8 +36,6 @@ class BrandController extends Controller
 
         if(isset($input['logo'])) {
 
-            $delete = Storage::disk('public')->delete($brand->logo);
-
             $storage  = Storage::disk('public')->put('brands', $request->file('logo'));
 
             if(env('APP_ENV') == 'local') {
