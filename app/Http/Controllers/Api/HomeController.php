@@ -1507,7 +1507,9 @@ class HomeController extends Controller
 
         $input = $request->all();
 
-        $credit_free = CreditFree::whereCode($input['code'])->first();
+        $customer = Customer::find($input['customer_id']);
+
+        $credit_free = CreditFree::whereCode($input['code'])->whereBrandId($customer->brand_id)->first();
 
         if(!$credit_free) {
 
