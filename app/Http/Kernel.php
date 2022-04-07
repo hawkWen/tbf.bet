@@ -9,6 +9,7 @@ use App\Http\Middleware\Support;
 use App\Http\Middleware\Customer;
 use App\Http\Middleware\XFrameOptions;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\WhiteList;
 
 class Kernel extends HttpKernel
 {
@@ -80,5 +81,6 @@ class Kernel extends HttpKernel
         'super' => Super::class,
         'support' => Support::class,
         'jwt' => \App\Http\Middleware\JWTMiddleware::class,
+        'whitelist' => WhiteList::class,
     ];
 }

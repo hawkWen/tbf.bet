@@ -35,7 +35,7 @@ Route::group(['namespace' => 'Api'], function() {
 
     Route::group([
         
-        'middleware' => 'jwt'
+        'middleware' => ['jwt','whitelist']
 
     ], function() {
 
