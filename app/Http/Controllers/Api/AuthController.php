@@ -312,7 +312,7 @@ class AuthController extends Controller
             'token' => $token,
             'user' => $this->guard()->user(),
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60 * 60 * 7,
+            'expires_in' => auth()->factory()->getTTL() * 60,
             'url_redirect' => $url_redirect
         ]);
     }
