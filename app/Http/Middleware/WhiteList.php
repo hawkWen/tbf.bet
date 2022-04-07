@@ -15,8 +15,6 @@ class WhiteList
      */
     public function handle($request, Closure $next)
     {
-        echo $request->ip();
-
         return $next($request);
     }
 }
