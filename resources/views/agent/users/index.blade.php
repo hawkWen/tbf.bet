@@ -228,11 +228,14 @@
                                                                             <select name="user_role_id" id="user_role_id"
                                                                                 class="form-control">
                                                                                 <option value="">เลือก</option>
-                                                                                @foreach ($user_roles->where('id', '!=', 1) as $user_role)
-                                                                                    <option value="{{ $user_role->id }}"
-                                                                                        @if ($user->user_role_id == $user_role->id) selected @endif>
-                                                                                        {{ $user_role->name }}</option>
-                                                                                @endforeach
+                                                                                @if (Auth::user()->user_role_id == 4)
+                                                                                    <option value="2">Manager</option>
+                                                                                    <option value="3">Customer Service
+                                                                                    </option>
+                                                                                @elseif (Auth::user()->user_role_id == 2)
+                                                                                    <option value="3">Customer Service
+                                                                                    </option>
+                                                                                @endif
                                                                             </select>
                                                                         </div>
                                                                     </div>
